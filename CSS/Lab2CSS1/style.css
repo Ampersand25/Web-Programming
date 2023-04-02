@@ -1,0 +1,19 @@
+.container-div {
+    display: flex;
+    border: 1px solid black;
+    align-items: center;
+    width: 400px;
+}
+
+#text-div, #image-div {
+    width: 200px;
+    text-align: center;
+}
+
+#image-div img {
+    max-width: 100%;
+    height: auto;
+    max-height: 100%;
+    display: inline-block;
+    vertical-align: middle;
+}

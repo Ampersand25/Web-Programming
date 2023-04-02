@@ -1,0 +1,125 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+#nav-list {
+    position: static;
+}
+
+#nav-list li {
+    list-style: none;
+    display: inline-block;
+}
+
+#nav-list li, #nav-list a {
+    height: 84px;
+    display: block;
+}
+
+.disabled {
+    pointer-events: none;
+}
+
+li:hover a {
+    pointer-events: auto;
+}
+
+#list-item1 {
+    width: 84px;
+    background: url('css-pr4.png') 0 -84px;
+}
+
+#list-item2 {
+    width: 84px;
+    background: url('css-pr4.png') -84px -84px;
+}
+
+#list-item3 {
+    width: 84px;
+    background: url('css-pr4.png') -168px -84px;
+}
+
+#list-item4 {
+    width: 84px;
+    background: url('css-pr4.png') -252px -84px;
+}
+
+#list-item5 {
+    width: 84px;
+    background: url('css-pr4.png') -336px -84px;
+}
+
+#list-item6 {
+    width: 84px;
+    background: url('css-pr4.png') -420px -84px;
+}
+
+#list-item7 {
+    width: 84px;
+    background: url('css-pr4.png') -504px -84px;
+}
+
+#list-item8 {
+    width: 84px;
+    background: url('css-pr4.png') -588px -84px;
+}
+
+#list-item9 {
+    width: 84px;
+    background: url('css-pr4.png') -672px -84px;
+}
+
+#list-item10 {
+    width: 84px;
+    background: url('css-pr4.png') -756px -84px;
+}
+
+#list-item11 {
+    width: 84px;
+    background: url('css-pr4.png') -840px -84px;
+}
+
+#list-item1 a:hover {
+    background: url('css-pr4.png') 0 0;
+}
+
+#list-item2 a:hover {
+    background: url('css-pr4.png') -84px 0;
+}
+
+#list-item3 a:hover {
+    background: url('css-pr4.png') -168px 0;
+}
+
+#list-item4 a:hover {
+    background: url('css-pr4.png') -252px 0;
+}
+
+#list-item5 a:hover {
+    background: url('css-pr4.png') -336px 0;
+}
+
+#list-item6 a:hover {
+    background: url('css-pr4.png') -420px 0;
+}
+
+#list-item7 a:hover {
+    background: url('css-pr4.png') -504px 0;
+}
+
+#list-item8 a:hover {
+    background: url('css-pr4.png') -588px 0;
+}
+
+#list-item9 a:hover {
+    background: url('css-pr4.png') -672px 0;
+}
+
+#list-item10 a:hover {
+    background: url('css-pr4.png') -756px 0;
+}
+
+#list-item11 a:hover {
+    background: url('css-pr4.png') -840px 0;
+}

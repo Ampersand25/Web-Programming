@@ -1,0 +1,34 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    height: 10em;
+    line-height: 10em;
+    background-color: red;
+}
+
+ul {
+    height: 1em;
+    list-style-type: none;
+    background-color: yellow;
+}
+
+li {
+    display: inline;
+    border-right: 2px solid green;
+    padding: 0 290px 0 10px;
+}
+
+div.main-view {
+    height: 42em;
+    line-height: 42em;
+    background-color: green;
+}
+
+footer {
+    height: calc(100vh - 10em - 1em - 42em);
+    line-height: calc(100vh - 10em - 1em - 42em);
+    background-color: pink;
+}
