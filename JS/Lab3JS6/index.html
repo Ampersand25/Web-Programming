@@ -8,17 +8,23 @@
 <body>
     <fieldset>
         <legend><b>GAME SETTINGS</b></legend>
-        <label for="table-size-input">Select the size of the game: </label>
+        
+		<label for="table-size-input">Select the size of the game: </label>
         <input id="table-size-input" type="number" value="2" min="2" max="10" step="1">
-        <br><br>
-        <button id="generate-game-button" onclick="generateGame()">Generate Game!</button>
+        
+		<br><br>
+        
+		<button id="generate-game-button" onclick="generateGame()">Generate Game!</button>
     </fieldset>
-    <br>
+    
+	<br>
+	
     <fieldset>
         <legend><b>GAME TABLE</b></legend>
-        <table id="game-table">
-        </table>
-        <script type="text/javascript" src="script.js"></script>
+        
+		<table id="game-table"></table>
     </fieldset>
+	
+	<script type="text/javascript" src="script.js"></script>
 </body>
 </html>

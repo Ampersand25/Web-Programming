@@ -45,7 +45,7 @@ function startGame(n) {
                 hiddenNumber = randomNumbersArray[k];
             }
             else {
-                newCell.innerHTML = randomNumbersArray[k];
+                newCell.innerHTML = "<b>" + randomNumbersArray[k] + "</b>";
             }
             newCell.id = "row" + i + "col" + j;
             ++k;
