@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <title>Laborator 3 JS Problema 3</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+    <label for="table-size-input">Select the size of the game: </label>
+    <input id="table-size-input" type="number" value="6" min="2" max="16" step="2">
+
+    <br>
+
+    <label for="number-of-seconds-input">Number of seconds after which the text disappears: </label>
+    <input id="number-of-seconds-input" type="number" value="3" min="1" max="10" step="1">
+
+    <br>
+
+    <button id="generate-game-button" onclick="generateGame()">Generate Game!</button>
+
+    <br><br>
+
+    <table id="game-table"></table>
+
+    <script type="text/javascript" src="script.js"></script>
+</body>
+</html>

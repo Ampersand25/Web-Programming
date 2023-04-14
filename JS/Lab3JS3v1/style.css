@@ -1,0 +1,11 @@
+#game-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+#game-table td {
+    border: 1px solid #000;
+    padding: 8px;
+    text-align: center;
+    vertical-align: middle;
+}
