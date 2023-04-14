@@ -21,17 +21,23 @@ function getPositionOfOptionInsideSelect(selectElement, searchedOptionText) {
     return -1;
 }
 
+function removeOptionFromSelect(selectElement, optionText) {
+    const pos = getPositionOfOptionInsideSelect(selectElement, optionText);
+    selectElement.remove(pos);
+}
+
+function addOptionToSelect(selectElement, optionText) {
+    const option = document.createElement('option');
+    option.text = optionText;
+    selectElement.appendChild(option);
+}
+
 firstSelect.addEventListener("dblclick", function(event) {
     const optionText = firstSelect.options[firstSelect.selectedIndex].text;
     console.log("Selected option from first select: " + optionText);
 
-    const pos = getPositionOfOptionInsideSelect(firstSelect, optionText);
-    firstSelect.remove(pos);
-
-    const option = document.createElement('option');
-    option.text = optionText;
-    secondSelect.appendChild(option);
-
+    removeOptionFromSelect(firstSelect, optionText);
+    addOptionToSelect(secondSelect, optionText);
     updateSelectsSize();
 });
 
@@ -39,12 +45,7 @@ secondSelect.addEventListener("dblclick", function(event) {
     const optionText = secondSelect.options[secondSelect.selectedIndex].text;
     console.log("Selected option from second select: " + optionText);
 
-    const pos = getPositionOfOptionInsideSelect(secondSelect, optionText);
-    secondSelect.remove(pos);
-
-    const option = document.createElement('option');
-    option.text = optionText;
-    firstSelect.appendChild(option);
-
+    removeOptionFromSelect(secondSelect, optionText);
+    addOptionToSelect(firstSelect, optionText);
     updateSelectsSize();
 });
