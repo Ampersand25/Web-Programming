@@ -1,0 +1,56 @@
+#game-table {
+    border-collapse: collapse;
+    width: 100%;
+
+    margin: 25px 0;
+    font-size: 0.9em;
+    font-family: sans-serif;
+    min-width: 400px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+
+#game-table td {
+    border: 1px solid #000;
+    padding: 12px 15px;
+}
+
+#game-table tbody tr {
+    border-bottom: 1px solid #dddddd;
+}
+
+#game-table tbody tr:nth-of-type(even) {
+    background-color: #f3f3f3;
+}
+
+#game-table tbody tr:last-of-type {
+    border-bottom: 2px solid #009879;
+}
+
+#game-table tbody tr.active-row {
+    font-weight: bold;
+    color: #009879;
+}
+
+#generate-game-button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #4831D4;
+    color: #CCF381;
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    border-radius: 30px;
+    transition: background-color 0.3s ease;
+}
+
+#generate-game-button:hover {
+    background-color: #EE4E34;
+}
+
+#generate-game-button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
