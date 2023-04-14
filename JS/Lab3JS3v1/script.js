@@ -53,14 +53,17 @@ function startGame(n, numberOfSeconds) {
 
     const table = document.getElementById("game-table");
     var matrix = [];
+    var visibleMatrix = [];
     var currentElemIndex = 0;
 
     for(let r = 0; r < n; ++r) {
         var row = [];
+        var visibleMatrixRow = [];
 
         const newRow = table.insertRow();
         for(let c = 0; c < n; ++c) {
             row.push(randomNumbersArray[currentElemIndex++]);
+            visibleMatrixRow.push(false);
 
             const newCell = newRow.insertCell(c);
             newCell.id = "row" + r + "col" + c;
@@ -70,6 +73,7 @@ function startGame(n, numberOfSeconds) {
         }
 
         matrix.push(row);
+        visibleMatrix.push(visibleMatrixRow)
     }
 
     console.log(matrix);
@@ -94,6 +98,8 @@ function startGame(n, numberOfSeconds) {
     var win = false;
     var blocked = false;
 
+    console.log(visibleMatrix);
+
     table.addEventListener("click", function(event) {
         if(blocked) {
             return;
@@ -115,11 +121,13 @@ function startGame(n, numberOfSeconds) {
                 clickedCell.style.color = "white";
 
                 if(firstCellClickedVal === -1) {
-                    firstCellClickedVal = clickedElement;
-                    firstCellClickedRow = rowIndex;
-                    firstCellClickedCol = colIndex;
+                    if(!visibleMatrix[rowIndex][colIndex]) {
+                        firstCellClickedVal = clickedElement;
+                        firstCellClickedRow = rowIndex;
+                        firstCellClickedCol = colIndex;
+                    }
                 }
-                else {
+                else if(!visibleMatrix[rowIndex][colIndex]) {
                     secondCellClickedVal = clickedElement;
                     secondCellClickedRow = rowIndex;
                     secondCellClickedCol = colIndex;
@@ -129,8 +137,22 @@ function startGame(n, numberOfSeconds) {
                     console.log("Second cell clicked value: " + secondCellClickedVal);
 
                     if(firstCellClickedVal === secondCellClickedVal) {
-                        console.log("MATCH");
-                        hiddenElements -= 2;
+                        if (firstCellClickedRow !== secondCellClickedRow || firstCellClickedCol !== secondCellClickedCol) {
+                            console.log("MATCH");
+                            hiddenElements -= 2;
+
+                            visibleMatrix[firstCellClickedRow][firstCellClickedCol] = true;
+                            visibleMatrix[secondCellClickedRow][secondCellClickedCol] = true;
+                        }
+                        else {
+                            console.log("SAME");
+
+                            blocked = true;
+                            setTimeout(function() {
+                                hideCell(firstCellClickedRow, firstCellClickedCol);
+                                blocked = false;
+                            }, numberOfSeconds * 1000);
+                        }
                     }
                     else {
                         console.log("NO MATCH");
@@ -143,7 +165,8 @@ function startGame(n, numberOfSeconds) {
                         }, numberOfSeconds * 1000);
                     }
 
-                    firstCellClickedVal = secondCellClickedVal = -1;
+                    firstCellClickedVal = -1;
+                    secondCellClickedVal = -1;
                 }
             }
         }
