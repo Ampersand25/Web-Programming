@@ -10,6 +10,18 @@ Nu se vor folosi biblioteci de functii, jQuery, pluginuri, etc.
 console.log("Welcome to script.js!");
 
 function startGame(n) {
+    const startTime = Date.now();
+    const secondsCounter = document.getElementById("play-time");
+
+    function updateSecondsCounter() {
+        const elapsedTimeInSeconds = Math.floor((Date.now() - startTime) / 1000);
+        secondsCounter.innerHTML = `<u>Total play time</u>: ${elapsedTimeInSeconds}s`;
+    }
+
+    updateSecondsCounter();
+
+    setInterval(updateSecondsCounter, 1000);
+
     const mySet = new Set();
 
     for(let i = 1; i <= n * n; ++i) {
@@ -131,25 +143,44 @@ function startGame(n) {
     }
 
     var win = false;
+    var numberOfMoves = 0;
 
     document.addEventListener('keydown', function(event) {
         if(!win) {
             const hiddenCellID = "row" + hiddenNumberRow + "col" + hiddenNumberCol;
+            var validMove = false;
             if(event.key === "ArrowUp") {
                 console.log("UP arrow key pressed");
                 arrowUpPressed(hiddenCellID);
+
+                validMove = true;
+                ++numberOfMoves;
             }
             else if(event.key === "ArrowRight") {
                 console.log("RIGHT arrow key pressed");
                 arrowRightPressed(hiddenCellID);
+
+                validMove = true;
+                ++numberOfMoves;
             }
             else if(event.key === "ArrowDown") {
                 console.log("DOWN arrow key pressed");
                 arrowDownPressed(hiddenCellID);
+
+                validMove = true;
+                ++numberOfMoves;
             }
             else if(event.key === "ArrowLeft") {
                 console.log("LEFT arrow key pressed");
                 arrowLeftPressed(hiddenCellID);
+
+                validMove = true;
+                ++numberOfMoves;
+            }
+
+            if(validMove) {
+                const numberOfMovesSpanElement = document.getElementById("no-of-moves");
+                numberOfMovesSpanElement.innerHTML = `<u>Number of moves</u>: ${numberOfMoves}`;
             }
 
             console.log("NEW HIDDEN ROW: " + hiddenNumberRow);
