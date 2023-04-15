@@ -3,7 +3,7 @@ Enunt:
 Sa se scrie o pagina HTML ce contine doua liste cu mai multe elemente fiecare, create cu ajutorul tagului <select>.
 La un dubluclick pe un element al primei liste, acesta va fi mutat in lista a doua si invers.
 Nu se vor folosi biblioteci de functii, jQuery, pluginuri, etc.
- */
+*/
 
 console.log("Welcome to script.js!");
 

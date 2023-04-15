@@ -5,7 +5,7 @@ Celulele tabelului contin numere de la 1 la n^2 intr-o ordine aleatoare.
 Una dintre celule este libera.
 Folosind JavaScript sa se creeze in cadrul paginii un joc de tip puzzle care la apasarea tastelor sageti va interschimba celula libera cu celula adiacenta (corespunzatoare tastei sus, jos, stanga, dreapta apasata).
 Nu se vor folosi biblioteci de functii, jQuery, pluginuri, etc.
- */
+*/
 
 console.log("Welcome to script.js!");
 
