@@ -154,6 +154,10 @@ function startGame(n, numberOfSeconds) {
                     }
                 }
                 else if(!visibleMatrix[rowIndex][colIndex]) {
+                    if(firstCellClickedRow === rowIndex && firstCellClickedCol === colIndex) {
+                        return;
+                    }
+
                     secondCellClickedVal = imageData[clickedImageIndex].src;
                     secondCellClickedRow = rowIndex;
                     secondCellClickedCol = colIndex;
