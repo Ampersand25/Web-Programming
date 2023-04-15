@@ -110,15 +110,6 @@ function startGame(n, numberOfSeconds) {
         return Math.floor(Math.random() * n);
     }
 
-    function getRandomColor() {
-        const letters = "0123456789ABCDEF";
-        var color = "#";
-        for(let i = 0; i < 6; ++i) {
-            color += letters[getRandomNumber(16)];
-        }
-        return color;
-    }
-
     const numbers = [];
 
     for(let i = 1; i <= n * n / 2; ++i) {
