@@ -63,15 +63,6 @@ function startGame(n, numberOfSeconds) {
         return Math.floor(Math.random() * n);
     }
 
-    function getRandomColor() {
-        const letters = "0123456789ABCDEF";
-        var color = "#";
-        for(let i = 0; i < 6; ++i) {
-            color += letters[getRandomNumber(16)];
-        }
-        return color;
-    }
-
     const numbers = [];
 
     for(let i = 1; i <= n * n / 2; ++i) {
@@ -251,8 +242,9 @@ function startGame(n, numberOfSeconds) {
 }
 
 function generateGame() {
+    const gameSize = document.getElementById("game-size-input").value;
     const numberOfSeconds = document.getElementById("number-of-seconds-input").value;
-    startGame(6, numberOfSeconds);
+    startGame(gameSize, numberOfSeconds);
 
     const generateGameButton = document.getElementById("generate-game-button");
     generateGameButton.disabled = true;
