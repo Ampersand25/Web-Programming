@@ -119,7 +119,7 @@ function startGame(n, numberOfSeconds) {
 
     function updateNumberOfMoves() {
         const numberOfMovesLabel = document.getElementById("moves-label");
-        numberOfMovesLabel.innerHTML = `Total number of moves: ${++numberOfMoves}`;
+        numberOfMovesLabel.textContent = `Total number of moves: ${++numberOfMoves}`;
     }
 
     table.addEventListener("click", function(event) {
