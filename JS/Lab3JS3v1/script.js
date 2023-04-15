@@ -13,6 +13,26 @@ Nu se vor folosi biblioteci de functii, jQuery, pluginuri, etc.
 console.log("Welcome to script.js!");
 
 function startGame(n, numberOfSeconds) {
+    var timer;
+
+    function startTimer() {
+        const startTime = new Date().getTime();
+        const timerLabel = document.getElementById("timer-label");
+
+        timer = setInterval(() => {
+            const currentTime = new Date().getTime();
+            const elapsedTime = Math.floor((currentTime - startTime) / 1000);
+
+            const hours = Math.floor(elapsedTime / 3600);
+            const minutes = Math.floor((elapsedTime % 3600) / 60);
+            const seconds = elapsedTime % 60;
+
+            timerLabel.textContent = `Total play time: ${hours} hours, ${minutes} minutes, ${seconds} seconds`;
+        }, 1000);
+    }
+
+    startTimer();
+
     function getRandomNumber(n) {
         return Math.floor(Math.random() * n);
     }
@@ -76,16 +96,6 @@ function startGame(n, numberOfSeconds) {
         visibleMatrix.push(visibleMatrixRow)
     }
 
-    console.log(matrix);
-
-    function hideCell(r, c) {
-        const cellID = "row" + r + "col" + c;
-        const cell = document.getElementById(cellID);
-        cell.innerHTML = "&zwnj;";
-        cell.style.backgroundColor = "white";
-        cell.style.color = "black";
-    }
-
     var firstCellClickedVal = -1;
     var firstCellClickedRow = -1;
     var firstCellClickedCol = -1;
@@ -97,8 +107,20 @@ function startGame(n, numberOfSeconds) {
     var hiddenElements = n * n;
     var win = false;
     var blocked = false;
+    var numberOfMoves = 0;
 
-    console.log(visibleMatrix);
+    function hideCell(r, c) {
+        const cellID = "row" + r + "col" + c;
+        const cell = document.getElementById(cellID);
+        cell.innerHTML = "&zwnj;";
+        cell.style.backgroundColor = "white";
+        cell.style.color = "black";
+    }
+
+    function updateNumberOfMoves() {
+        const numberOfMovesLabel = document.getElementById("moves-label");
+        numberOfMovesLabel.innerHTML = `Total number of moves: ${++numberOfMoves}`;
+    }
 
     table.addEventListener("click", function(event) {
         if(blocked) {
@@ -109,6 +131,8 @@ function startGame(n, numberOfSeconds) {
             const cell = event.target;
 
             if(cell.tagName === "TD") {
+                var validMove = false;
+
                 const row = cell.parentNode;
                 const rowIndex = row.rowIndex;
                 const colIndex = cell.cellIndex;
@@ -125,6 +149,8 @@ function startGame(n, numberOfSeconds) {
                         firstCellClickedVal = clickedElement;
                         firstCellClickedRow = rowIndex;
                         firstCellClickedCol = colIndex;
+
+                        validMove = true;
                     }
                 }
                 else if(!visibleMatrix[rowIndex][colIndex]) {
@@ -147,6 +173,8 @@ function startGame(n, numberOfSeconds) {
 
                             visibleMatrix[firstCellClickedRow][firstCellClickedCol] = true;
                             visibleMatrix[secondCellClickedRow][secondCellClickedCol] = true;
+
+                            validMove = true;
                         }
                         else {
                             console.log("SAME");
@@ -167,15 +195,23 @@ function startGame(n, numberOfSeconds) {
                             hideCell(secondCellClickedRow, secondCellClickedCol);
                             blocked = false;
                         }, numberOfSeconds * 1000);
+
+                        validMove = true;
                     }
 
                     firstCellClickedVal = -1;
                     secondCellClickedVal = -1;
                 }
+
+                if(validMove) {
+                    updateNumberOfMoves();
+                }
             }
         }
 
         if(hiddenElements === 0 && win === false) {
+            clearInterval(timer);
+
             alert("YOU WIN!");
             win = true;
         }

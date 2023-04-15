@@ -6,6 +6,8 @@
     <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
+    <hr>
+
     <label for="table-size-input">Select the size of the game: </label>
     <input id="table-size-input" type="number" value="4" min="2" max="16" step="2">
 
@@ -18,9 +20,19 @@
 
     <button id="generate-game-button" onclick="generateGame()">Generate Game!</button>
 
-    <br><br>
+    <br><hr><br>
 
     <table id="game-table"></table>
+
+    <hr>
+
+    <label id="moves-label">Total number of moves: 0</label>
+
+    <br>
+
+    <label id="timer-label">Total play time: 0 hours, 0 minutes, 0 seconds</label>
+
+    <hr>
 
     <script type="text/javascript" src="script.js"></script>
 </body>
