@@ -13,6 +13,30 @@ Nu se vor folosi biblioteci de functii, jQuery, pluginuri, etc.
 console.log("Welcome to script.js!");
 
 function startGame(n, numberOfSeconds) {
+    var timer;
+
+    function startTimer() {
+        const startTime = new Date().getTime();
+        const timerLabel = document.getElementById("timer-label");
+
+        timer = setInterval(() => {
+            const currentTime = new Date().getTime();
+            const elapsedTime = Math.floor((currentTime - startTime) / 1000);
+
+            const hours = Math.floor(elapsedTime / 3600);
+            const minutes = Math.floor((elapsedTime % 3600) / 60);
+            const seconds = elapsedTime % 60;
+
+            const hoursStr = (hours < 10) ? ("0" + hours) : (hours);
+            const minutesStr = (minutes < 10) ? ("0" + minutes) : (minutes);
+            const secondsStr = (seconds < 10) ? ("0" + seconds) : (seconds);
+
+            timerLabel.innerHTML = `<em>Time</em>: <strong>${hoursStr}:${minutesStr}:${secondsStr}</strong>`;
+        }, 1000);
+    }
+
+    startTimer();
+
     const imageData = [
         { src: "./Images/image0.png", alt: "Image 0" },
         { src: "./Images/image1.png", alt: "Image 1" },
@@ -104,6 +128,11 @@ function startGame(n, numberOfSeconds) {
         cell.innerHTML = `<img src="${imageData[0].src}" alt="${imageData[0].alt}" width="50" height="50">`;
     }
 
+    function updateNumberOfMoves() {
+        const numberOfMovesLabel = document.getElementById("moves-label");
+        numberOfMovesLabel.innerHTML = `<em>Score</em>: <strong>${++numberOfMoves}</strong>`;
+    }
+
     var firstCellClickedVal = false;
     var firstCellClickedRow = -1;
     var firstCellClickedCol = -1;
@@ -115,6 +144,7 @@ function startGame(n, numberOfSeconds) {
     var hiddenElements = n * n;
     var win = false;
     var blocked = false;
+    var numberOfMoves = 0;
 
     table.addEventListener("click", function(event) {
         if(blocked) {
@@ -141,6 +171,8 @@ function startGame(n, numberOfSeconds) {
             }
 
             if(cell.tagName === "IMG" || cell.tagName === "TD") {
+                var validMove = false;
+
                 const clickedCellID = "row" + rowIndex + "col" + colIndex;
                 const clickedCell = document.getElementById(clickedCellID);
                 const clickedImageIndex = matrix[rowIndex][colIndex];
@@ -151,6 +183,8 @@ function startGame(n, numberOfSeconds) {
                         firstCellClickedVal = imageData[clickedImageIndex].src;
                         firstCellClickedRow = rowIndex;
                         firstCellClickedCol = colIndex;
+
+                        validMove = true;
                     }
                 }
                 else if(!visibleMatrix[rowIndex][colIndex]) {
@@ -172,6 +206,8 @@ function startGame(n, numberOfSeconds) {
 
                             hiddenElements -= 2;
                             visibleMatrix[firstCellClickedRow][firstCellClickedCol] = visibleMatrix[secondCellClickedRow][secondCellClickedCol] = true;
+
+                            validMove = true;
                         }
                         else {
                             console.log("SAME");
@@ -192,14 +228,22 @@ function startGame(n, numberOfSeconds) {
                             hideCell(secondCellClickedRow, secondCellClickedCol);
                             blocked = false;
                         }, numberOfSeconds * 1000);
+
+                        validMove = true;
                     }
 
                     firstCellClickedVal = secondCellClickedVal = false;
+                }
+
+                if(validMove) {
+                    updateNumberOfMoves();
                 }
             }
         }
 
         if(hiddenElements === 0 && win === false) {
+            clearInterval(timer);
+
             alert("YOU WIN!");
             win = true;
         }
