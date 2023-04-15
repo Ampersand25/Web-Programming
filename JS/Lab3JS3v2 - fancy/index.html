@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <title>Laborator 3 JS Problema 3 Versiunea 1 (cu numere)</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+    <div class="wrapper">
+        <div class="settings-container">
+            <label for="number-of-seconds-input">Number of seconds after which the images disappear: </label>
+            <input id="number-of-seconds-input" type="number" value="0.5" min="0.5" max="5" step="0.5">
+
+            <br>
+
+            <button id="generate-game-button" onclick="createGame()">Create Game!</button>
+        </div>
+
+        <br>
+
+        <div class="game-container">
+            <div class="highlights">
+                <label id="minimum-moves"><em>Best Score</em>: <strong>-</strong></label>
+
+                <br>
+
+                <label id="best-time"><em>Best Time</em>: <strong>-</strong></label>
+            </div>
+
+            <div class="table-container">
+                <table id="game-table"></table>
+            </div>
+
+            <div class="stats-container">
+                <label id="moves-label"><em>Score</em>: <strong>0</strong></label>
+
+                <br>
+
+                <label id="time-label"><em>Time</em>: <strong>00:00:00</strong></label>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="script.js"></script>
+</body>
+</html>
