@@ -8,7 +8,7 @@ Jocul se termina cand toate perechile de numere au fost ghicite.
 Dupa prima implementare a jocului, se va crea o noua versiune in care numerele vor fi inlocuite cu imagini (ce contin fructe spre exemplu, sau “profi” de pe pagina facultatii).
 Problema mai este recunoscuta si sub numele de Memory Game.
 Nu se vor folosi biblioteci de functii, jQuery, pluginuri, etc.
- */
+*/
 
 console.log("Welcome to script.js!");
 
