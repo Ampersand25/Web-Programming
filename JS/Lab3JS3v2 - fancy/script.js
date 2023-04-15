@@ -12,7 +12,7 @@ Nu se vor folosi biblioteci de functii, jQuery, pluginuri, etc.
 
 console.log("Welcome to script.js!");
 
-function startGame(n, numberOfSeconds) {
+function startGame(n, numberOfSeconds, imageFolder) {
     function getBestScore() {
         const storedBestScore = localStorage.getItem("bestScore");
         const minimumMovesLabel = document.getElementById("minimum-moves");
@@ -85,25 +85,25 @@ function startGame(n, numberOfSeconds) {
     startTimer();
 
     const imageData = [
-        { src: "./Images/image0.png", alt: "Image 0" },
-        { src: "./Images/image1.png", alt: "Image 1" },
-        { src: "./Images/image2.png", alt: "Image 2" },
-        { src: "./Images/image3.png", alt: "Image 3" },
-        { src: "./Images/image4.png", alt: "Image 4" },
-        { src: "./Images/image5.png", alt: "Image 5" },
-        { src: "./Images/image6.png", alt: "Image 6" },
-        { src: "./Images/image7.png", alt: "Image 7" },
-        { src: "./Images/image8.png", alt: "Image 8" },
-        { src: "./Images/image9.png", alt: "Image 9" },
-        { src: "./Images/image10.png", alt: "Image 10" },
-        { src: "./Images/image11.png", alt: "Image 11" },
-        { src: "./Images/image12.png", alt: "Image 12" },
-        { src: "./Images/image13.png", alt: "Image 13" },
-        { src: "./Images/image14.png", alt: "Image 14" },
-        { src: "./Images/image15.png", alt: "Image 15" },
-        { src: "./Images/image16.png", alt: "Image 16" },
-        { src: "./Images/image17.png", alt: "Image 17" },
-        { src: "./Images/image18.png", alt: "Image 18" }
+        { src: "./" + imageFolder + "/image0.png", alt: "Image 0" },
+        { src: "./" + imageFolder + "/image1.png", alt: "Image 1" },
+        { src: "./" + imageFolder + "/image2.png", alt: "Image 2" },
+        { src: "./" + imageFolder + "/image3.png", alt: "Image 3" },
+        { src: "./" + imageFolder + "/image4.png", alt: "Image 4" },
+        { src: "./" + imageFolder + "/image5.png", alt: "Image 5" },
+        { src: "./" + imageFolder + "/image6.png", alt: "Image 6" },
+        { src: "./" + imageFolder + "/image7.png", alt: "Image 7" },
+        { src: "./" + imageFolder + "/image8.png", alt: "Image 8" },
+        { src: "./" + imageFolder + "/image9.png", alt: "Image 9" },
+        { src: "./" + imageFolder + "/image10.png", alt: "Image 10" },
+        { src: "./" + imageFolder + "/image11.png", alt: "Image 11" },
+        { src: "./" + imageFolder + "/image12.png", alt: "Image 12" },
+        { src: "./" + imageFolder + "/image13.png", alt: "Image 13" },
+        { src: "./" + imageFolder + "/image14.png", alt: "Image 14" },
+        { src: "./" + imageFolder + "/image15.png", alt: "Image 15" },
+        { src: "./" + imageFolder + "/image16.png", alt: "Image 16" },
+        { src: "./" + imageFolder + "/image17.png", alt: "Image 17" },
+        { src: "./" + imageFolder + "/image18.png", alt: "Image 18" }
     ];
 
     function getRandomNumber(n) {
@@ -295,11 +295,24 @@ function startGame(n, numberOfSeconds) {
     });
 }
 
+function getImageFolder() {
+    const selectElement = document.getElementById("cards-type-select");
+    const selectedIndex = selectElement.selectedIndex;
+    const selectedValue = selectElement.options[selectedIndex].value;
+    if(selectedValue === "option1") {
+        return "Images1";
+    }
+    if(selectedValue === "option2") {
+        return "Images2";
+    }
+    return "Images3";
+}
+
 function createGame() {
     const numberOfSeconds = document.getElementById("number-of-seconds-input").value;
     document.getElementsByClassName("settings-container")[0].style.display = 'none';
     document.getElementsByClassName("game-container")[0].style.display = 'block';
-    startGame(6, numberOfSeconds);
+    startGame(6, numberOfSeconds, getImageFolder());
 
     const generateGameButton = document.getElementById("generate-game-button");
     generateGameButton.disabled = true;
