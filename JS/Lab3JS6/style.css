@@ -2,6 +2,14 @@ body {
     background-color: #FF6F61;
 }
 
+.title-container {
+    text-align: center;
+}
+
+h1 {
+    display: inline-block;
+}
+
 fieldset {
     background-color: white;
 }
