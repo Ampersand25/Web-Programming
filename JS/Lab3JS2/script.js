@@ -137,6 +137,14 @@ function validateData() {
         submitButton.textContent = "Retrimite";
     }
 
+    const correctImg = "./Images/CorrectImg.png";
+    const wrongImg = "./Images/WrongImg.png";
+
+    const nameImg = document.getElementById("name-validation-img");
+    const dobImg = document.getElementById("date-of-birth-validation-img");
+    const ageImg = document.getElementById("age-validation-img");
+    const emailImg = document.getElementById("email-validation-img");
+
     const nameInput = document.getElementById("name-input");
     const dobInput = document.getElementById("date-of-birth-input");
     const ageInput = document.getElementById("age-input");
@@ -153,36 +161,44 @@ function validateData() {
     if(nameErrors.length !== 0) {
         errors += nameErrors;
         nameInput.style.border = "2px solid red";
+        nameImg.src = correctImg;
     }
     else {
         nameInput.style.border = "2px solid green";
+        nameImg.src = wrongImg;
     }
 
     const dobErrors = validateDOB(dobValue);
     if(dobErrors.length !== 0) {
         errors += dobErrors;
         dobInput.style.border = "2px solid red";
+        dobImg.src = correctImg;
     }
     else {
         dobInput.style.border = "2px solid green";
+        dobImg.src = wrongImg;
     }
 
     const ageErrors = validateAge(ageValue, dobValue);
     if(ageErrors.length !== 0) {
         errors += ageErrors;
         ageInput.style.border = "2px solid red";
+        ageImg.src = correctImg;
     }
     else {
         ageInput.style.border = "2px solid green";
+        ageImg.src = wrongImg;
     }
 
     const emailErrors = validateEmail(emailValue);
     if(emailErrors.length !== 0) {
         errors += emailErrors;
         emailInput.style.border = "2px solid red";
+        emailImg.src = correctImg;
     }
     else {
         emailInput.style.border = "2px solid green";
+        emailImg.src = wrongImg;
     }
 
     if(errors.length === 0) {

@@ -3,32 +3,69 @@
 <head>
     <meta charset="UTF-8">
     <title>Laborator 3 JS Problema 2</title>
+    <style>
+        body, button {
+            background-color: #D65076;
+        }
+
+        .title-container {
+            text-align: center;
+        }
+
+        h1 {
+            display: inline-block;
+            color: #EFC050;
+        }
+
+        fieldset {
+            background-color: #EFC050;
+        }
+
+        button {
+            color: #EFC050;
+        }
+
+        img {
+            width: 10px;
+            height: 10px;
+        }
+    </style>
 </head>
 <body>
+    <div class="title-container">
+        <h1><u>Problema 2 JS</u></h1>
+    </div>
+
+    <br>
+
     <fieldset>
         <legend><b>Informatii Personale</b></legend>
 
+        <img id="name-validation-img" src="./Images/NoAnswerImg.png" alt="Validation Image For Name Input">
         <label for="name-input"><u>Introduceti numele</u>: </label>
-        <input id="name-input" type="text" placeholder="John Smith">
+        <input id="name-input" type="text" placeholder="John Smith" size="30">
 
         <br><br>
 
+        <img id="date-of-birth-validation-img" src="./Images/NoAnswerImg.png" alt="Validation Image For Date of Birth Input">
         <label for="date-of-birth-input"><u>Introduceti data nasterii</u>: </label>
-        <input id="date-of-birth-input" type="text" placeholder="MM/DD/YYYY">
+        <input id="date-of-birth-input" type="text" placeholder="MM/DD/YYYY" size="9">
 
         <br><br>
 
+        <img id="age-validation-img" src="./Images/NoAnswerImg.png" alt="Validation Image For Age Input">
         <label for="age-input"><u>Introduceti varsta</u>: </label>
-        <input id="age-input" type="text" placeholder="18">
+        <input id="age-input" type="text" placeholder="18" size="1">
 
         <br><br>
 
+        <img id="email-validation-img" src="./Images/NoAnswerImg.png" alt="Validation Image For Email Address Input">
         <label for="email-input"><u>Introduceti adresa de email</u>: </label>
-        <input id="email-input" type="text" placeholder="name@domain.com">
+        <input id="email-input" type="text" placeholder="name@domain.com" size="21">
 
         <br><br>
 
-        <button id="submit-button" onclick="validateData()">Trimite</button>
+        <button id="submit-button" onclick="validateData()"><b>Trimite</b></button>
     </fieldset>
 
     <script type="text/javascript" src="script.js"></script>
