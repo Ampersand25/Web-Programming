@@ -45,8 +45,21 @@ function hideAllListItemsExceptFirstOne(numberOfListItems) {
     }
 }
 
+function setImageAnimation(itemID) {
+    const imageID = "image" + itemID;
+    const image = document.getElementById(imageID);
+    image.classList.add("flip-animation");
+}
+
+function clearImageAnimation(itemID) {
+    const imageID = "image" + itemID;
+    const image = document.getElementById(imageID);
+    image.classList.remove("flip-animation");
+}
+
 function hideShowListItem(currentItem, numberOfListItems, reverse = false) {
     hideListItem(currentItem);
+    clearImageAnimation(currentItem);
     var newItem;
     if(!reverse) {
         newItem = getNextItem(currentItem, numberOfListItems);
@@ -55,6 +68,7 @@ function hideShowListItem(currentItem, numberOfListItems, reverse = false) {
         newItem = getPrevItem(currentItem, numberOfListItems);
     }
     showListItem(newItem);
+    setImageAnimation(newItem);
     return newItem;
 }
 

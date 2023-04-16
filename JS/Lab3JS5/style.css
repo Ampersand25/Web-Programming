@@ -16,14 +16,20 @@ h1 {
     z-index: 1;
 }
 
-.container {
+.image-container {
     position: relative;
     display: inline-block;
+    perspective: 1000px;
 }
 
 img {
     width: 400px;
     height: 200px;
+    transition: transform 0.5s ease-in-out;
+}
+
+.flip-animation {
+    transform: rotateY(360deg);
 }
 
 .link {
