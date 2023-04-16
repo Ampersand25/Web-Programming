@@ -1,3 +1,11 @@
+body {
+    background-color: #FF6F61;
+}
+
+fieldset {
+    background-color: white;
+}
+
 #game-table {
     border-collapse: collapse;
     width: 100%;
@@ -16,6 +24,10 @@
 
 #game-table tbody tr {
     border-bottom: 1px solid #dddddd;
+}
+
+#game-table tbody tr:nth-of-type(odd) {
+    background-color: #ffffff;
 }
 
 #game-table tbody tr:nth-of-type(even) {

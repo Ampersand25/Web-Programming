@@ -28,6 +28,15 @@ function startGame(n) {
         mySet.add(i);
     }
 
+    function getRandomColor() {
+        const letters = "0123456789ABCDEF";
+        var color = "#";
+        for(let i = 0; i < 6; ++i) {
+            color += letters[getRandomNumber(16)];
+        }
+        return color;
+    }
+
     function getRandomNumber(n) {
         return Math.floor(Math.random() * n);
     }
@@ -57,9 +66,9 @@ function startGame(n) {
                 hiddenNumber = randomNumbersArray[k];
             }
             else {
-                newCell.innerHTML = "<b>" + randomNumbersArray[k] + "</b>";
+                newCell.innerHTML = `<div style="color: ${getRandomColor()}"><b>${randomNumbersArray[k]}</b></div>`;
             }
-            newCell.id = "row" + i + "col" + j;
+            newCell.id = `row${i} col${j}`;
             ++k;
         }
     }
@@ -84,7 +93,7 @@ function startGame(n) {
 
     function arrowUpPressed(hiddenCellID) {
         if(hiddenNumberRow > 0) {
-            const upCellID = "row" + (hiddenNumberRow - 1) + "col" + hiddenNumberCol;
+            const upCellID = `row${hiddenNumberRow - 1} col${hiddenNumberCol}`;
             interchangeCells(hiddenCellID, upCellID);
 
             --hiddenNumberRow;
@@ -93,7 +102,7 @@ function startGame(n) {
 
     function arrowRightPressed(hiddenCellID) {
         if(hiddenNumberCol + 1 < n) {
-            const upCellID = "row" + hiddenNumberRow + "col" + (hiddenNumberCol + 1);
+            const upCellID = `row${hiddenNumberRow} col${hiddenNumberCol + 1}`;
             interchangeCells(hiddenCellID, upCellID);
 
             ++hiddenNumberCol;
@@ -102,7 +111,7 @@ function startGame(n) {
 
     function arrowDownPressed(hiddenCellID) {
         if(hiddenNumberRow < n - 1) {
-            const upCellID = "row" + (hiddenNumberRow + 1) + "col" + hiddenNumberCol;
+            const upCellID = `row${hiddenNumberRow + 1} col${hiddenNumberCol}`;
             interchangeCells(hiddenCellID, upCellID);
 
             ++hiddenNumberRow;
@@ -111,7 +120,7 @@ function startGame(n) {
 
     function arrowLeftPressed(hiddenCellID) {
         if(hiddenNumberCol > 0) {
-            const upCellID = "row" + hiddenNumberRow + "col" + (hiddenNumberCol - 1);
+            const upCellID = `row${hiddenNumberRow} col${hiddenNumberCol - 1}`;
             interchangeCells(hiddenCellID, upCellID);
 
             --hiddenNumberCol;
@@ -128,7 +137,7 @@ function startGame(n) {
                     currentValue = hiddenNumber;
                 }
                 else {
-                    const currentCellID = "row" + i + "col" + j;
+                    const currentCellID = `row${i} col${j}`;
                     currentValue = document.getElementById(currentCellID).innerHTML;
                 }
 
@@ -147,35 +156,31 @@ function startGame(n) {
 
     document.addEventListener('keydown', function(event) {
         if(!win) {
-            const hiddenCellID = "row" + hiddenNumberRow + "col" + hiddenNumberCol;
+            const hiddenCellID = `row${hiddenNumberRow} col${hiddenNumberCol}`;
             var validMove = false;
             if(event.key === "ArrowUp") {
-                console.log("UP arrow key pressed");
+                console.log(`\nMove #${++numberOfMoves}\nUP arrow key pressed`);
                 arrowUpPressed(hiddenCellID);
 
                 validMove = true;
-                ++numberOfMoves;
             }
             else if(event.key === "ArrowRight") {
-                console.log("RIGHT arrow key pressed");
+                console.log(`\nMove #${++numberOfMoves}\nRIGHT arrow key pressed`);
                 arrowRightPressed(hiddenCellID);
 
                 validMove = true;
-                ++numberOfMoves;
             }
             else if(event.key === "ArrowDown") {
-                console.log("DOWN arrow key pressed");
+                console.log(`\nMove #${++numberOfMoves}\nDOWN arrow key pressed`);
                 arrowDownPressed(hiddenCellID);
 
                 validMove = true;
-                ++numberOfMoves;
             }
             else if(event.key === "ArrowLeft") {
-                console.log("LEFT arrow key pressed");
+                console.log(`\nMove #${++numberOfMoves}\nLEFT arrow key pressed`);
                 arrowLeftPressed(hiddenCellID);
 
                 validMove = true;
-                ++numberOfMoves;
             }
 
             if(validMove) {
