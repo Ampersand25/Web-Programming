@@ -1,3 +1,15 @@
+body {
+    background-color: #926AA6;
+}
+
+.title-container {
+    text-align: center;
+}
+
+h1 {
+    display: inline-block;
+}
+
 #game-table {
     width: 100%;
     border-collapse: collapse;
