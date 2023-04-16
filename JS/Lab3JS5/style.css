@@ -1,0 +1,52 @@
+body {
+    background-color: #D2386C;
+}
+
+.title-container {
+    text-align: center;
+}
+
+h1 {
+    display: inline-block;
+}
+
+.buttons-container {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+}
+
+.container {
+    position: relative;
+    display: inline-block;
+}
+
+img {
+    width: 400px;
+    height: 200px;
+}
+
+.link {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 24px;
+}
+
+#main-list {
+    padding-left: 0;
+    margin-left: 20px;
+}
+
+#main-list li {
+    border-bottom: 1px solid #000;
+    padding-bottom: 5px;
+    margin-bottom: 5px;
+}
+
+#main-list li:nth-child(1) {
+    border-top: 1px solid #000;
+    padding-top: 5px;
+    margin-top: 5px;
+}
