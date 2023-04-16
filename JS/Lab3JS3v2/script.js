@@ -38,25 +38,25 @@ function startGame(n, numberOfSeconds) {
     startTimer();
 
     const imageData = [
-        { src: "./Images/image0.png", alt: "Image 0" },
-        { src: "./Images/image1.png", alt: "Image 1" },
-        { src: "./Images/image2.png", alt: "Image 2" },
-        { src: "./Images/image3.png", alt: "Image 3" },
-        { src: "./Images/image4.png", alt: "Image 4" },
-        { src: "./Images/image5.png", alt: "Image 5" },
-        { src: "./Images/image6.png", alt: "Image 6" },
-        { src: "./Images/image7.png", alt: "Image 7" },
-        { src: "./Images/image8.png", alt: "Image 8" },
-        { src: "./Images/image9.png", alt: "Image 9" },
-        { src: "./Images/image10.png", alt: "Image 10" },
-        { src: "./Images/image11.png", alt: "Image 11" },
-        { src: "./Images/image12.png", alt: "Image 12" },
-        { src: "./Images/image13.png", alt: "Image 13" },
-        { src: "./Images/image14.png", alt: "Image 14" },
-        { src: "./Images/image15.png", alt: "Image 15" },
-        { src: "./Images/image16.png", alt: "Image 16" },
-        { src: "./Images/image17.png", alt: "Image 17" },
-        { src: "./Images/image18.png", alt: "Image 18" }
+        { src: "./Images/image0.jpg", alt: "Image 0" },
+        { src: "./Images/image1.jpg", alt: "Image 1" },
+        { src: "./Images/image2.jpg", alt: "Image 2" },
+        { src: "./Images/image3.jpg", alt: "Image 3" },
+        { src: "./Images/image4.jpg", alt: "Image 4" },
+        { src: "./Images/image5.jpg", alt: "Image 5" },
+        { src: "./Images/image6.jpg", alt: "Image 6" },
+        { src: "./Images/image7.jpg", alt: "Image 7" },
+        { src: "./Images/image8.jpg", alt: "Image 8" },
+        { src: "./Images/image9.jpg", alt: "Image 9" },
+        { src: "./Images/image10.jpg", alt: "Image 10" },
+        { src: "./Images/image11.jpg", alt: "Image 11" },
+        { src: "./Images/image12.jpg", alt: "Image 12" },
+        { src: "./Images/image13.jpg", alt: "Image 13" },
+        { src: "./Images/image14.jpg", alt: "Image 14" },
+        { src: "./Images/image15.jpg", alt: "Image 15" },
+        { src: "./Images/image16.jpg", alt: "Image 16" },
+        { src: "./Images/image17.jpg", alt: "Image 17" },
+        { src: "./Images/image18.jpg", alt: "Image 18" }
     ];
 
     function getRandomNumber(n) {
