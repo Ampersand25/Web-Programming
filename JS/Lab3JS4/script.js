@@ -100,6 +100,7 @@ function main(table, isVertical) {
     const totalRows = getNumberOfRows(table);
     const totalCols = getNumberOfCols(table);
 
+    console.log("\n");
     console.log(`Number of rows: ${totalRows}`);
     console.log(`Number of cols: ${totalCols}`);
 
