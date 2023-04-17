@@ -160,15 +160,24 @@ function startGame(n, numberOfSeconds, imageFolder) {
 
     console.log(matrix);
 
+    function changeImage(r, c, newSrc, newAlt) {
+        const image = document.getElementById(`image${r},${c}`);
+        image.src = `${newSrc}`;
+        image.alt = `${newAlt}`;
+    }
+
     function hideCell(r, c) {
-        const cellID = `row${r}col${c}`;
-        const cell = document.getElementById(cellID);
-        cell.innerHTML = `<img id="image${r},${c}" src="${imageData[0].src}" alt="${imageData[0].alt}" width="50" height="50">`;
+        changeImage(r, c, imageData[0].src, imageData[0].alt);
     }
 
     function updateNumberOfMoves() {
         const numberOfMovesLabel = document.getElementById("moves-label");
         numberOfMovesLabel.innerHTML = `<em>Score</em>: <strong>${++numberOfMoves}</strong>`;
+    }
+
+    function startAnimation(r, c) {
+        const image = document.getElementById(`image${r},${c}`);
+        image.classList.toggle("rotate");
     }
 
     var firstCellClickedVal = false;
@@ -211,10 +220,8 @@ function startGame(n, numberOfSeconds, imageFolder) {
             if(cell.tagName === "IMG" || cell.tagName === "TD") {
                 var validMove = false;
 
-                const clickedCellID = `row${rowIndex}col${colIndex}`;
-                const clickedCell = document.getElementById(clickedCellID);
                 const clickedImageIndex = matrix[rowIndex][colIndex];
-                clickedCell.innerHTML = `<img id="image${rowIndex},${colIndex}" src="${imageData[clickedImageIndex].src}" alt="${imageData[clickedImageIndex].alt}" width="50" height="50">`;
+                changeImage(rowIndex, colIndex, imageData[clickedImageIndex].src, imageData[clickedImageIndex].alt);
 
                 if(firstCellClickedVal === false) {
                     if(!visibleMatrix[rowIndex][colIndex]) {
@@ -274,6 +281,7 @@ function startGame(n, numberOfSeconds, imageFolder) {
                 }
 
                 if(validMove) {
+                    startAnimation(rowIndex, colIndex);
                     updateNumberOfMoves();
                 }
             }
