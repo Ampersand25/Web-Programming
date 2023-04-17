@@ -12,7 +12,7 @@ Nu se vor folosi biblioteci de functii, jQuery, pluginuri, etc.
 console.log("Welcome to script.js!");
 
 function getPrevItem(currentItem, numberOfListItems) {
-    var itemNumber = currentItem - 1;
+    let itemNumber = currentItem - 1;
     if(itemNumber === 0) {
         itemNumber = numberOfListItems;
     }
@@ -20,7 +20,7 @@ function getPrevItem(currentItem, numberOfListItems) {
 }
 
 function getNextItem(currentItem, numberOfListItems) {
-    var itemNumber = currentItem + 1;
+    let itemNumber = currentItem + 1;
     if(itemNumber > numberOfListItems) {
         itemNumber = 1;
     }
@@ -61,7 +61,7 @@ function hideShowListItem(currentItem, numberOfListItems, reverse = false) {
     hideListItem(currentItem);
     clearImageAnimation(currentItem);
 
-    var newItem;
+    let newItem;
     if(!reverse) {
         newItem = getNextItem(currentItem, numberOfListItems);
     }
@@ -81,13 +81,13 @@ function updateCurrentItemLabel(currentItem, numberOfListItems) {
 function startGame(n, numberOfListItems) {
     hideAllListItemsExceptFirstOne(numberOfListItems);
 
-    var currentItem = 1;
-    var currentSecond = 0;
+    let currentItem = 1;
+    let currentSecond = 0;
 
     setInterval(function() {
         ++currentSecond;
         console.log(currentSecond + "/" + n);
-        if(currentSecond == n) {
+        if(currentSecond === n) {
             console.log("NEXT IMAGE!");
             currentItem = hideShowListItem(currentItem, numberOfListItems, false);
             updateCurrentItemLabel(currentItem, numberOfListItems);
@@ -112,7 +112,7 @@ function startGame(n, numberOfListItems) {
 }
 
 function generateGame() {
-    const n = document.getElementById("number-of-seconds-input").value;
+    const n = Number(document.getElementById("number-of-seconds-input").value);
     const orderedList = document.getElementById("main-list");
     const numberOfListItems = orderedList.getElementsByTagName("li").length;
     updateCurrentItemLabel(1, numberOfListItems);

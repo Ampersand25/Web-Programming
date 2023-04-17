@@ -59,7 +59,7 @@ function convertToDateOfBirth(string) {
 function calculateAge(dob) {
     const currentDate = new Date();
 
-    var age = currentDate.getFullYear() - dob.getFullYear();
+    let age = currentDate.getFullYear() - dob.getFullYear();
 
     const currentMonth = currentDate.getMonth();
     const dobMonth = dob.getMonth();
@@ -115,7 +115,7 @@ function validateAge(age, dob) {
     if(!isInteger(age)) {
         return "• Varsta - varsta introdusa nu este un numar intreg!\n";
     }
-    var ageNumber = parseInt(age);
+    const ageNumber = parseInt(age);
     if(age < 0) {
         return "• Varsta - varsta introdusa nu este un numar natural (este un numar negativ)!\n";
     }
@@ -136,7 +136,7 @@ function validateEmail(email) {
     if(email.length === 0) {
         return "• Email - nu ati introdus nicio adresa de email!\n";
     }
-    const validEmailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    const validEmailRegex = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
     if(!validEmailRegex.test(email)) {
         return "• Email - adresa de email introdusa nu este una valida!\n";
     }
@@ -167,7 +167,7 @@ function validateData() {
     const ageValue = ageInput.value;
     const emailValue = emailInput.value;
 
-    var errors = "";
+    let errors = "";
 
     const nameErrors = validateName(nameValue);
     if(nameErrors.length !== 0) {

@@ -40,7 +40,7 @@ function main() {
     updateSelectsSize(firstSelect);
     updateSelectsSize(secondSelect);
 
-    firstSelect.addEventListener("dblclick", function(event) {
+    firstSelect.addEventListener("dblclick", function() {
         const optionText = firstSelect.options[firstSelect.selectedIndex].text;
         console.log(`Selected option from first select: ${optionText}`);
 
@@ -51,7 +51,7 @@ function main() {
         updateSelectsSize(secondSelect);
     });
 
-    secondSelect.addEventListener("dblclick", function(event) {
+    secondSelect.addEventListener("dblclick", function() {
         const optionText = secondSelect.options[secondSelect.selectedIndex].text;
         console.log(`Selected option from second select: ${optionText}`);
 

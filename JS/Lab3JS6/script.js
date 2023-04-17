@@ -9,7 +9,7 @@ Nu se vor folosi biblioteci de functii, jQuery, pluginuri, etc.
 
 console.log("Welcome to script.js!");
 
-var numberOfPassedSeconds;
+let numberOfPassedSeconds;
 
 function updateSecondsCounter() {
     ++numberOfPassedSeconds;
@@ -45,7 +45,7 @@ function createArray(mySet) {
 
 function getRandomColor() {
     const letters = "0123456789ABCDEF";
-    var randomColor = "#";
+    let randomColor = "#";
     for(let i = 0; i < 6; ++i) {
         randomColor += letters[getRandomNumber(16)];
     }
@@ -64,7 +64,7 @@ function computeGameTable(n, randomNumbersArray, hiddenNumber) {
     hiddenNumber.row = getRandomNumber(n);
     hiddenNumber.col = getRandomNumber(n);
 
-    var k = 0;
+    let k = 0;
     for(let i = 0; i < n; ++i) {
         const newRow = table.insertRow();
         for(let j = 0; j < n; ++j) {
@@ -89,8 +89,8 @@ function computeGameTable(n, randomNumbersArray, hiddenNumber) {
 }
 
 function interchangeCells(firstCellID, secondCellID) {
-    var firstCell = document.getElementById(firstCellID);
-    var secondCell = document.getElementById(secondCellID);
+    let firstCell = document.getElementById(firstCellID);
+    let secondCell = document.getElementById(secondCellID);
 
     const auxInnerHTML = firstCell.innerHTML;
     firstCell.innerHTML = secondCell.innerHTML;
@@ -138,10 +138,10 @@ function arrowLeftPressed(hiddenCellID, hiddenNumber) {
 }
 
 function gameFinished(n, hiddenNumber) {
-    var prevValue = 0;
+    let prevValue = 0;
     for(let i = 0; i < n; ++i) {
         for(let j = 0; j < n; ++j) {
-            var currentValue;
+            let currentValue;
 
             if(i === hiddenNumber.row && j === hiddenNumber.col) {
                 currentValue = hiddenNumber.val;
@@ -179,7 +179,7 @@ function startGame(n) {
     const mySet = createSet(n);
     const randomNumbersArray = createArray(mySet);
 
-    var hiddenNumber = {val: undefined, row: undefined, col: undefined};
+    let hiddenNumber = {val: undefined, row: undefined, col: undefined};
     computeGameTable(n, randomNumbersArray, hiddenNumber);
 
     if(gameFinished(n, hiddenNumber) === true) {
@@ -187,14 +187,14 @@ function startGame(n) {
         return;
     }
 
-    var win = false;
-    var numberOfMoves = 0;
+    let win = false;
+    let numberOfMoves = 0;
 
     document.addEventListener('keydown', function(event) {
         if(!win) {
             const hiddenCellID = `row${hiddenNumber.row} col${hiddenNumber.col}`;
 
-            var validMove = false;
+            let validMove = false;
             if(event.key === "ArrowUp") {
                 console.log("\n");
                 console.log(`Move #${++numberOfMoves}\nUP arrow key pressed`);
