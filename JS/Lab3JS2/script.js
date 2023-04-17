@@ -67,7 +67,7 @@ function calculateAge(dob) {
     const dobDay = dob.getDate();
 
     if(currentMonth < dobMonth || (currentMonth === dobMonth && currentDay < dobDay)) {
-        age--;
+        --age;
     }
 
     return age;
@@ -100,7 +100,7 @@ function isNumber(string) {
 }
 
 function isInteger(string) {
-    var validIntegerRegex = /^-?\d+$/;
+    const validIntegerRegex = /^-?\d+$/;
     return validIntegerRegex.test(string);
 }
 
@@ -173,44 +173,44 @@ function validateData() {
     if(nameErrors.length !== 0) {
         errors += nameErrors;
         nameInput.style.border = "2px solid red";
-        nameImg.src = correctImg;
+        nameImg.src = wrongImg;
     }
     else {
         nameInput.style.border = "2px solid green";
-        nameImg.src = wrongImg;
+        nameImg.src = correctImg;
     }
 
     const dobErrors = validateDOB(dobValue);
     if(dobErrors.length !== 0) {
         errors += dobErrors;
         dobInput.style.border = "2px solid red";
-        dobImg.src = correctImg;
+        dobImg.src = wrongImg;
     }
     else {
         dobInput.style.border = "2px solid green";
-        dobImg.src = wrongImg;
+        dobImg.src = correctImg;
     }
 
     const ageErrors = validateAge(ageValue, dobValue);
     if(ageErrors.length !== 0) {
         errors += ageErrors;
         ageInput.style.border = "2px solid red";
-        ageImg.src = correctImg;
+        ageImg.src = wrongImg;
     }
     else {
         ageInput.style.border = "2px solid green";
-        ageImg.src = wrongImg;
+        ageImg.src = correctImg;
     }
 
     const emailErrors = validateEmail(emailValue);
     if(emailErrors.length !== 0) {
         errors += emailErrors;
         emailInput.style.border = "2px solid red";
-        emailImg.src = correctImg;
+        emailImg.src = wrongImg;
     }
     else {
         emailInput.style.border = "2px solid green";
-        emailImg.src = wrongImg;
+        emailImg.src = correctImg;
     }
 
     if(errors.length === 0) {
