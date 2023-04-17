@@ -12,73 +12,68 @@ Nu se vor folosi biblioteci de functii, jQuery, pluginuri, etc.
 
 console.log("Welcome to script.js!");
 
-function startGame(n, numberOfSeconds) {
-    var timer;
+function startTimer() {
+    const startTime = new Date().getTime();
+    const timerLabel = document.getElementById("timer-label");
 
-    function startTimer() {
-        const startTime = new Date().getTime();
-        const timerLabel = document.getElementById("timer-label");
+    return setInterval(() => {
+        const currentTime = new Date().getTime();
+        const elapsedTime = Math.floor((currentTime - startTime) / 1000);
 
-        timer = setInterval(() => {
-            const currentTime = new Date().getTime();
-            const elapsedTime = Math.floor((currentTime - startTime) / 1000);
+        const hours = Math.floor(elapsedTime / 3600);
+        const minutes = Math.floor((elapsedTime % 3600) / 60);
+        const seconds = elapsedTime % 60;
 
-            const hours = Math.floor(elapsedTime / 3600);
-            const minutes = Math.floor((elapsedTime % 3600) / 60);
-            const seconds = elapsedTime % 60;
+        timerLabel.textContent = `Total play time: ${hours} hours, ${minutes} minutes, ${seconds} seconds`;
+    }, 1000);
+}
 
-            timerLabel.textContent = `Total play time: ${hours} hours, ${minutes} minutes, ${seconds} seconds`;
-        }, 1000);
+function getRandomNumber(n) {
+    return Math.floor(Math.random() * n);
+}
+
+function getRandomColor() {
+    const letters = "0123456789ABCDEF";
+    let color = "#";
+    for(let i = 0; i < 6; ++i) {
+        color += letters[getRandomNumber(16)];
     }
+    return color;
+}
 
-    startTimer();
-
-    function getRandomNumber(n) {
-        return Math.floor(Math.random() * n);
-    }
-
-    function getRandomColor() {
-        const letters = "0123456789ABCDEF";
-        var color = "#";
-        for(let i = 0; i < 6; ++i) {
-            color += letters[getRandomNumber(16)];
-        }
-        return color;
-    }
-
-    const numbers = [];
-    var colors = ["#FFFFFF"];
-
+function populateArrays(n, numbers, colors) {
     for(let i = 1; i <= n * n / 2; ++i) {
         numbers.push(i);
         numbers.push(i);
 
         colors.push(getRandomColor());
     }
+}
 
-    function deleteElement(arr, index) {
-        if(index !== -1) {
-            arr.splice(index, 1);
-        }
+function deleteElement(arr, index) {
+    if(index !== -1) {
+        arr.splice(index, 1);
     }
+}
 
+function getRandomNumbersArray(numbers) {
     const randomNumbersArray = [];
-
     while(numbers.length !== 0) {
         const randomIndex = getRandomNumber(numbers.length);
         const randomNumber = numbers[randomIndex];
         randomNumbersArray.push(randomNumber);
         deleteElement(numbers, randomIndex);
     }
+    return randomNumbersArray;
+}
 
+function computeGameTable(n, randomNumbersArray, matrix, visibleMatrix) {
     const table = document.getElementById("game-table");
-    var matrix = [];
-    var visibleMatrix = [];
-    var currentElemIndex = 0;
+    let currentElemIndex = 0;
 
     for(let r = 0; r < n; ++r) {
-        var row = [];
-        var visibleMatrixRow = [];
+        const row = [];
+        const visibleMatrixRow = [];
 
         const newRow = table.insertRow();
         for(let c = 0; c < n; ++c) {
@@ -86,7 +81,7 @@ function startGame(n, numberOfSeconds) {
             visibleMatrixRow.push(false);
 
             const newCell = newRow.insertCell(c);
-            newCell.id = "row" + r + "col" + c;
+            newCell.id = `row${r}col${c}`;
             newCell.innerHTML = "&zwnj;";
             newCell.style.backgroundColor = "white";
             newCell.style.color = "black";
@@ -96,31 +91,48 @@ function startGame(n, numberOfSeconds) {
         visibleMatrix.push(visibleMatrixRow)
     }
 
-    var firstCellClickedVal = -1;
-    var firstCellClickedRow = -1;
-    var firstCellClickedCol = -1;
+    return table;
+}
 
-    var secondCellClickedVal = -1;
-    var secondCellClickedRow = -1;
-    var secondCellClickedCol = -1;
+function hideCell(r, c) {
+    const cellID = `row${r}col${c}`;
+    const cell = document.getElementById(cellID);
+    cell.innerHTML = "&zwnj;";
+    cell.style.backgroundColor = "white";
+    cell.style.color = "black";
+}
 
-    var hiddenElements = n * n;
-    var win = false;
-    var blocked = false;
-    var numberOfMoves = 0;
+function updateNumberOfMoves(numberOfMoves) {
+    const numberOfMovesLabel = document.getElementById("moves-label");
+    numberOfMovesLabel.textContent = `Total number of moves: ${++numberOfMoves}`;
+    return numberOfMoves;
+}
 
-    function hideCell(r, c) {
-        const cellID = "row" + r + "col" + c;
-        const cell = document.getElementById(cellID);
-        cell.innerHTML = "&zwnj;";
-        cell.style.backgroundColor = "white";
-        cell.style.color = "black";
-    }
+function startGame(n, numberOfSeconds) {
+    const timer = startTimer();
 
-    function updateNumberOfMoves() {
-        const numberOfMovesLabel = document.getElementById("moves-label");
-        numberOfMovesLabel.textContent = `Total number of moves: ${++numberOfMoves}`;
-    }
+    const numbers = [];
+    const colors = ["#FFFFFF"];
+    populateArrays(n, numbers, colors);
+
+    const randomNumbersArray = getRandomNumbersArray(numbers);
+
+    const matrix = [];
+    const visibleMatrix = [];
+    const table = computeGameTable(n, randomNumbersArray, matrix, visibleMatrix);
+
+    let firstCellClickedVal = -1;
+    let firstCellClickedRow = -1;
+    let firstCellClickedCol = -1;
+
+    let secondCellClickedVal = -1;
+    let secondCellClickedRow = -1;
+    let secondCellClickedCol = -1;
+
+    let hiddenElements = n * n;
+    let win = false;
+    let blocked = false;
+    let numberOfMoves = 0;
 
     table.addEventListener("click", function(event) {
         if(blocked) {
@@ -131,13 +143,13 @@ function startGame(n, numberOfSeconds) {
             const cell = event.target;
 
             if(cell.tagName === "TD") {
-                var validMove = false;
+                let validMove = false;
 
                 const row = cell.parentNode;
                 const rowIndex = row.rowIndex;
                 const colIndex = cell.cellIndex;
 
-                const clickedCellID = "row" + rowIndex + "col" + colIndex;
+                const clickedCellID = `row${rowIndex}col${colIndex}`;
                 const clickedCell = document.getElementById(clickedCellID);
                 const clickedElement = matrix[rowIndex][colIndex];
                 clickedCell.innerHTML = clickedElement;
@@ -204,7 +216,7 @@ function startGame(n, numberOfSeconds) {
                 }
 
                 if(validMove) {
-                    updateNumberOfMoves();
+                    numberOfMoves = updateNumberOfMoves(numberOfMoves);
                 }
             }
         }
