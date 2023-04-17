@@ -16,6 +16,10 @@ h1 {
     z-index: 1;
 }
 
+#current-item-label {
+    background-color: white;
+}
+
 .image-container {
     position: relative;
     display: inline-block;

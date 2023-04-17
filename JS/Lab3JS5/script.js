@@ -28,13 +28,13 @@ function getNextItem(currentItem, numberOfListItems) {
 }
 
 function hideListItem(itemNumber) {
-    const itemID = "li" + itemNumber;
+    const itemID = `li${itemNumber}`;
     const item = document.getElementById(itemID);
     item.style.visibility = "hidden";
 }
 
 function showListItem(itemNumber) {
-    const itemID = "li" + itemNumber;
+    const itemID = `li${itemNumber}`;
     const item = document.getElementById(itemID);
     item.style.visibility = "visible";
 }
@@ -46,13 +46,13 @@ function hideAllListItemsExceptFirstOne(numberOfListItems) {
 }
 
 function setImageAnimation(itemID) {
-    const imageID = "image" + itemID;
+    const imageID = `image${itemID}`;
     const image = document.getElementById(imageID);
     image.classList.add("flip-animation");
 }
 
 function clearImageAnimation(itemID) {
-    const imageID = "image" + itemID;
+    const imageID = `image${itemID}`;
     const image = document.getElementById(imageID);
     image.classList.remove("flip-animation");
 }
@@ -60,6 +60,7 @@ function clearImageAnimation(itemID) {
 function hideShowListItem(currentItem, numberOfListItems, reverse = false) {
     hideListItem(currentItem);
     clearImageAnimation(currentItem);
+
     var newItem;
     if(!reverse) {
         newItem = getNextItem(currentItem, numberOfListItems);
@@ -72,18 +73,24 @@ function hideShowListItem(currentItem, numberOfListItems, reverse = false) {
     return newItem;
 }
 
+function updateCurrentItemLabel(currentItem, numberOfListItems) {
+    const label = document.getElementById("current-item-label");
+    label.textContent = `${currentItem}/${numberOfListItems}`;
+}
+
 function startGame(n, numberOfListItems) {
     hideAllListItemsExceptFirstOne(numberOfListItems);
 
     var currentItem = 1;
     var currentSecond = 0;
 
-    var intervalID = setInterval(function() {
+    setInterval(function() {
         ++currentSecond;
         console.log(currentSecond + "/" + n);
         if(currentSecond == n) {
             console.log("NEXT IMAGE!");
             currentItem = hideShowListItem(currentItem, numberOfListItems, false);
+            updateCurrentItemLabel(currentItem, numberOfListItems);
 
             currentSecond = 0;
         }
@@ -92,19 +99,24 @@ function startGame(n, numberOfListItems) {
     const prevBtn = document.getElementById('previous-button');
     prevBtn.addEventListener("click", function() {
         currentItem = hideShowListItem(currentItem, numberOfListItems, true);
+        updateCurrentItemLabel(currentItem, numberOfListItems);
         currentSecond = 0;
     });
 
     const nextBtn = document.getElementById('next-button');
     nextBtn.addEventListener("click", function() {
         currentItem = hideShowListItem(currentItem, numberOfListItems, false);
+        updateCurrentItemLabel(currentItem, numberOfListItems);
         currentSecond = 0;
     });
 }
 
 function generateGame() {
     const n = document.getElementById("number-of-seconds-input").value;
-    startGame(n, 10);
+    const orderedList = document.getElementById("main-list");
+    const numberOfListItems = orderedList.getElementsByTagName("li").length;
+    updateCurrentItemLabel(1, numberOfListItems);
+    startGame(n, numberOfListItems);
 
     const generateGameButton = document.getElementById("generate-game-button");
     generateGameButton.disabled = true;
