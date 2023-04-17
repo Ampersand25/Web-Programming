@@ -12,7 +12,7 @@ Nu se vor folosi biblioteci de functii, jQuery, pluginuri, etc.
 
 console.log("Welcome to script.js!");
 
-var timeCount;
+let timeCount;
 
 function getBestScore() {
     const storedBestScore = localStorage.getItem("bestScore");
@@ -320,13 +320,7 @@ function getImageFolder() {
     const selectElement = document.getElementById("cards-type-select");
     const selectedIndex = selectElement.selectedIndex;
     const selectedValue = selectElement.options[selectedIndex].value;
-    if(selectedValue === "option1") {
-        return "Images1";
-    }
-    if(selectedValue === "option2") {
-        return "Images2";
-    }
-    return "Images3";
+    return `Images${selectedValue.slice("option".length)}`;
 }
 
 function createGame() {
