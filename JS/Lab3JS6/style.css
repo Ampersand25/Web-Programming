@@ -43,19 +43,14 @@ fieldset {
 }
 
 #game-table tbody tr:last-of-type {
-    border-bottom: 2px solid #009879;
-}
-
-#game-table tbody tr.active-row {
-    font-weight: bold;
-    color: #009879;
+    border-bottom: 3px solid #FF6F61;
 }
 
 #generate-game-button {
     display: inline-block;
     padding: 10px 20px;
     background-color: #4831D4;
-    color: #CCF381;
+    color: white;
     font-size: 18px;
     font-weight: bold;
     text-align: center;
@@ -67,7 +62,7 @@ fieldset {
 }
 
 #generate-game-button:hover {
-    background-color: #EE4E34;
+    background-color: #CCF381;
 }
 
 #generate-game-button:disabled {

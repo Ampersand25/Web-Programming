@@ -9,146 +9,182 @@ Nu se vor folosi biblioteci de functii, jQuery, pluginuri, etc.
 
 console.log("Welcome to script.js!");
 
-function startGame(n) {
-    const startTime = Date.now();
+var numberOfPassedSeconds;
+
+function updateSecondsCounter() {
+    ++numberOfPassedSeconds;
+
     const secondsCounter = document.getElementById("play-time");
+    secondsCounter.innerHTML = `<u>Total play time</u>: ${numberOfPassedSeconds}s`;
+}
 
-    function updateSecondsCounter() {
-        const elapsedTimeInSeconds = Math.floor((Date.now() - startTime) / 1000);
-        secondsCounter.innerHTML = `<u>Total play time</u>: ${elapsedTimeInSeconds}s`;
-    }
-
-    updateSecondsCounter();
-
-    setInterval(updateSecondsCounter, 1000);
-
+function createSet(n) {
     const mySet = new Set();
-
     for(let i = 1; i <= n * n; ++i) {
         mySet.add(i);
     }
+    return mySet;
+}
 
-    function getRandomColor() {
-        const letters = "0123456789ABCDEF";
-        var color = "#";
-        for(let i = 0; i < 6; ++i) {
-            color += letters[getRandomNumber(16)];
-        }
-        return color;
-    }
+function getRandomNumber(n) {
+    return Math.floor(Math.random() * n);
+}
 
-    function getRandomNumber(n) {
-        return Math.floor(Math.random() * n);
-    }
-
+function createArray(mySet) {
     const randomNumbersArray = [];
-
     while(mySet.size !== 0) {
         const setToArray = Array.from(mySet);
         const randomIndex = getRandomNumber(setToArray.length);
         const randomNumber = setToArray[randomIndex];
+
         randomNumbersArray.push(randomNumber);
         mySet.delete(randomNumber);
     }
+    return randomNumbersArray;
+}
 
+function getRandomColor() {
+    const letters = "0123456789ABCDEF";
+    var randomColor = "#";
+    for(let i = 0; i < 6; ++i) {
+        randomColor += letters[getRandomNumber(16)];
+    }
+    return randomColor;
+}
+
+function displayInitialGameStatus(hiddenNumber) {
+    console.log(`HIDDEN NUMBER: ${hiddenNumber.val}`);
+    console.log(`HIDDEN NUMBER ROW: ${hiddenNumber.row}`);
+    console.log(`HIDDEN NUMBER COL: ${hiddenNumber.col}`);
+}
+
+function computeGameTable(n, randomNumbersArray, hiddenNumber) {
     const table = document.getElementById("game-table");
-    var hiddenNumber;
-    var hiddenNumberRow = getRandomNumber(n);
-    var hiddenNumberCol = getRandomNumber(n);
-    var k = 0;
 
+    hiddenNumber.row = getRandomNumber(n);
+    hiddenNumber.col = getRandomNumber(n);
+
+    var k = 0;
     for(let i = 0; i < n; ++i) {
         const newRow = table.insertRow();
         for(let j = 0; j < n; ++j) {
             const newCell = newRow.insertCell(j);
-            if(i === hiddenNumberRow && j === hiddenNumberCol) {
+            if(i === hiddenNumber.row && j === hiddenNumber.col) {
                 newCell.innerHTML = "";
-                hiddenNumber = randomNumbersArray[k];
+                newCell.style.color = "black";
+
+                hiddenNumber.val = randomNumbersArray[k];
             }
             else {
-                newCell.innerHTML = `<div style="color: ${getRandomColor()}"><b>${randomNumbersArray[k]}</b></div>`;
+                newCell.innerHTML = `${randomNumbersArray[k]}`;
+                newCell.style.color = `${getRandomColor()}`;
             }
+            newCell.style.fontWeight = "bold";
             newCell.id = `row${i} col${j}`;
             ++k;
         }
     }
 
-    console.log("HIDDEN NUMBER: " + hiddenNumber);
-    console.log("HIDDEN NUMBER ROW: " + hiddenNumberRow);
-    console.log("HIDDEN NUMBER COL: " + hiddenNumberCol);
+    displayInitialGameStatus(hiddenNumber);
+}
 
-    if(gameFinished() === true) {
+function interchangeCells(firstCellID, secondCellID) {
+    var firstCell = document.getElementById(firstCellID);
+    var secondCell = document.getElementById(secondCellID);
+
+    const auxInnerHTML = firstCell.innerHTML;
+    firstCell.innerHTML = secondCell.innerHTML;
+    secondCell.innerHTML = auxInnerHTML;
+
+    const auxStyleColor = firstCell.style.color;
+    firstCell.style.color = secondCell.style.color;
+    secondCell.style.color = auxStyleColor;
+}
+
+function arrowUpPressed(hiddenCellID, hiddenNumber) {
+    if(hiddenNumber.row > 0) {
+        const upCellID = `row${hiddenNumber.row - 1} col${hiddenNumber.col}`;
+        interchangeCells(hiddenCellID, upCellID);
+
+        --hiddenNumber.row;
+    }
+}
+
+function arrowRightPressed(hiddenCellID, hiddenNumber, n) {
+    if(hiddenNumber.col + 1 < n) {
+        const upCellID = `row${hiddenNumber.row} col${hiddenNumber.col + 1}`;
+        interchangeCells(hiddenCellID, upCellID);
+
+        ++hiddenNumber.col;
+    }
+}
+
+function arrowDownPressed(hiddenCellID, hiddenNumber, n) {
+    if(hiddenNumber.row < n - 1) {
+        const upCellID = `row${hiddenNumber.row + 1} col${hiddenNumber.col}`;
+        interchangeCells(hiddenCellID, upCellID);
+
+        ++hiddenNumber.row;
+    }
+}
+
+function arrowLeftPressed(hiddenCellID, hiddenNumber) {
+    if(hiddenNumber.col > 0) {
+        const upCellID = `row${hiddenNumber.row} col${hiddenNumber.col - 1}`;
+        interchangeCells(hiddenCellID, upCellID);
+
+        --hiddenNumber.col;
+    }
+}
+
+function gameFinished(n, hiddenNumber) {
+    var prevValue = 0;
+    for(let i = 0; i < n; ++i) {
+        for(let j = 0; j < n; ++j) {
+            var currentValue;
+
+            if(i === hiddenNumber.row && j === hiddenNumber.col) {
+                currentValue = hiddenNumber.val;
+            }
+            else {
+                const currentCellID = `row${i} col${j}`;
+                currentValue = document.getElementById(currentCellID).innerHTML;
+            }
+
+            if(prevValue > currentValue) {
+                return false;
+            }
+
+            prevValue = currentValue;
+        }
+    }
+    return true;
+}
+
+function updateNumberOfMoves(currentNumberOfMoves) {
+    const numberOfMovesSpanElement = document.getElementById("no-of-moves");
+    numberOfMovesSpanElement.innerHTML = `<u>Number of moves</u>: ${currentNumberOfMoves}`;
+}
+
+function displayCurrentGameStatus(hiddenNumber) {
+    console.log(`NEW HIDDEN ROW: ${hiddenNumber.row}`);
+    console.log(`NEW HIDDEN COL: ${hiddenNumber.col}`);
+}
+
+function startGame(n) {
+    numberOfPassedSeconds = 0;
+    updateSecondsCounter();
+    const timer = setInterval(updateSecondsCounter, 1000);
+
+    const mySet = createSet(n);
+    const randomNumbersArray = createArray(mySet);
+
+    var hiddenNumber = {val: undefined, row: undefined, col: undefined};
+    computeGameTable(n, randomNumbersArray, hiddenNumber);
+
+    if(gameFinished(n, hiddenNumber) === true) {
         alert("YOU WIN!");
         return;
-    }
-
-    function interchangeCells(firstCellID, secondCellID) {
-        var firstCell = document.getElementById(firstCellID);
-        var secondCell = document.getElementById(secondCellID);
-
-        const aux = firstCell.innerHTML;
-        firstCell.innerHTML = secondCell.innerHTML;
-        secondCell.innerHTML = aux;
-    }
-
-    function arrowUpPressed(hiddenCellID) {
-        if(hiddenNumberRow > 0) {
-            const upCellID = `row${hiddenNumberRow - 1} col${hiddenNumberCol}`;
-            interchangeCells(hiddenCellID, upCellID);
-
-            --hiddenNumberRow;
-        }
-    }
-
-    function arrowRightPressed(hiddenCellID) {
-        if(hiddenNumberCol + 1 < n) {
-            const upCellID = `row${hiddenNumberRow} col${hiddenNumberCol + 1}`;
-            interchangeCells(hiddenCellID, upCellID);
-
-            ++hiddenNumberCol;
-        }
-    }
-
-    function arrowDownPressed(hiddenCellID) {
-        if(hiddenNumberRow < n - 1) {
-            const upCellID = `row${hiddenNumberRow + 1} col${hiddenNumberCol}`;
-            interchangeCells(hiddenCellID, upCellID);
-
-            ++hiddenNumberRow;
-        }
-    }
-
-    function arrowLeftPressed(hiddenCellID) {
-        if(hiddenNumberCol > 0) {
-            const upCellID = `row${hiddenNumberRow} col${hiddenNumberCol - 1}`;
-            interchangeCells(hiddenCellID, upCellID);
-
-            --hiddenNumberCol;
-        }
-    }
-
-    function gameFinished() {
-        var prevValue = 0;
-        for(let i = 0; i < n; ++i) {
-            for(let j = 0; j < n; ++j) {
-                var currentValue;
-
-                if(i === hiddenNumberRow && j === hiddenNumberCol) {
-                    currentValue = hiddenNumber;
-                }
-                else {
-                    const currentCellID = `row${i} col${j}`;
-                    currentValue = document.getElementById(currentCellID).innerHTML;
-                }
-
-                if(prevValue > currentValue) {
-                    return false;
-                }
-
-                prevValue = currentValue;
-            }
-        }
-        return true;
     }
 
     var win = false;
@@ -156,42 +192,46 @@ function startGame(n) {
 
     document.addEventListener('keydown', function(event) {
         if(!win) {
-            const hiddenCellID = `row${hiddenNumberRow} col${hiddenNumberCol}`;
+            const hiddenCellID = `row${hiddenNumber.row} col${hiddenNumber.col}`;
+
             var validMove = false;
             if(event.key === "ArrowUp") {
-                console.log(`\nMove #${++numberOfMoves}\nUP arrow key pressed`);
-                arrowUpPressed(hiddenCellID);
+                console.log("\n");
+                console.log(`Move #${++numberOfMoves}\nUP arrow key pressed`);
+                arrowUpPressed(hiddenCellID, hiddenNumber);
 
                 validMove = true;
             }
             else if(event.key === "ArrowRight") {
-                console.log(`\nMove #${++numberOfMoves}\nRIGHT arrow key pressed`);
-                arrowRightPressed(hiddenCellID);
+                console.log("\n");
+                console.log(`Move #${++numberOfMoves}\nRIGHT arrow key pressed`);
+                arrowRightPressed(hiddenCellID, hiddenNumber, n);
 
                 validMove = true;
             }
             else if(event.key === "ArrowDown") {
-                console.log(`\nMove #${++numberOfMoves}\nDOWN arrow key pressed`);
-                arrowDownPressed(hiddenCellID);
+                console.log("\n");
+                console.log(`Move #${++numberOfMoves}\nDOWN arrow key pressed`);
+                arrowDownPressed(hiddenCellID, hiddenNumber, n);
 
                 validMove = true;
             }
             else if(event.key === "ArrowLeft") {
-                console.log(`\nMove #${++numberOfMoves}\nLEFT arrow key pressed`);
-                arrowLeftPressed(hiddenCellID);
+                console.log("\n");
+                console.log(`Move #${++numberOfMoves}\nLEFT arrow key pressed`);
+                arrowLeftPressed(hiddenCellID, hiddenNumber);
 
                 validMove = true;
             }
 
             if(validMove) {
-                const numberOfMovesSpanElement = document.getElementById("no-of-moves");
-                numberOfMovesSpanElement.innerHTML = `<u>Number of moves</u>: ${numberOfMoves}`;
+                updateNumberOfMoves(numberOfMoves);
             }
 
-            console.log("NEW HIDDEN ROW: " + hiddenNumberRow);
-            console.log("NEW HIDDEN COL: " + hiddenNumberCol);
+            displayCurrentGameStatus(hiddenNumber);
 
-            if(gameFinished() === true) {
+            if(gameFinished(n, hiddenNumber) === true) {
+                clearInterval(timer);
                 alert("YOU WIN!");
                 win = true;
             }
