@@ -74,9 +74,9 @@ function startGame(n, numberOfSeconds, imageFolder) {
             const minutes = Math.floor((elapsedTime % 3600) / 60);
             const seconds = elapsedTime % 60;
 
-            const hoursStr = (hours < 10) ? ("0" + hours) : (hours);
-            const minutesStr = (minutes < 10) ? ("0" + minutes) : (minutes);
-            const secondsStr = (seconds < 10) ? ("0" + seconds) : (seconds);
+            const hoursStr = (hours < 10) ? (`0${hours}`) : (hours);
+            const minutesStr = (minutes < 10) ? (`0${minutes}`) : (minutes);
+            const secondsStr = (seconds < 10) ? (`0${seconds}`) : (seconds);
 
             timeLabel.innerHTML = `<em>Time</em>: <strong>${hoursStr}:${minutesStr}:${secondsStr}</strong>`;
         }, 1000);
@@ -85,25 +85,25 @@ function startGame(n, numberOfSeconds, imageFolder) {
     startTimer();
 
     const imageData = [
-        { src: "./" + imageFolder + "/image0.png", alt: "Image 0" },
-        { src: "./" + imageFolder + "/image1.png", alt: "Image 1" },
-        { src: "./" + imageFolder + "/image2.png", alt: "Image 2" },
-        { src: "./" + imageFolder + "/image3.png", alt: "Image 3" },
-        { src: "./" + imageFolder + "/image4.png", alt: "Image 4" },
-        { src: "./" + imageFolder + "/image5.png", alt: "Image 5" },
-        { src: "./" + imageFolder + "/image6.png", alt: "Image 6" },
-        { src: "./" + imageFolder + "/image7.png", alt: "Image 7" },
-        { src: "./" + imageFolder + "/image8.png", alt: "Image 8" },
-        { src: "./" + imageFolder + "/image9.png", alt: "Image 9" },
-        { src: "./" + imageFolder + "/image10.png", alt: "Image 10" },
-        { src: "./" + imageFolder + "/image11.png", alt: "Image 11" },
-        { src: "./" + imageFolder + "/image12.png", alt: "Image 12" },
-        { src: "./" + imageFolder + "/image13.png", alt: "Image 13" },
-        { src: "./" + imageFolder + "/image14.png", alt: "Image 14" },
-        { src: "./" + imageFolder + "/image15.png", alt: "Image 15" },
-        { src: "./" + imageFolder + "/image16.png", alt: "Image 16" },
-        { src: "./" + imageFolder + "/image17.png", alt: "Image 17" },
-        { src: "./" + imageFolder + "/image18.png", alt: "Image 18" }
+        { src: `./${imageFolder}/image0.png`, alt: "Image 0" },
+        { src: `./${imageFolder}/image1.png`, alt: "Image 1" },
+        { src: `./${imageFolder}/image2.png`, alt: "Image 2" },
+        { src: `./${imageFolder}/image3.png`, alt: "Image 3" },
+        { src: `./${imageFolder}/image4.png`, alt: "Image 4" },
+        { src: `./${imageFolder}/image5.png`, alt: "Image 5" },
+        { src: `./${imageFolder}/image6.png`, alt: "Image 6" },
+        { src: `./${imageFolder}/image7.png`, alt: "Image 7" },
+        { src: `./${imageFolder}/image8.png`, alt: "Image 8" },
+        { src: `./${imageFolder}/image9.png`, alt: "Image 9" },
+        { src: `./${imageFolder}/image10.png`, alt: "Image 10" },
+        { src: `./${imageFolder}/image11.png`, alt: "Image 11" },
+        { src: `./${imageFolder}/image12.png`, alt: "Image 12" },
+        { src: `./${imageFolder}/image13.png`, alt: "Image 13" },
+        { src: `./${imageFolder}/image14.png`, alt: "Image 14" },
+        { src: `./${imageFolder}/image15.png`, alt: "Image 15" },
+        { src: `./${imageFolder}/image16.png`, alt: "Image 16" },
+        { src: `./${imageFolder}/image17.png`, alt: "Image 17" },
+        { src: `./${imageFolder}/image18.png`, alt: "Image 18" }
     ];
 
     function getRandomNumber(n) {
@@ -148,8 +148,8 @@ function startGame(n, numberOfSeconds, imageFolder) {
             visibleMatrixRow.push(false);
 
             const newCell = newRow.insertCell(c);
-            newCell.id = "row" + r + "col" + c;
-            newCell.innerHTML = `<img src="${imageData[0].src}" alt="${imageData[0].alt}" width="50" height="50">`;
+            newCell.id = `row${r}col${c}`;
+            newCell.innerHTML = `<img id="image${r},${c}" src="${imageData[0].src}" alt="${imageData[0].alt}" width="50" height="50">`;
 
             ++currentElemIndex;
         }
@@ -161,9 +161,9 @@ function startGame(n, numberOfSeconds, imageFolder) {
     console.log(matrix);
 
     function hideCell(r, c) {
-        const cellID = "row" + r + "col" + c;
+        const cellID = `row${r}col${c}`;
         const cell = document.getElementById(cellID);
-        cell.innerHTML = `<img src="${imageData[0].src}" alt="${imageData[0].alt}" width="50" height="50">`;
+        cell.innerHTML = `<img id="image${r},${c}" src="${imageData[0].src}" alt="${imageData[0].alt}" width="50" height="50">`;
     }
 
     function updateNumberOfMoves() {
@@ -211,10 +211,10 @@ function startGame(n, numberOfSeconds, imageFolder) {
             if(cell.tagName === "IMG" || cell.tagName === "TD") {
                 var validMove = false;
 
-                const clickedCellID = "row" + rowIndex + "col" + colIndex;
+                const clickedCellID = `row${rowIndex}col${colIndex}`;
                 const clickedCell = document.getElementById(clickedCellID);
                 const clickedImageIndex = matrix[rowIndex][colIndex];
-                clickedCell.innerHTML = `<img src="${imageData[clickedImageIndex].src}" alt="${imageData[clickedImageIndex].alt}" width="50" height="50">`;
+                clickedCell.innerHTML = `<img id="image${rowIndex},${colIndex}" src="${imageData[clickedImageIndex].src}" alt="${imageData[clickedImageIndex].alt}" width="50" height="50">`;
 
                 if(firstCellClickedVal === false) {
                     if(!visibleMatrix[rowIndex][colIndex]) {
@@ -235,8 +235,8 @@ function startGame(n, numberOfSeconds, imageFolder) {
                     secondCellClickedCol = colIndex;
 
                     console.clear();
-                    console.log("First cell clicked value: " + firstCellClickedVal);
-                    console.log("Second cell clicked value: " + secondCellClickedVal);
+                    console.log(`First cell clicked value: ${firstCellClickedVal}`);
+                    console.log(`Second cell clicked value: ${secondCellClickedVal}`);
 
                     if(firstCellClickedVal === secondCellClickedVal) {
                         if (firstCellClickedRow !== secondCellClickedRow || firstCellClickedCol !== secondCellClickedCol) {

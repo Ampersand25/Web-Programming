@@ -46,6 +46,14 @@ button {
     vertical-align: middle;
 }
 
+img {
+    transition: transform 3s ease;
+}
+
+.rotate {
+    transform: rotate(360deg);
+}
+
 .settings-container {
     display: block;
 }
