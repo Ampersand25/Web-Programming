@@ -7,19 +7,13 @@ Nu se vor folosi biblioteci de functii, jQuery, pluginuri, etc.
 
 console.log("Welcome to script.js!");
 
-const firstSelect = document.getElementById("first-select");
-const secondSelect = document.getElementById("second-select");
-
-function updateSelectsSize()
+function updateSelectsSize(selectElement)
 {
-    firstSelect.size = firstSelect.length;
-    secondSelect.size = secondSelect.length;
+    selectElement.size = selectElement.length;
 }
 
-updateSelectsSize();
-
 function getPositionOfOptionInsideSelect(selectElement, searchedOptionText) {
-    for (let i = 0; i < selectElement.length; ++i) {
+    for(let i = 0; i < selectElement.length; ++i) {
         if (selectElement.options[i].text === searchedOptionText) {
             return i;
         }
@@ -34,25 +28,39 @@ function removeOptionFromSelect(selectElement, optionText) {
 }
 
 function addOptionToSelect(selectElement, optionText) {
-    const option = document.createElement('option');
+    const option = document.createElement("option");
     option.text = optionText;
     selectElement.appendChild(option);
 }
 
-firstSelect.addEventListener("dblclick", function(event) {
-    const optionText = firstSelect.options[firstSelect.selectedIndex].text;
-    console.log("Selected option from first select: " + optionText);
+function main() {
+    const firstSelect = document.getElementById("first-select");
+    const secondSelect = document.getElementById("second-select");
 
-    removeOptionFromSelect(firstSelect, optionText);
-    addOptionToSelect(secondSelect, optionText);
-    updateSelectsSize();
-});
+    updateSelectsSize(firstSelect);
+    updateSelectsSize(secondSelect);
 
-secondSelect.addEventListener("dblclick", function(event) {
-    const optionText = secondSelect.options[secondSelect.selectedIndex].text;
-    console.log("Selected option from second select: " + optionText);
+    firstSelect.addEventListener("dblclick", function(event) {
+        const optionText = firstSelect.options[firstSelect.selectedIndex].text;
+        console.log(`Selected option from first select: ${optionText}`);
 
-    removeOptionFromSelect(secondSelect, optionText);
-    addOptionToSelect(firstSelect, optionText);
-    updateSelectsSize();
-});
+        removeOptionFromSelect(firstSelect, optionText);
+        addOptionToSelect(secondSelect, optionText);
+
+        updateSelectsSize(firstSelect);
+        updateSelectsSize(secondSelect);
+    });
+
+    secondSelect.addEventListener("dblclick", function(event) {
+        const optionText = secondSelect.options[secondSelect.selectedIndex].text;
+        console.log(`Selected option from second select: ${optionText}`);
+
+        removeOptionFromSelect(secondSelect, optionText);
+        addOptionToSelect(firstSelect, optionText);
+
+        updateSelectsSize(firstSelect);
+        updateSelectsSize(secondSelect);
+    });
+}
+
+main();
