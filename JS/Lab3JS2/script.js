@@ -9,6 +9,18 @@ Nu se vor folosi biblioteci de functii, jQuery, pluginuri, etc.
 
 console.log("Welcome to script.js!");
 
+function clearFields() {
+    const nameInput = document.getElementById("name-input");
+    const dobInput = document.getElementById("date-of-birth-input");
+    const ageInput = document.getElementById("age-input");
+    const emailInput = document.getElementById("email-input");
+
+    nameInput.value = "";
+    dobInput.value = "";
+    ageInput.value = "";
+    emailInput.value = "";
+}
+
 function validateName(name) {
     name = name.trim();
     if(name.length === 0) {
