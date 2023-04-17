@@ -9,7 +9,7 @@ body {
     background-color: #6FD7A3;
 }
 
-.wrapper {
+.wrapper-container {
     box-sizing: border-box;
     width: 40em;
     padding: 2.5em 3em;

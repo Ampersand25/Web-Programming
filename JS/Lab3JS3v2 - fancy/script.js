@@ -12,79 +12,72 @@ Nu se vor folosi biblioteci de functii, jQuery, pluginuri, etc.
 
 console.log("Welcome to script.js!");
 
-function startGame(n, numberOfSeconds, imageFolder) {
-    function getBestScore() {
-        const storedBestScore = localStorage.getItem("bestScore");
-        const minimumMovesLabel = document.getElementById("minimum-moves");
-        if(storedBestScore !== null) {
-            minimumMovesLabel.innerHTML = `<em>Best Score</em>: <strong>${storedBestScore}</strong>`;
-        }
-        else {
-            minimumMovesLabel.innerHTML = `<em>Best Score</em>: <strong>-</strong>`;
-        }
-        return storedBestScore;
+var timeCount;
+
+function getBestScore() {
+    const storedBestScore = localStorage.getItem("bestScore");
+    const minimumMovesLabel = document.getElementById("minimum-moves");
+    if(storedBestScore !== null) {
+        minimumMovesLabel.innerHTML = `<em>Best Score</em>: <strong>${storedBestScore}</strong>`;
     }
-
-    function setBestScore(newBestScore) {
-        localStorage.setItem("bestScore", newBestScore);
+    else {
+        minimumMovesLabel.innerHTML = `<em>Best Score</em>: <strong>-</strong>`;
     }
+    return storedBestScore;
+}
 
-    const bestScore = getBestScore();
+function setBestScore(newBestScore) {
+    localStorage.setItem("bestScore", newBestScore);
+}
 
-    function getBestTime() {
-        const storedBestTime = localStorage.getItem("bestTime");
-        const bestTimeLabel = document.getElementById("best-time");
-        if(storedBestTime !== null) {
-            const hours = Math.floor(storedBestTime / 3600);
-            const minutes = Math.floor((storedBestTime % 3600) / 60);
-            const seconds = storedBestTime % 60;
+function getBestTime() {
+    const storedBestTime = localStorage.getItem("bestTime");
+    const bestTimeLabel = document.getElementById("best-time");
+    if(storedBestTime !== null) {
+        const hours = Math.floor(storedBestTime / 3600);
+        const minutes = Math.floor((storedBestTime % 3600) / 60);
+        const seconds = storedBestTime % 60;
 
-            const hoursStr = (hours < 10) ? ("0" + hours) : (hours);
-            const minutesStr = (minutes < 10) ? ("0" + minutes) : (minutes);
-            const secondsStr = (seconds < 10) ? ("0" + seconds) : (seconds);
+        const hoursStr = (hours < 10) ? (`0${hours}`) : (hours);
+        const minutesStr = (minutes < 10) ? (`0${minutes}`) : (minutes);
+        const secondsStr = (seconds < 10) ? (`0${seconds}`) : (seconds);
 
-            bestTimeLabel.innerHTML = `<em>Best Time</em>: <strong>${hoursStr}:${minutesStr}:${secondsStr}</strong>`;
-        }
-        else {
-            bestTimeLabel.innerHTML = `<em>Best Time</em>: <strong>-</strong>`;
-        }
-        return storedBestTime;
+        bestTimeLabel.innerHTML = `<em>Best Time</em>: <strong>${hoursStr}:${minutesStr}:${secondsStr}</strong>`;
     }
-
-    function setBestTime(newBestTime) {
-        localStorage.setItem("bestTime", newBestTime);
+    else {
+        bestTimeLabel.innerHTML = `<em>Best Time</em>: <strong>-</strong>`;
     }
+    return storedBestTime;
+}
 
-    const bestTime = getBestTime();
+function setBestTime(newBestTime) {
+    localStorage.setItem("bestTime", newBestTime);
+}
 
-    var timer;
-    var timeCount;
+function startTimer() {
+    const startTime = new Date().getTime();
+    const timeLabel = document.getElementById("time-label");
 
-    function startTimer() {
-        const startTime = new Date().getTime();
-        const timeLabel = document.getElementById("time-label");
+    return setInterval(() => {
+        const currentTime = new Date().getTime();
+        const elapsedTime = Math.floor((currentTime - startTime) / 1000);
 
-        timer = setInterval(() => {
-            const currentTime = new Date().getTime();
-            const elapsedTime = Math.floor((currentTime - startTime) / 1000);
+        timeCount = elapsedTime;
 
-            timeCount = elapsedTime;
+        const hours = Math.floor(elapsedTime / 3600);
+        const minutes = Math.floor((elapsedTime % 3600) / 60);
+        const seconds = elapsedTime % 60;
 
-            const hours = Math.floor(elapsedTime / 3600);
-            const minutes = Math.floor((elapsedTime % 3600) / 60);
-            const seconds = elapsedTime % 60;
+        const hoursStr = (hours < 10) ? (`0${hours}`) : (hours);
+        const minutesStr = (minutes < 10) ? (`0${minutes}`) : (minutes);
+        const secondsStr = (seconds < 10) ? (`0${seconds}`) : (seconds);
 
-            const hoursStr = (hours < 10) ? (`0${hours}`) : (hours);
-            const minutesStr = (minutes < 10) ? (`0${minutes}`) : (minutes);
-            const secondsStr = (seconds < 10) ? (`0${seconds}`) : (seconds);
+        timeLabel.innerHTML = `<em>Time</em>: <strong>${hoursStr}:${minutesStr}:${secondsStr}</strong>`;
+    }, 1000);
+}
 
-            timeLabel.innerHTML = `<em>Time</em>: <strong>${hoursStr}:${minutesStr}:${secondsStr}</strong>`;
-        }, 1000);
-    }
-
-    startTimer();
-
-    const imageData = [
+function getImageData(imageFolder) {
+    return [
         { src: `./${imageFolder}/image0.png`, alt: "Image 0" },
         { src: `./${imageFolder}/image1.png`, alt: "Image 1" },
         { src: `./${imageFolder}/image2.png`, alt: "Image 2" },
@@ -105,41 +98,45 @@ function startGame(n, numberOfSeconds, imageFolder) {
         { src: `./${imageFolder}/image17.png`, alt: "Image 17" },
         { src: `./${imageFolder}/image18.png`, alt: "Image 18" }
     ];
+}
 
-    function getRandomNumber(n) {
-        return Math.floor(Math.random() * n);
-    }
+function getRandomNumber(n) {
+    return Math.floor(Math.random() * n);
+}
 
+function getNumbers(n) {
     const numbers = [];
-
     for(let i = 1; i <= n * n / 2; ++i) {
         numbers.push(i);
         numbers.push(i);
     }
+    return numbers;
+}
 
-    function deleteElement(arr, index) {
-        if(index !== -1) {
-            arr.splice(index, 1);
-        }
+function deleteElement(arr, index) {
+    if(index !== -1) {
+        arr.splice(index, 1);
     }
+}
 
+function getRandomNumbers(numbers) {
     const randomNumbersArray = [];
-
     while(numbers.length !== 0) {
         const randomIndex = getRandomNumber(numbers.length);
         const randomNumber = numbers[randomIndex];
         randomNumbersArray.push(randomNumber);
         deleteElement(numbers, randomIndex);
     }
+    return randomNumbersArray;
+}
 
+function computeGameTable(n, randomNumbersArray, imageData, matrix, visibleMatrix) {
     const table = document.getElementById("game-table");
-    var matrix = [];
-    var visibleMatrix = [];
-    var currentElemIndex = 0;
+    let currentElemIndex = 0;
 
     for(let r = 0; r < n; ++r) {
-        var row = [];
-        var visibleMatrixRow = [];
+        const row = [];
+        const visibleMatrixRow = [];
 
         const newRow = table.insertRow();
         for(let c = 0; c < n; ++c) {
@@ -158,40 +155,56 @@ function startGame(n, numberOfSeconds, imageFolder) {
         visibleMatrix.push(visibleMatrixRow);
     }
 
+    return table;
+}
+
+function changeImage(r, c, newSrc, newAlt) {
+    const image = document.getElementById(`image${r},${c}`);
+    image.src = `${newSrc}`;
+    image.alt = `${newAlt}`;
+}
+
+function hideCell(r, c, imageData) {
+    changeImage(r, c, imageData[0].src, imageData[0].alt);
+}
+
+function updateNumberOfMoves(numberOfMoves) {
+    const numberOfMovesLabel = document.getElementById("moves-label");
+    numberOfMovesLabel.innerHTML = `<em>Score</em>: <strong>${++numberOfMoves}</strong>`;
+    return numberOfMoves;
+}
+
+function startAnimation(r, c) {
+    const image = document.getElementById(`image${r},${c}`);
+    image.classList.toggle("rotate");
+}
+
+function startGame(n = 6, numberOfSeconds = 0.5, imageFolder = "Images1") {
+    const bestScore = getBestScore();
+    const bestTime = getBestTime();
+    const timer = startTimer();
+    const imageData = getImageData(imageFolder);
+    const numbers = getNumbers(n);
+    const randomNumbersArray = getRandomNumbers(numbers);
+
+    const matrix = [];
+    const visibleMatrix = [];
+    const table = computeGameTable(n, randomNumbersArray, imageData, matrix, visibleMatrix);
+
     console.log(matrix);
 
-    function changeImage(r, c, newSrc, newAlt) {
-        const image = document.getElementById(`image${r},${c}`);
-        image.src = `${newSrc}`;
-        image.alt = `${newAlt}`;
-    }
+    let firstCellClickedVal = false;
+    let firstCellClickedRow = -1;
+    let firstCellClickedCol = -1;
 
-    function hideCell(r, c) {
-        changeImage(r, c, imageData[0].src, imageData[0].alt);
-    }
+    let secondCellClickedVal = false;
+    let secondCellClickedRow = -1;
+    let secondCellClickedCol = -1;
 
-    function updateNumberOfMoves() {
-        const numberOfMovesLabel = document.getElementById("moves-label");
-        numberOfMovesLabel.innerHTML = `<em>Score</em>: <strong>${++numberOfMoves}</strong>`;
-    }
-
-    function startAnimation(r, c) {
-        const image = document.getElementById(`image${r},${c}`);
-        image.classList.toggle("rotate");
-    }
-
-    var firstCellClickedVal = false;
-    var firstCellClickedRow = -1;
-    var firstCellClickedCol = -1;
-
-    var secondCellClickedVal = false;
-    var secondCellClickedRow = -1;
-    var secondCellClickedCol = -1;
-
-    var hiddenElements = n * n;
-    var win = false;
-    var blocked = false;
-    var numberOfMoves = 0;
+    let hiddenElements = n * n;
+    let win = false;
+    let blocked = false;
+    let numberOfMoves = 0;
 
     table.addEventListener("click", function(event) {
         if(blocked) {
@@ -200,11 +213,11 @@ function startGame(n, numberOfSeconds, imageFolder) {
 
         if(win === false) {
             const cell = event.target;
-            var rowIndex = undefined;
-            var colIndex = undefined;
+            let rowIndex = undefined;
+            let colIndex = undefined;
 
             if(cell.tagName === "IMG") {
-                const tableCell = cell.closest('td');
+                const tableCell = cell.closest("td");
 
                 const row = tableCell.parentNode;
                 rowIndex = row.rowIndex;
@@ -218,7 +231,7 @@ function startGame(n, numberOfSeconds, imageFolder) {
             }
 
             if(cell.tagName === "IMG" || cell.tagName === "TD") {
-                var validMove = false;
+                let validMove = false;
 
                 const clickedImageIndex = matrix[rowIndex][colIndex];
                 changeImage(rowIndex, colIndex, imageData[clickedImageIndex].src, imageData[clickedImageIndex].alt);
@@ -259,7 +272,7 @@ function startGame(n, numberOfSeconds, imageFolder) {
 
                             blocked = true;
                             setTimeout(function() {
-                                hideCell(firstCellClickedRow, firstCellClickedCol);
+                                hideCell(firstCellClickedRow, firstCellClickedCol, imageData);
                                 blocked = false;
                             }, numberOfSeconds * 1000);
                         }
@@ -269,8 +282,8 @@ function startGame(n, numberOfSeconds, imageFolder) {
 
                         blocked = true;
                         setTimeout(function() {
-                            hideCell(firstCellClickedRow, firstCellClickedCol);
-                            hideCell(secondCellClickedRow, secondCellClickedCol);
+                            hideCell(firstCellClickedRow, firstCellClickedCol, imageData);
+                            hideCell(secondCellClickedRow, secondCellClickedCol, imageData);
                             blocked = false;
                         }, numberOfSeconds * 1000);
 
@@ -282,7 +295,7 @@ function startGame(n, numberOfSeconds, imageFolder) {
 
                 if(validMove) {
                     startAnimation(rowIndex, colIndex);
-                    updateNumberOfMoves();
+                    numberOfMoves = updateNumberOfMoves(numberOfMoves);
                 }
             }
         }
