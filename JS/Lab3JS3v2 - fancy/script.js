@@ -17,12 +17,13 @@ let timeCount;
 function getBestScore() {
     const storedBestScore = localStorage.getItem("bestScore");
     const minimumMovesLabel = document.getElementById("minimum-moves");
+
+    let score = "-";
     if(storedBestScore !== null) {
-        minimumMovesLabel.innerHTML = `<em>Best Score</em>: <strong>${storedBestScore}</strong>`;
+        score = `${storedBestScore}`;
     }
-    else {
-        minimumMovesLabel.innerHTML = `<em>Best Score</em>: <strong>-</strong>`;
-    }
+    minimumMovesLabel.innerHTML = `<em>Best Score</em>: <strong>${score}</strong>`;
+
     return storedBestScore;
 }
 
@@ -33,6 +34,7 @@ function setBestScore(newBestScore) {
 function getBestTime() {
     const storedBestTime = localStorage.getItem("bestTime");
     const bestTimeLabel = document.getElementById("best-time");
+    let time = "-";
     if(storedBestTime !== null) {
         const hours = Math.floor(storedBestTime / 3600);
         const minutes = Math.floor((storedBestTime % 3600) / 60);
@@ -42,11 +44,9 @@ function getBestTime() {
         const minutesStr = (minutes < 10) ? (`0${minutes}`) : (minutes);
         const secondsStr = (seconds < 10) ? (`0${seconds}`) : (seconds);
 
-        bestTimeLabel.innerHTML = `<em>Best Time</em>: <strong>${hoursStr}:${minutesStr}:${secondsStr}</strong>`;
+        time = `${hoursStr}:${minutesStr}:${secondsStr}`;
     }
-    else {
-        bestTimeLabel.innerHTML = `<em>Best Time</em>: <strong>-</strong>`;
-    }
+    bestTimeLabel.innerHTML = `<em>Best Time</em>: <strong>${time}</strong>`;
     return storedBestTime;
 }
 
@@ -106,7 +106,8 @@ function getRandomNumber(n) {
 
 function getNumbers(n) {
     const numbers = [];
-    for(let i = 1; i <= n * n / 2; ++i) {
+    const numberOfCards = n * n / 2;
+    for(let i = 1; i <= numberOfCards; ++i) {
         numbers.push(i);
         numbers.push(i);
     }
@@ -116,6 +117,9 @@ function getNumbers(n) {
 function deleteElement(arr, index) {
     if(index !== -1) {
         arr.splice(index, 1);
+    }
+    else {
+        console.error(`Index (${index}) out of range!`);
     }
 }
 

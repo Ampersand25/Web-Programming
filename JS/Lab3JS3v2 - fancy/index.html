@@ -8,21 +8,21 @@
 <body>
     <div class="wrapper-container">
         <div class="settings-container">
-            <label for="number-of-seconds-input">Number of seconds after which the images disappear: </label>
-            <input id="number-of-seconds-input" type="number" value="0.5" min="0.5" max="5" step="0.5">
+            <div class="number-of-seconds-container">
+                <label for="number-of-seconds-input">Number of seconds after which the images disappear: </label>
+                <input id="number-of-seconds-input" type="number" value="0.5" min="0.5" max="5" step="0.5">
+            </div>
 
-            <br>
-
-            <label for="cards-type-select">Choose the type of the cards: </label>
-            <select id="cards-type-select">
-                <option value="option1">Pokemons</option>
-                <option value="option2">Football Clubs</option>
-                <option value="option3">Animal Emojis</option>
-                <option value="option4">Yu-Gi-Oh!</option>
-                <option value="option5">Famous Logos</option>
-            </select>
-
-            <br>
+            <div class="cards-type-container">
+                <label for="cards-type-select">Choose the type of the cards: </label>
+                <select id="cards-type-select">
+                    <option value="option1">Pokemons</option>
+                    <option value="option2">Football Clubs</option>
+                    <option value="option3">Animal Emojis</option>
+                    <option value="option4">Yu-Gi-Oh!</option>
+                    <option value="option5">Famous Logos</option>
+                </select>
+            </div>
 
             <button id="generate-game-button" onclick="createGame()">Create Game!</button>
         </div>
@@ -30,7 +30,7 @@
         <br>
 
         <div class="game-container">
-            <div class="highlights">
+            <div class="highlights-container">
                 <label id="minimum-moves"><em>Best Score</em>: <strong>-</strong></label>
 
                 <br>
@@ -51,6 +51,7 @@
             </div>
         </div>
     </div>
+
     <script type="text/javascript" src="script.js"></script>
 </body>
 </html>
