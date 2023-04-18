@@ -10,33 +10,37 @@
         <h1><u>Problema 3v1 JS</u></h1>
     </div>
 
-    <br>
+    <br><hr>
+
+    <div class="settings-container">
+        <div class="table-size-container">
+            <label for="table-size-input">Select the size of the game: </label>
+            <input id="table-size-input" type="number" value="4" min="2" max="16" step="2">
+        </div>
+
+        <div class="number-of-seconds-container">
+            <label for="number-of-seconds-input">Number of seconds after which the text disappears: </label>
+            <input id="number-of-seconds-input" type="number" value="3" min="1" max="10" step="1">
+        </div>
+
+        <button id="generate-game-button" onclick="generateGame()">Generate Game!</button>
+    </div>
 
     <hr>
 
-    <label for="table-size-input">Select the size of the game: </label>
-    <input id="table-size-input" type="number" value="4" min="2" max="16" step="2">
-
-    <br>
-
-    <label for="number-of-seconds-input">Number of seconds after which the text disappears: </label>
-    <input id="number-of-seconds-input" type="number" value="3" min="1" max="10" step="1">
-
-    <br>
-
-    <button id="generate-game-button" onclick="generateGame()">Generate Game!</button>
-
-    <br><hr><br>
-
-    <table id="game-table"></table>
+    <div class="game-table-container">
+        <table id="game-table"></table>
+    </div>
 
     <hr>
 
-    <label id="moves-label">Total number of moves: 0</label>
+    <div class="statistics-container">
+        <label id="moves-label">Total number of moves: 0</label>
 
-    <br>
+        <br>
 
-    <label id="timer-label">Total play time: 0 hours, 0 minutes, 0 seconds</label>
+        <label id="timer-label">Total play time: 0 hours, 0 minutes, 0 seconds</label>
+    </div>
 
     <hr>
 

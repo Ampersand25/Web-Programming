@@ -33,12 +33,7 @@ function getRandomNumber(n) {
 }
 
 function getRandomColor() {
-    const letters = "0123456789ABCDEF";
-    let color = "#";
-    for(let i = 0; i < 6; ++i) {
-        color += letters[getRandomNumber(16)];
-    }
-    return color;
+    return `#${Math.floor(Math.random()*16777215).toString(16)}`;
 }
 
 function populateArrays(n, numbers, colors) {
@@ -53,6 +48,9 @@ function populateArrays(n, numbers, colors) {
 function deleteElement(arr, index) {
     if(index !== -1) {
         arr.splice(index, 1);
+    }
+    else {
+        alert(`Index (${index}) out of range!`);
     }
 }
 
@@ -175,8 +173,8 @@ function startGame(n, numberOfSeconds) {
                     secondCellClickedCol = colIndex;
 
                     console.clear();
-                    console.log("First cell clicked value: " + firstCellClickedVal);
-                    console.log("Second cell clicked value: " + secondCellClickedVal);
+                    console.log(`First cell clicked value: ${firstCellClickedVal}`);
+                    console.log(`Second cell clicked value: ${secondCellClickedVal}`);
 
                     if(firstCellClickedVal === secondCellClickedVal) {
                         if (firstCellClickedRow !== secondCellClickedRow || firstCellClickedCol !== secondCellClickedCol) {
