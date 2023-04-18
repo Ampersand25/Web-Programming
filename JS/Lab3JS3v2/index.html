@@ -12,29 +12,35 @@
 
     <br>
 
-    <label for="game-size-input">Size of the game: </label>
-    <input id="game-size-input" type="number" value="4" min="2" max="6" step="2">
+    <div class="game-settings-container">
+        <div class="game-size-container">
+            <label for="game-size-input">Size of the game: </label>
+            <input id="game-size-input" type="number" value="4" min="2" max="6" step="2">
+        </div>
+
+        <div class="number-of-seconds-container">
+            <label for="number-of-seconds-input">Number of seconds after which the images disappear: </label>
+            <input id="number-of-seconds-input" type="number" value="0.5" min="0.5" max="5" step="0.5">
+        </div>
+
+        <button id="generate-game-button" onclick="generateGame()">Generate Game!</button>
+    </div>
 
     <br>
 
-    <label for="number-of-seconds-input">Number of seconds after which the images disappear: </label>
-    <input id="number-of-seconds-input" type="number" value="0.5" min="0.5" max="5" step="0.5">
+    <div class="game-table-container">
+        <table id="game-table"></table>
+    </div>
 
     <br>
 
-    <button id="generate-game-button" onclick="generateGame()">Generate Game!</button>
+    <div class="game-stats-container">
+        <label id="moves-label"><em>Score</em>: <strong>0</strong></label>
 
-    <br><br>
+        <br>
 
-    <table id="game-table"></table>
-
-    <br>
-
-    <label id="moves-label"><em>Score</em>: <strong>0</strong></label>
-
-    <br>
-
-    <label id="timer-label"><em>Time</em>: <strong>00:00:00</strong></label>
+        <label id="timer-label"><em>Time</em>: <strong>00:00:00</strong></label>
+    </div>
 
     <script type="text/javascript" src="script.js"></script>
 </body>
