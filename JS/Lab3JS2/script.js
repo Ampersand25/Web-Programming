@@ -143,11 +143,24 @@ function validateEmail(email) {
     return "";
 }
 
-function validateData() {
+function updateSubmitButton() {
     const submitButton = document.getElementById("submit-button");
     if(submitButton.textContent === "Trimite") {
         submitButton.textContent = "Retrimite";
     }
+}
+
+function alertUser(errors) {
+    if(errors.length === 0) {
+        alert("Datele sunt completate corect!");
+    }
+    else {
+        alert("Datele nu sunt completate corect!\nCampurile care nu au fost completate corect sunt:\n" + errors);
+    }
+}
+
+function validateData() {
+    updateSubmitButton();
 
     const correctImg = "./Images/CorrectImg.png";
     const wrongImg = "./Images/WrongImg.png";
@@ -213,10 +226,5 @@ function validateData() {
         emailImg.src = correctImg;
     }
 
-    if(errors.length === 0) {
-        alert("Datele sunt completate corect!");
-    }
-    else {
-        alert("Datele nu sunt completate corect!\nCampurile care nu au fost completate corect sunt:\n" + errors);
-    }
+    alertUser(errors);
 }
