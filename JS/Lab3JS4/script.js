@@ -96,7 +96,7 @@ function sortHorizontalTable(table, totalRows, totalCols, colIndex, asc) {
     }
 }
 
-function main(table, isVertical) {
+function createSortableTable(table, isVertical) {
     const totalRows = getNumberOfRows(table);
     const totalCols = getNumberOfCols(table);
 
@@ -141,18 +141,22 @@ function main(table, isVertical) {
     });
 }
 
-const table1 = document.getElementById("first-table");
-const table2 = document.getElementById("second-table");
-const table3 = document.getElementById("third-table");
+function main() {
+    const table1 = document.getElementById("first-table");
+    const table2 = document.getElementById("second-table");
+    const table3 = document.getElementById("third-table");
 
-main(table1, true);
-main(table2, true);
-main(table3, true);
+    createSortableTable(table1, true);
+    createSortableTable(table2, true);
+    createSortableTable(table3, true);
 
-const table4 = document.getElementById("fourth-table");
-const table5 = document.getElementById("fifth-table");
-const table6 = document.getElementById("sixth-table");
+    const table4 = document.getElementById("fourth-table");
+    const table5 = document.getElementById("fifth-table");
+    const table6 = document.getElementById("sixth-table");
 
-main(table4, false);
-main(table5, false);
-main(table6, false);
+    createSortableTable(table4, false);
+    createSortableTable(table5, false);
+    createSortableTable(table6, false);
+}
+
+main();
