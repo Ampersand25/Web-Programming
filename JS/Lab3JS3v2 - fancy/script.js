@@ -78,25 +78,25 @@ function startTimer() {
 
 function getImageData(imageFolder) {
     return [
-        { src: `./${imageFolder}/image0.png`, alt: "Image 0" },
-        { src: `./${imageFolder}/image1.png`, alt: "Image 1" },
-        { src: `./${imageFolder}/image2.png`, alt: "Image 2" },
-        { src: `./${imageFolder}/image3.png`, alt: "Image 3" },
-        { src: `./${imageFolder}/image4.png`, alt: "Image 4" },
-        { src: `./${imageFolder}/image5.png`, alt: "Image 5" },
-        { src: `./${imageFolder}/image6.png`, alt: "Image 6" },
-        { src: `./${imageFolder}/image7.png`, alt: "Image 7" },
-        { src: `./${imageFolder}/image8.png`, alt: "Image 8" },
-        { src: `./${imageFolder}/image9.png`, alt: "Image 9" },
-        { src: `./${imageFolder}/image10.png`, alt: "Image 10" },
-        { src: `./${imageFolder}/image11.png`, alt: "Image 11" },
-        { src: `./${imageFolder}/image12.png`, alt: "Image 12" },
-        { src: `./${imageFolder}/image13.png`, alt: "Image 13" },
-        { src: `./${imageFolder}/image14.png`, alt: "Image 14" },
-        { src: `./${imageFolder}/image15.png`, alt: "Image 15" },
-        { src: `./${imageFolder}/image16.png`, alt: "Image 16" },
-        { src: `./${imageFolder}/image17.png`, alt: "Image 17" },
-        { src: `./${imageFolder}/image18.png`, alt: "Image 18" }
+        { src: `./Images/${imageFolder}/image0.png`, alt: "Image 0" },
+        { src: `./Images/${imageFolder}/image1.png`, alt: "Image 1" },
+        { src: `./Images/${imageFolder}/image2.png`, alt: "Image 2" },
+        { src: `./Images/${imageFolder}/image3.png`, alt: "Image 3" },
+        { src: `./Images/${imageFolder}/image4.png`, alt: "Image 4" },
+        { src: `./Images/${imageFolder}/image5.png`, alt: "Image 5" },
+        { src: `./Images/${imageFolder}/image6.png`, alt: "Image 6" },
+        { src: `./Images/${imageFolder}/image7.png`, alt: "Image 7" },
+        { src: `./Images/${imageFolder}/image8.png`, alt: "Image 8" },
+        { src: `./Images/${imageFolder}/image9.png`, alt: "Image 9" },
+        { src: `./Images/${imageFolder}/image10.png`, alt: "Image 10" },
+        { src: `./Images/${imageFolder}/image11.png`, alt: "Image 11" },
+        { src: `./Images/${imageFolder}/image12.png`, alt: "Image 12" },
+        { src: `./Images/${imageFolder}/image13.png`, alt: "Image 13" },
+        { src: `./Images/${imageFolder}/image14.png`, alt: "Image 14" },
+        { src: `./Images/${imageFolder}/image15.png`, alt: "Image 15" },
+        { src: `./Images/${imageFolder}/image16.png`, alt: "Image 16" },
+        { src: `./Images/${imageFolder}/image17.png`, alt: "Image 17" },
+        { src: `./Images/${imageFolder}/image18.png`, alt: "Image 18" }
     ];
 }
 
