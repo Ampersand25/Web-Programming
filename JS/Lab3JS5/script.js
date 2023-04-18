@@ -78,37 +78,54 @@ function updateCurrentItemLabel(currentItem, numberOfListItems) {
     label.textContent = `${currentItem}/${numberOfListItems}`;
 }
 
+function setIntervalFunction(gameInfo) {
+    setInterval(function() {
+        ++gameInfo.currentSecond;
+        console.log(gameInfo.currentSecond + "/" + gameInfo.n);
+        if(gameInfo.currentSecond === gameInfo.n) {
+            console.log("NEXT IMAGE!");
+            gameInfo.currentItem = hideShowListItem(gameInfo.currentItem, gameInfo.numberOfListItems, false);
+            updateCurrentItemLabel(gameInfo.currentItem, gameInfo.numberOfListItems);
+
+            gameInfo.currentSecond = 0;
+        }
+    }, 1000);
+}
+
+function addEventListenerToPrevButton(gameInfo) {
+    const prevBtn = document.getElementById("previous-button");
+    prevBtn.addEventListener("click", function() {
+        gameInfo.currentItem = hideShowListItem(gameInfo.currentItem, gameInfo.numberOfListItems, true);
+        updateCurrentItemLabel(gameInfo.currentItem, gameInfo.numberOfListItems);
+        gameInfo.currentSecond = 0;
+    });
+}
+
+function addEventListenerToNextButton(gameInfo) {
+    const nextBtn = document.getElementById("next-button");
+    nextBtn.addEventListener("click", function() {
+        gameInfo.currentItem = hideShowListItem(gameInfo.currentItem, gameInfo.numberOfListItems, false);
+        updateCurrentItemLabel(gameInfo.currentItem, gameInfo.numberOfListItems);
+        gameInfo.currentSecond = 0;
+    });
+}
+
 function startGame(n, numberOfListItems) {
     hideAllListItemsExceptFirstOne(numberOfListItems);
 
-    let currentItem = 1;
-    let currentSecond = 0;
+    let gameInfo = {n: n, numberOfListItems: numberOfListItems, currentItem: 1, currentSecond: 0};
 
-    setInterval(function() {
-        ++currentSecond;
-        console.log(currentSecond + "/" + n);
-        if(currentSecond === n) {
-            console.log("NEXT IMAGE!");
-            currentItem = hideShowListItem(currentItem, numberOfListItems, false);
-            updateCurrentItemLabel(currentItem, numberOfListItems);
+    setIntervalFunction(gameInfo);
+    addEventListenerToPrevButton(gameInfo);
+    addEventListenerToNextButton(gameInfo);
+}
 
-            currentSecond = 0;
-        }
-    }, 1000);
+function enableNavigationButtons() {
+    const prevImageButton = document.getElementById("previous-button");
+    const nextImageButton = document.getElementById("next-button");
 
-    const prevBtn = document.getElementById('previous-button');
-    prevBtn.addEventListener("click", function() {
-        currentItem = hideShowListItem(currentItem, numberOfListItems, true);
-        updateCurrentItemLabel(currentItem, numberOfListItems);
-        currentSecond = 0;
-    });
-
-    const nextBtn = document.getElementById('next-button');
-    nextBtn.addEventListener("click", function() {
-        currentItem = hideShowListItem(currentItem, numberOfListItems, false);
-        updateCurrentItemLabel(currentItem, numberOfListItems);
-        currentSecond = 0;
-    });
+    prevImageButton.disabled = false;
+    nextImageButton.disabled = false;
 }
 
 function generateGame() {
@@ -120,4 +137,6 @@ function generateGame() {
 
     const generateGameButton = document.getElementById("generate-game-button");
     generateGameButton.disabled = true;
+
+    enableNavigationButtons();
 }
