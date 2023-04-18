@@ -62,5 +62,3 @@ function main() {
         updateSelectsSize(secondSelect);
     });
 }
-
-main();
