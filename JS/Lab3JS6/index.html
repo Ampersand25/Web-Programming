@@ -10,36 +10,42 @@
         <h1><u>Problema 6 JS</u></h1>
     </div>
 
+    <div class="game-settings-container">
+        <fieldset>
+            <legend><b>GAME SETTINGS</b></legend>
+
+            <label for="table-size-input">Select the size of the game: </label>
+            <input id="table-size-input" type="number" value="2" min="2" max="10" step="1">
+
+            <br><br>
+
+            <button id="generate-game-button" onclick="generateGame()">Generate Game!</button>
+        </fieldset>
+    </div>
+
     <br>
 
-    <fieldset>
-        <legend><b>GAME SETTINGS</b></legend>
-        
-		<label for="table-size-input">Select the size of the game: </label>
-        <input id="table-size-input" type="number" value="2" min="2" max="10" step="1">
-        
-		<br><br>
-        
-		<button id="generate-game-button" onclick="generateGame()">Generate Game!</button>
-    </fieldset>
-    
-	<br>
-	
-    <fieldset>
-        <legend><b>GAME TABLE</b></legend>
-        
-		<table id="game-table"></table>
-    </fieldset>
+    <div class="game-table-container">
+        <fieldset>
+            <legend><b>GAME TABLE</b></legend>
 
-    <fieldset>
-        <legend><b>STATISTICS</b></legend>
+            <table id="game-table"></table>
+        </fieldset>
+    </div>
 
-        <span id="no-of-moves"><u>Number of moves</u>: 0</span>
+    <br>
 
-        <br>
+    <div class="statistics-container">
+        <fieldset>
+            <legend><b>STATISTICS</b></legend>
 
-        <span id="play-time"><u>Total play time</u>: 0s</span>
-    </fieldset>
+            <span id="no-of-moves"><u>Number of moves</u>: 0</span>
+
+            <br>
+
+            <span id="play-time"><u>Total play time</u>: 0s</span>
+        </fieldset>
+    </div>
 	
 	<script type="text/javascript" src="script.js"></script>
 </body>

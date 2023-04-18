@@ -195,28 +195,28 @@ function startGame(n) {
             const hiddenCellID = `row${hiddenNumber.row} col${hiddenNumber.col}`;
 
             let validMove = false;
-            if(event.key === "ArrowUp") {
+            if(event.key === "ArrowUp" && hiddenNumber.row !== 0) {
                 console.log("\n");
                 console.log(`Move #${++numberOfMoves}\nUP arrow key pressed`);
                 arrowUpPressed(hiddenCellID, hiddenNumber);
 
                 validMove = true;
             }
-            else if(event.key === "ArrowRight") {
+            else if(event.key === "ArrowRight" && hiddenNumber.col < n - 1) {
                 console.log("\n");
                 console.log(`Move #${++numberOfMoves}\nRIGHT arrow key pressed`);
                 arrowRightPressed(hiddenCellID, hiddenNumber, n);
 
                 validMove = true;
             }
-            else if(event.key === "ArrowDown") {
+            else if(event.key === "ArrowDown" && hiddenNumber.row < n - 1) {
                 console.log("\n");
                 console.log(`Move #${++numberOfMoves}\nDOWN arrow key pressed`);
                 arrowDownPressed(hiddenCellID, hiddenNumber, n);
 
                 validMove = true;
             }
-            else if(event.key === "ArrowLeft") {
+            else if(event.key === "ArrowLeft" && hiddenNumber.col !== 0) {
                 console.log("\n");
                 console.log(`Move #${++numberOfMoves}\nLEFT arrow key pressed`);
                 arrowLeftPressed(hiddenCellID, hiddenNumber);
@@ -226,9 +226,8 @@ function startGame(n) {
 
             if(validMove) {
                 updateNumberOfMoves(numberOfMoves);
+                displayCurrentGameStatus(hiddenNumber);
             }
-
-            displayCurrentGameStatus(hiddenNumber);
 
             if(gameFinished(n, hiddenNumber) === true) {
                 clearInterval(timer);
