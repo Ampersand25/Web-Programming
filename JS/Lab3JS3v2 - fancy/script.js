@@ -183,6 +183,21 @@ function startAnimation(r, c) {
     image.classList.toggle("rotate");
 }
 
+function gameOver(timer, numberOfMoves, bestScore, bestTime) {
+    clearInterval(timer);
+
+    alert("YOU WIN!");
+
+    if(bestScore === null || numberOfMoves < bestScore) {
+        setBestScore(numberOfMoves);
+    }
+    if(bestTime === null || timeCount < bestTime) {
+        setBestTime(timeCount);
+    }
+
+    return true;
+}
+
 function startGame(n = 6, numberOfSeconds = 0.5, imageFolder = "Images1") {
     const bestScore = getBestScore();
     const bestTime = getBestTime();
@@ -211,110 +226,79 @@ function startGame(n = 6, numberOfSeconds = 0.5, imageFolder = "Images1") {
     let numberOfMoves = 0;
 
     table.addEventListener("click", function(event) {
-        if(blocked) {
+        if(blocked || win) {
             return;
         }
 
-        if(win === false) {
-            const cell = event.target;
-            let rowIndex = undefined;
-            let colIndex = undefined;
+        const cell = event.target;
+        let rowIndex = undefined;
+        let colIndex = undefined;
 
-            if(cell.tagName === "IMG") {
-                const tableCell = cell.closest("td");
+        if(cell.tagName === "IMG") {
+            const tableCell = cell.closest("td");
 
-                const row = tableCell.parentNode;
-                rowIndex = row.rowIndex;
-                colIndex = tableCell.cellIndex;
-            }
-
-            if(cell.tagName === "TD") {
-                const row = cell.parentNode;
-                rowIndex = row.rowIndex;
-                colIndex = cell.cellIndex;
-            }
-
-            if(cell.tagName === "IMG" || cell.tagName === "TD") {
-                let validMove = false;
-
-                const clickedImageIndex = matrix[rowIndex][colIndex];
-                changeImage(rowIndex, colIndex, imageData[clickedImageIndex].src, imageData[clickedImageIndex].alt);
-
-                if(firstCellClickedVal === false) {
-                    if(!visibleMatrix[rowIndex][colIndex]) {
-                        firstCellClickedVal = imageData[clickedImageIndex].src;
-                        firstCellClickedRow = rowIndex;
-                        firstCellClickedCol = colIndex;
-
-                        validMove = true;
-                    }
-                }
-                else if(!visibleMatrix[rowIndex][colIndex]) {
-                    if(firstCellClickedRow === rowIndex && firstCellClickedCol === colIndex) {
-                        return;
-                    }
-
-                    secondCellClickedVal = imageData[clickedImageIndex].src;
-                    secondCellClickedRow = rowIndex;
-                    secondCellClickedCol = colIndex;
-
-                    console.clear();
-                    console.log(`First cell clicked value: ${firstCellClickedVal}`);
-                    console.log(`Second cell clicked value: ${secondCellClickedVal}`);
-
-                    if(firstCellClickedVal === secondCellClickedVal) {
-                        if (firstCellClickedRow !== secondCellClickedRow || firstCellClickedCol !== secondCellClickedCol) {
-                            console.log("MATCH");
-
-                            hiddenElements -= 2;
-                            visibleMatrix[firstCellClickedRow][firstCellClickedCol] = visibleMatrix[secondCellClickedRow][secondCellClickedCol] = true;
-
-                            validMove = true;
-                        }
-                        else {
-                            console.log("SAME");
-
-                            blocked = true;
-                            setTimeout(function() {
-                                hideCell(firstCellClickedRow, firstCellClickedCol, imageData);
-                                blocked = false;
-                            }, numberOfSeconds * 1000);
-                        }
-                    }
-                    else {
-                        console.log("NO MATCH");
-
-                        blocked = true;
-                        setTimeout(function() {
-                            hideCell(firstCellClickedRow, firstCellClickedCol, imageData);
-                            hideCell(secondCellClickedRow, secondCellClickedCol, imageData);
-                            blocked = false;
-                        }, numberOfSeconds * 1000);
-
-                        validMove = true;
-                    }
-
-                    firstCellClickedVal = secondCellClickedVal = false;
-                }
-
-                if(validMove) {
-                    startAnimation(rowIndex, colIndex);
-                    numberOfMoves = updateNumberOfMoves(numberOfMoves);
-                }
-            }
+            const row = tableCell.parentNode;
+            rowIndex = row.rowIndex;
+            colIndex = tableCell.cellIndex;
         }
 
-        if(hiddenElements === 0 && win === false) {
-            clearInterval(timer);
+        if(cell.tagName === "TD") {
+            const row = cell.parentNode;
+            rowIndex = row.rowIndex;
+            colIndex = cell.cellIndex;
+        }
 
-            alert("YOU WIN!");
-            win = true;
-
-            if(bestScore === null || numberOfMoves < bestScore) {
-                setBestScore(numberOfMoves);
+        if(cell.tagName === "IMG" || cell.tagName === "TD") {
+            if(visibleMatrix[rowIndex][colIndex]) {
+                return;
             }
-            if(bestTime === null || timeCount < bestTime) {
-                setBestTime(timeCount);
+
+            const clickedImageIndex = matrix[rowIndex][colIndex];
+            changeImage(rowIndex, colIndex, imageData[clickedImageIndex].src, imageData[clickedImageIndex].alt);
+
+            if(firstCellClickedVal === false) {
+                firstCellClickedVal = imageData[clickedImageIndex].src;
+                firstCellClickedRow = rowIndex;
+                firstCellClickedCol = colIndex;
+                visibleMatrix[rowIndex][colIndex] = true;
+            }
+            else {
+                secondCellClickedVal = imageData[clickedImageIndex].src;
+                secondCellClickedRow = rowIndex;
+                secondCellClickedCol = colIndex;
+
+                console.clear();
+                console.log(`First cell clicked value: ${firstCellClickedVal}`);
+                console.log(`Second cell clicked value: ${secondCellClickedVal}`);
+
+                if(firstCellClickedVal === secondCellClickedVal) {
+                    console.log("MATCH");
+
+                    hiddenElements -= 2;
+                    visibleMatrix[secondCellClickedRow][secondCellClickedCol] = true;
+                }
+                else {
+                    console.log("NO MATCH");
+
+                    blocked = true;
+                    setTimeout(function() {
+                        hideCell(firstCellClickedRow, firstCellClickedCol, imageData);
+                        hideCell(secondCellClickedRow, secondCellClickedCol, imageData);
+                        blocked = false;
+                    }, numberOfSeconds * 1000);
+
+                    visibleMatrix[firstCellClickedRow][firstCellClickedCol] = false;
+                }
+
+                firstCellClickedVal = secondCellClickedVal = false;
+            }
+
+            startAnimation(rowIndex, colIndex);
+            numberOfMoves = updateNumberOfMoves(numberOfMoves);
+
+            if(hiddenElements === 0) {
+                gameOver(timer, numberOfMoves, bestScore, bestTime);
+                win = true;
             }
         }
     });
