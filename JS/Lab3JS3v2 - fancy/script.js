@@ -178,9 +178,18 @@ function updateNumberOfMoves(numberOfMoves) {
     return numberOfMoves;
 }
 
-function startAnimation(r, c) {
+function startRotate(r, c) {
     const image = document.getElementById(`image${r},${c}`);
     image.classList.toggle("rotate");
+}
+
+function startVibration(r, c) {
+    const image = document.getElementById(`image${r},${c}`);
+    image.classList.remove("vibration");
+    void image.offsetWidth;
+    setTimeout(() => {
+        image.classList.add("vibration");
+    }, 10);
 }
 
 function gameOver(timer, numberOfMoves, bestScore, bestTime) {
@@ -284,6 +293,10 @@ function startGame(n = 6, numberOfSeconds = 0.5, imageFolder = "Images1") {
                     setTimeout(function() {
                         hideCell(firstCellClickedRow, firstCellClickedCol, imageData);
                         hideCell(secondCellClickedRow, secondCellClickedCol, imageData);
+
+                        startVibration(firstCellClickedRow, firstCellClickedCol);
+                        startVibration(secondCellClickedRow, secondCellClickedCol);
+
                         blocked = false;
                     }, numberOfSeconds * 1000);
 
@@ -293,7 +306,7 @@ function startGame(n = 6, numberOfSeconds = 0.5, imageFolder = "Images1") {
                 firstCellClickedVal = secondCellClickedVal = false;
             }
 
-            startAnimation(rowIndex, colIndex);
+            startRotate(rowIndex, colIndex);
             numberOfMoves = updateNumberOfMoves(numberOfMoves);
 
             if(hiddenElements === 0) {
