@@ -10,6 +10,7 @@ body {
 }
 
 .wrapper-container {
+    border: 5px solid black;
     box-sizing: border-box;
     width: 40em;
     padding: 2.5em 3em;
@@ -40,7 +41,7 @@ button {
 }
 
 #game-table td {
-    border: 1px solid #000;
+    border: 2px solid black;
     padding: 8px;
     text-align: center;
     vertical-align: middle;
