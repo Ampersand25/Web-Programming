@@ -161,7 +161,7 @@ function gameFinished(n, hiddenNumber) {
     return true;
 }
 
-function updateNumberOfMoves(currentNumberOfMoves) {
+function updateNumberOfMovesSpan(currentNumberOfMoves) {
     const numberOfMovesSpanElement = document.getElementById("no-of-moves");
     numberOfMovesSpanElement.innerHTML = `<u>Number of moves</u>: ${currentNumberOfMoves}`;
 }
@@ -171,7 +171,58 @@ function displayCurrentGameStatus(hiddenNumber) {
     console.log(`NEW HIDDEN COL: ${hiddenNumber.col}`);
 }
 
-function startGame(n) {
+function startGame(n, hiddenNumber, timer) {
+    if(gameFinished(n, hiddenNumber)) {
+        clearInterval(timer);
+        alert("YOU WIN!");
+        return;
+    }
+
+    let win = false;
+    let numberOfMoves = 0;
+
+    document.addEventListener("keydown", function(event) {
+            const hiddenCellID = `row${hiddenNumber.row} col${hiddenNumber.col}`;
+
+            let validMove = true;
+            if(event.key === "ArrowUp" && hiddenNumber.row !== 0) {
+                console.log("\n");
+                console.log(`Move #${++numberOfMoves}\nUP arrow key pressed`);
+                arrowUpPressed(hiddenCellID, hiddenNumber);
+            }
+            else if(event.key === "ArrowRight" && hiddenNumber.col < n - 1) {
+                console.log("\n");
+                console.log(`Move #${++numberOfMoves}\nRIGHT arrow key pressed`);
+                arrowRightPressed(hiddenCellID, hiddenNumber, n);
+            }
+            else if(event.key === "ArrowDown" && hiddenNumber.row < n - 1) {
+                console.log("\n");
+                console.log(`Move #${++numberOfMoves}\nDOWN arrow key pressed`);
+                arrowDownPressed(hiddenCellID, hiddenNumber, n);
+            }
+            else if(event.key === "ArrowLeft" && hiddenNumber.col !== 0) {
+                console.log("\n");
+                console.log(`Move #${++numberOfMoves}\nLEFT arrow key pressed`);
+                arrowLeftPressed(hiddenCellID, hiddenNumber);
+            }
+            else {
+                validMove = false;
+            }
+
+            if(validMove) {
+                updateNumberOfMovesSpan(numberOfMoves);
+                displayCurrentGameStatus(hiddenNumber);
+            }
+
+            if(gameFinished(n, hiddenNumber)) {
+                clearInterval(timer);
+                alert("YOU WIN!");
+                win = true;
+            }
+    });
+}
+
+function createGame(n) {
     numberOfPassedSeconds = 0;
     updateSecondsCounter();
     const timer = setInterval(updateSecondsCounter, 1000);
@@ -182,65 +233,12 @@ function startGame(n) {
     let hiddenNumber = {val: undefined, row: undefined, col: undefined};
     computeGameTable(n, randomNumbersArray, hiddenNumber);
 
-    if(gameFinished(n, hiddenNumber) === true) {
-        alert("YOU WIN!");
-        return;
-    }
-
-    let win = false;
-    let numberOfMoves = 0;
-
-    document.addEventListener('keydown', function(event) {
-        if(!win) {
-            const hiddenCellID = `row${hiddenNumber.row} col${hiddenNumber.col}`;
-
-            let validMove = false;
-            if(event.key === "ArrowUp" && hiddenNumber.row !== 0) {
-                console.log("\n");
-                console.log(`Move #${++numberOfMoves}\nUP arrow key pressed`);
-                arrowUpPressed(hiddenCellID, hiddenNumber);
-
-                validMove = true;
-            }
-            else if(event.key === "ArrowRight" && hiddenNumber.col < n - 1) {
-                console.log("\n");
-                console.log(`Move #${++numberOfMoves}\nRIGHT arrow key pressed`);
-                arrowRightPressed(hiddenCellID, hiddenNumber, n);
-
-                validMove = true;
-            }
-            else if(event.key === "ArrowDown" && hiddenNumber.row < n - 1) {
-                console.log("\n");
-                console.log(`Move #${++numberOfMoves}\nDOWN arrow key pressed`);
-                arrowDownPressed(hiddenCellID, hiddenNumber, n);
-
-                validMove = true;
-            }
-            else if(event.key === "ArrowLeft" && hiddenNumber.col !== 0) {
-                console.log("\n");
-                console.log(`Move #${++numberOfMoves}\nLEFT arrow key pressed`);
-                arrowLeftPressed(hiddenCellID, hiddenNumber);
-
-                validMove = true;
-            }
-
-            if(validMove) {
-                updateNumberOfMoves(numberOfMoves);
-                displayCurrentGameStatus(hiddenNumber);
-            }
-
-            if(gameFinished(n, hiddenNumber) === true) {
-                clearInterval(timer);
-                alert("YOU WIN!");
-                win = true;
-            }
-        }
-    });
+    startGame(n, hiddenNumber, timer);
 }
 
 function generateGame() {
     const gameSize = document.getElementById("table-size-input").value;
-    startGame(gameSize);
+    createGame(gameSize);
 
     const generateGameButton = document.getElementById("generate-game-button");
     generateGameButton.disabled = true;
