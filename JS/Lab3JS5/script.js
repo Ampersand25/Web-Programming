@@ -95,6 +95,7 @@ function setIntervalFunction(gameInfo) {
 function addEventListenerToPrevButton(gameInfo) {
     const prevBtn = document.getElementById("previous-button");
     prevBtn.addEventListener("click", function() {
+        console.log("PREV IMAGE!");
         gameInfo.currentItem = hideShowListItem(gameInfo.currentItem, gameInfo.numberOfListItems, true);
         updateCurrentItemLabel(gameInfo.currentItem, gameInfo.numberOfListItems);
         gameInfo.currentSecond = 0;
@@ -104,6 +105,7 @@ function addEventListenerToPrevButton(gameInfo) {
 function addEventListenerToNextButton(gameInfo) {
     const nextBtn = document.getElementById("next-button");
     nextBtn.addEventListener("click", function() {
+        console.log("NEXT IMAGE!");
         gameInfo.currentItem = hideShowListItem(gameInfo.currentItem, gameInfo.numberOfListItems, false);
         updateCurrentItemLabel(gameInfo.currentItem, gameInfo.numberOfListItems);
         gameInfo.currentSecond = 0;
@@ -120,12 +122,19 @@ function startGame(n, numberOfListItems) {
     addEventListenerToNextButton(gameInfo);
 }
 
-function enableNavigationButtons() {
-    const prevImageButton = document.getElementById("previous-button");
-    const nextImageButton = document.getElementById("next-button");
+function disableButton(buttonID) {
+    const btn = document.getElementById(buttonID);
+    btn.disabled = true;
+}
 
-    prevImageButton.disabled = false;
-    nextImageButton.disabled = false;
+function enableButton(buttonID) {
+    const btn = document.getElementById(buttonID);
+    btn.disabled = false;
+}
+
+function enableNavigationButtons() {
+    enableButton("previous-button");
+    enableButton("next-button");
 }
 
 function generateGame() {
@@ -135,8 +144,6 @@ function generateGame() {
     updateCurrentItemLabel(1, numberOfListItems);
     startGame(n, numberOfListItems);
 
-    const generateGameButton = document.getElementById("generate-game-button");
-    generateGameButton.disabled = true;
-
+    disableButton("generate-game-button");
     enableNavigationButtons();
 }
