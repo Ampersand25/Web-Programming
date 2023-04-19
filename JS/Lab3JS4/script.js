@@ -96,6 +96,15 @@ function sortHorizontalTable(table, totalRows, totalCols, colIndex, asc) {
     }
 }
 
+function sortTable(table, totalRows, totalCols, rowIndex, colIndex, asc, isVertical) {
+    if(isVertical) {
+        sortVerticalTable(table, totalRows, totalCols, rowIndex, asc);
+    }
+    else {
+        sortHorizontalTable(table, totalRows, totalCols, colIndex, asc);
+    }
+}
+
 function createSortableTable(table, isVertical) {
     const totalRows = getNumberOfRows(table);
     const totalCols = getNumberOfCols(table);
@@ -121,19 +130,8 @@ function createSortableTable(table, isVertical) {
                 console.log(`Row: ${rowIndex}`);
                 console.log(`Col: ${colIndex}`);
 
-                if(headerText !== lastHeaderText) {
-                    asc = true;
-                }
-                else {
-                    asc = !asc;
-                }
-
-                if(isVertical) {
-                    sortVerticalTable(table, totalRows, totalCols, rowIndex, asc);
-                }
-                else {
-                    sortHorizontalTable(table, totalRows, totalCols, colIndex, asc);
-                }
+                asc = headerText !== lastHeaderText ? true : !asc;
+                sortTable(table, totalRows, totalCols, rowIndex, colIndex, asc, isVertical);
 
                 lastHeaderText = headerText;
             });
@@ -141,7 +139,7 @@ function createSortableTable(table, isVertical) {
     });
 }
 
-function main() {
+function createHorizontalSortableTables() {
     const table1 = document.getElementById("first-table");
     const table2 = document.getElementById("second-table");
     const table3 = document.getElementById("third-table");
@@ -151,7 +149,9 @@ function main() {
     createSortableTable(table2, true);
     createSortableTable(table3, true);
     createSortableTable(table4, true);
+}
 
+function createVerticalSortableTables() {
     const table5 = document.getElementById("fifth-table");
     const table6 = document.getElementById("sixth-table");
     const table7 = document.getElementById("seventh-table");
@@ -161,6 +161,11 @@ function main() {
     createSortableTable(table6, false);
     createSortableTable(table7, false);
     createSortableTable(table8, false);
+}
+
+function main() {
+    createHorizontalSortableTables();
+    createVerticalSortableTables();
 }
 
 main();
