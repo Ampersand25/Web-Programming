@@ -7,7 +7,7 @@ Nu se vor folosi biblioteci de functii, jQuery, pluginuri, etc.
 
 console.log("Welcome to script.js!");
 
-function updateSelectsSize(selectElement)
+function updateSelectSize(selectElement)
 {
     selectElement.size = selectElement.length;
 }
@@ -33,32 +33,26 @@ function addOptionToSelect(selectElement, optionText) {
     selectElement.appendChild(option);
 }
 
-function main() {
-    const firstSelect = document.getElementById("first-select");
-    const secondSelect = document.getElementById("second-select");
-
-    updateSelectsSize(firstSelect);
-    updateSelectsSize(secondSelect);
-
+function addDoubleClickEventOnSelect(firstSelect, secondSelect, selectName) {
     firstSelect.addEventListener("dblclick", function() {
         const optionText = firstSelect.options[firstSelect.selectedIndex].text;
-        console.log(`Selected option from first select: ${optionText}`);
+        console.log(`Selected option from ${selectName}: ${optionText}`);
 
         removeOptionFromSelect(firstSelect, optionText);
         addOptionToSelect(secondSelect, optionText);
 
-        updateSelectsSize(firstSelect);
-        updateSelectsSize(secondSelect);
+        updateSelectSize(firstSelect);
+        updateSelectSize(secondSelect);
     });
+}
 
-    secondSelect.addEventListener("dblclick", function() {
-        const optionText = secondSelect.options[secondSelect.selectedIndex].text;
-        console.log(`Selected option from second select: ${optionText}`);
+function main() {
+    const firstSelect = document.getElementById("first-select");
+    const secondSelect = document.getElementById("second-select");
 
-        removeOptionFromSelect(secondSelect, optionText);
-        addOptionToSelect(firstSelect, optionText);
+    updateSelectSize(firstSelect);
+    updateSelectSize(secondSelect);
 
-        updateSelectsSize(firstSelect);
-        updateSelectsSize(secondSelect);
-    });
+    addDoubleClickEventOnSelect(firstSelect, secondSelect, "first select");
+    addDoubleClickEventOnSelect(secondSelect, firstSelect, "second select");
 }
