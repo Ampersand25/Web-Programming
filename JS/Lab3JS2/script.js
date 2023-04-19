@@ -47,7 +47,7 @@ function isValidDateOfBirth(string) {
 }
 
 function convertToDateOfBirth(string) {
-    const parts = string.split('/');
+    const parts = string.split("/");
 
     const month = parseInt(parts[0], 10);
     const day = parseInt(parts[1], 10);
@@ -143,7 +143,7 @@ function validateEmail(email) {
     return "";
 }
 
-function updateSubmitButton() {
+function updateSubmitButtonText() {
     const submitButton = document.getElementById("submit-button");
     if(submitButton.textContent === "Trimite") {
         submitButton.textContent = "Retrimite";
@@ -155,12 +155,60 @@ function alertUser(errors) {
         alert("Datele sunt completate corect!");
     }
     else {
-        alert("Datele nu sunt completate corect!\nCampurile care nu au fost completate corect sunt:\n" + errors);
+        alert(`Datele nu sunt completate corect!\nCampurile care nu au fost completate corect sunt:\n${errors}`);
     }
 }
 
+function validateNameWrapper(nameValue, nameInput, nameImg, correctImg, wrongImg) {
+    const nameErrors = validateName(nameValue);
+    if(nameErrors.length !== 0) {
+        nameInput.style.border = "2px solid red";
+        nameImg.src = wrongImg;
+        return nameErrors;
+    }
+    nameInput.style.border = "2px solid green";
+    nameImg.src = correctImg;
+    return "";
+}
+
+function validateDOBWrapper(dobValue, dobInput, dobImg, correctImg, wrongImg) {
+    const dobErrors = validateDOB(dobValue);
+    if(dobErrors.length !== 0) {
+        dobInput.style.border = "2px solid red";
+        dobImg.src = wrongImg;
+        return dobErrors;
+    }
+    dobInput.style.border = "2px solid green";
+    dobImg.src = correctImg;
+    return "";
+}
+
+function validateAgeWrapper(ageValue, dobValue, ageInput, ageImg, correctImg, wrongImg) {
+    const ageErrors = validateAge(ageValue, dobValue);
+    if(ageErrors.length !== 0) {
+        ageInput.style.border = "2px solid red";
+        ageImg.src = wrongImg;
+        return ageErrors;
+    }
+    ageInput.style.border = "2px solid green";
+    ageImg.src = correctImg;
+    return "";
+}
+
+function validateEmailWrapper(emailValue, emailInput, emailImg, correctImg, wrongImg) {
+    const emailErrors = validateEmail(emailValue);
+    if(emailErrors.length !== 0) {
+        emailInput.style.border = "2px solid red";
+        emailImg.src = wrongImg;
+        return emailErrors;
+    }
+    emailInput.style.border = "2px solid green";
+    emailImg.src = correctImg;
+    return "";
+}
+
 function validateData() {
-    updateSubmitButton();
+    updateSubmitButtonText();
 
     const correctImg = "./Images/CorrectImg.png";
     const wrongImg = "./Images/WrongImg.png";
@@ -181,50 +229,10 @@ function validateData() {
     const emailValue = emailInput.value;
 
     let errors = "";
-
-    const nameErrors = validateName(nameValue);
-    if(nameErrors.length !== 0) {
-        errors += nameErrors;
-        nameInput.style.border = "2px solid red";
-        nameImg.src = wrongImg;
-    }
-    else {
-        nameInput.style.border = "2px solid green";
-        nameImg.src = correctImg;
-    }
-
-    const dobErrors = validateDOB(dobValue);
-    if(dobErrors.length !== 0) {
-        errors += dobErrors;
-        dobInput.style.border = "2px solid red";
-        dobImg.src = wrongImg;
-    }
-    else {
-        dobInput.style.border = "2px solid green";
-        dobImg.src = correctImg;
-    }
-
-    const ageErrors = validateAge(ageValue, dobValue);
-    if(ageErrors.length !== 0) {
-        errors += ageErrors;
-        ageInput.style.border = "2px solid red";
-        ageImg.src = wrongImg;
-    }
-    else {
-        ageInput.style.border = "2px solid green";
-        ageImg.src = correctImg;
-    }
-
-    const emailErrors = validateEmail(emailValue);
-    if(emailErrors.length !== 0) {
-        errors += emailErrors;
-        emailInput.style.border = "2px solid red";
-        emailImg.src = wrongImg;
-    }
-    else {
-        emailInput.style.border = "2px solid green";
-        emailImg.src = correctImg;
-    }
+    errors += validateNameWrapper(nameValue, nameInput, nameImg, correctImg, wrongImg);
+    errors += validateDOBWrapper(dobValue, dobInput, dobImg, correctImg, wrongImg);
+    errors += validateAgeWrapper(ageValue, dobValue, ageInput, ageImg, correctImg, wrongImg);
+    errors += validateEmailWrapper(emailValue, emailInput, emailImg, correctImg, wrongImg);
 
     alertUser(errors);
 }
