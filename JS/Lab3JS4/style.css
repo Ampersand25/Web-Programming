@@ -34,6 +34,7 @@ table td {
 table th {
     background-color: #FFF8DC;
     font-weight: bold;
+    cursor: pointer;
 }
 
 table tbody tr:hover {
