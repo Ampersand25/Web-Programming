@@ -44,3 +44,7 @@ table tbody tr:hover {
 table tr:nth-child(even) {
     background-color: #F5F5DC;
 }
+
+.horizontal-table th {
+    text-align: center;
+}
