@@ -26,6 +26,7 @@ input[type="submit"]:hover {
     background-color: rgba(30, 215, 96, 0.97);
     box-shadow: 0 3px 0 #24D71EFF;
     transform: translateY(2px);
+    cursor: pointer;
 }
 
 #progress_container {
@@ -123,5 +124,109 @@ ul, ol li {
     padding: 10px;
     font-size: 18px;
     color: white;
-    box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.radio input[type="radio"] {
+    display: none;
+}
+
+.radio label {
+    display: inline-block;
+    padding: 0.5em 1em;
+    margin: 0.5em;
+    font-size: 1em;
+    font-weight: bold;
+    color: #333;
+    border: 2px solid #333;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+.radio input[type="radio"]:checked + label {
+    background-color: #1ed760;
+    color: #fff;
+}
+
+input[type="text"], textarea {
+    color: #1ed760;
+    font-weight: bold;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+    background: transparent;
+    color: #333;
+    cursor: pointer;
+}
+
+input[type="date"] {
+    appearance: none;
+    padding: 0.5em;
+    border: 2px solid #333;
+    border-radius: 4px;
+    font-size: 1em;
+    color: #1ed760;
+    font-weight: bold;
+}
+
+input[type="date"]:focus {
+    outline: none;
+    border-color: #1ed760;
+}
+
+input[type="number"] {
+    color: #1ed760;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 8px;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    outline: none;
+}
+
+textarea {
+    font-size: 14px;
+    padding: 12px;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    outline: none;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease-in-out;
+}
+
+textarea:hover,
+textarea:focus {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+select {
+    appearance: none;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    padding: 8px;
+    font-size: 14px;
+    color: #1ed760;
+    background-color: transparent;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cpath fill='%23000' d='M475.314 136.686L256 356.002 36.686 136.686c-12.496-12.496-32.758-12.496-45.255 0-12.496 12.496-12.496 32.758 0 45.255l224 224c6.248 6.248 14.438 9.372 22.627 9.372s16.379-3.124 22.627-9.372l224-224c12.496-12.496 12.496-32.758 0-45.255-12.498-12.497-32.76-12.497-45.257-.001z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 8px center;
+    background-size: 16px 16px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+
+select:focus {
+    outline: none;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-color: #333;
+}
+
+option {
+    color: #1ed760;
+    background-color: #000;
+}
+
+input[type="checkbox"], .checkbox-container label {
+    cursor: pointer;
 }
