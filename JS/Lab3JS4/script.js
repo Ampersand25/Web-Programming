@@ -140,27 +140,37 @@ function createSortableTable(table, isVertical) {
 }
 
 function createHorizontalSortableTables() {
-    const table1 = document.getElementById("first-table");
-    const table2 = document.getElementById("second-table");
-    const table3 = document.getElementById("third-table");
-    const table4 = document.getElementById("fourth-table");
+    // const table1 = document.getElementById("first-table");
+    // const table2 = document.getElementById("second-table");
+    // const table3 = document.getElementById("third-table");
+    // const table4 = document.getElementById("fourth-table");
+    //
+    // createSortableTable(table1, true);
+    // createSortableTable(table2, true);
+    // createSortableTable(table3, true);
+    // createSortableTable(table4, true);
 
-    createSortableTable(table1, true);
-    createSortableTable(table2, true);
-    createSortableTable(table3, true);
-    createSortableTable(table4, true);
+    const verticalTables = document.getElementsByClassName("vertical-table");
+    for(let i = 0; i < verticalTables.length; ++i) {
+        createSortableTable(verticalTables[i], true);
+    }
 }
 
 function createVerticalSortableTables() {
-    const table5 = document.getElementById("fifth-table");
-    const table6 = document.getElementById("sixth-table");
-    const table7 = document.getElementById("seventh-table");
-    const table8 = document.getElementById("eight-table");
+    // const table5 = document.getElementById("fifth-table");
+    // const table6 = document.getElementById("sixth-table");
+    // const table7 = document.getElementById("seventh-table");
+    // const table8 = document.getElementById("eight-table");
+    //
+    // createSortableTable(table5, false);
+    // createSortableTable(table6, false);
+    // createSortableTable(table7, false);
+    // createSortableTable(table8, false);
 
-    createSortableTable(table5, false);
-    createSortableTable(table6, false);
-    createSortableTable(table7, false);
-    createSortableTable(table8, false);
+    const horizontalTables = document.getElementsByClassName("horizontal-table");
+    for(let i = 0; i < horizontalTables.length; ++i) {
+        createSortableTable(horizontalTables[i], false);
+    }
 }
 
 function main() {
