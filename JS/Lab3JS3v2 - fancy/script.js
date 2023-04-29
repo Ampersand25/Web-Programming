@@ -12,6 +12,9 @@ Nu se vor folosi biblioteci de functii, jQuery, pluginuri, etc.
 
 console.log("Welcome to script.js!");
 
+const canvas = document.getElementById("confetti");
+const jsConfetti = new JSConfetti();
+
 let timeCount;
 
 function getBestScore() {
@@ -192,10 +195,18 @@ function startVibration(r, c) {
     }, 10);
 }
 
-function gameOver(timer, numberOfMoves, bestScore, bestTime) {
-    clearInterval(timer);
+function startConfetti() {
+    jsConfetti.addConfetti();
+}
 
+function winEvent(timer) {
+    clearInterval(timer);
+    setInterval(startConfetti, 500);
     alert("YOU WIN!");
+}
+
+function gameOver(timer, numberOfMoves, bestScore, bestTime) {
+    winEvent(timer);
 
     if(bestScore === null || numberOfMoves < bestScore) {
         setBestScore(numberOfMoves);
@@ -205,6 +216,25 @@ function gameOver(timer, numberOfMoves, bestScore, bestTime) {
     }
 
     return true;
+}
+
+function displayAllCards(n, matrix, imageData) {
+    for(let r = 0; r < n; ++r) {
+        for(let c = 0; c < n; ++c) {
+            const imageIndex = matrix[r][c];
+            changeImage(r, c, imageData[imageIndex].src, imageData[imageIndex].alt);
+        }
+    }
+}
+
+function giveUpEvent(timer) {
+    clearInterval(timer);
+    alert("YOU GAVE UP!");
+}
+
+function giveUp(timer, n, matrix, imageData) {
+    displayAllCards(n, matrix, imageData);
+    setTimeout(() => { giveUpEvent(timer); }, 1000);
 }
 
 function startGame(n = 6, numberOfSeconds = 0.5, imageFolder = "Images1") {
@@ -220,6 +250,12 @@ function startGame(n = 6, numberOfSeconds = 0.5, imageFolder = "Images1") {
     const table = computeGameTable(n, randomNumbersArray, imageData, matrix, visibleMatrix);
 
     console.log(matrix);
+
+    document.addEventListener("keydown", (event) => {
+        if(event.key === "Escape") {
+            giveUp(timer, n, matrix, imageData);
+        }
+    });
 
     let firstCellClickedVal = false;
     let firstCellClickedRow = -1;
