@@ -9,6 +9,9 @@ Nu se vor folosi biblioteci de functii, jQuery, pluginuri, etc.
 
 console.log("Welcome to script.js!");
 
+const canvas = document.getElementById("confetti");
+const jsConfetti = new JSConfetti();
+
 let numberOfPassedSeconds;
 
 function updateSecondsCounter() {
@@ -230,13 +233,19 @@ function displayCurrentGameStatus(hiddenNumber) {
     console.log(`NEW HIDDEN COL: ${hiddenNumber.col}`);
 }
 
+function winHandler(timer) {
+    clearInterval(timer);
+    jsConfetti.addConfetti({
+        emojis: ['🦄', '🌈', '⚡️', '💥', '✨', '💫', '🌸'],
+    }).then(() => { alert("YOU WIN!"); });
+}
+
 function startGame(n, hiddenNumber, timer) {
     console.log("\n");
     console.log("*GAME HAS STARTED*");
 
     if(gameFinished(n, hiddenNumber)) {
-        clearInterval(timer);
-        alert("YOU WIN!");
+        winHandler(timer);
         return;
     }
 
@@ -275,8 +284,7 @@ function startGame(n, hiddenNumber, timer) {
             }
 
             if(gameFinished(n, hiddenNumber)) {
-                clearInterval(timer);
-                alert("YOU WIN!");
+                winHandler(timer);
                 win = true;
             }
     });
