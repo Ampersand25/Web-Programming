@@ -254,22 +254,22 @@ function startGame(n, hiddenNumber, timer) {
 
     document.addEventListener("keydown", (event) => {
             let validMove = true;
-            if(event.key === "ArrowUp" && hiddenNumber.row !== 0) {
+            if((event.key === "ArrowUp" || event.key.toLocaleLowerCase() === "w") && hiddenNumber.row !== 0) {
                 console.log("\n");
                 console.log(`Move #${++numberOfMoves}\nUP arrow key pressed`);
                 arrowUpPressed(hiddenNumber, n);
             }
-            else if(event.key === "ArrowRight" && hiddenNumber.col < n - 1) {
+            else if((event.key === "ArrowRight" || event.key.toLocaleLowerCase() === "d") && hiddenNumber.col < n - 1) {
                 console.log("\n");
                 console.log(`Move #${++numberOfMoves}\nRIGHT arrow key pressed`);
                 arrowRightPressed(hiddenNumber, n);
             }
-            else if(event.key === "ArrowDown" && hiddenNumber.row < n - 1) {
+            else if((event.key === "ArrowDown" || event.key.toLocaleLowerCase() === "s") && hiddenNumber.row < n - 1) {
                 console.log("\n");
                 console.log(`Move #${++numberOfMoves}\nDOWN arrow key pressed`);
                 arrowDownPressed(hiddenNumber, n);
             }
-            else if(event.key === "ArrowLeft" && hiddenNumber.col !== 0) {
+            else if((event.key === "ArrowLeft" || event.key.toLocaleLowerCase() === "a") && hiddenNumber.col !== 0) {
                 console.log("\n");
                 console.log(`Move #${++numberOfMoves}\nLEFT arrow key pressed`);
                 arrowLeftPressed(hiddenNumber, n);
