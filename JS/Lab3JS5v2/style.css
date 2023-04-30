@@ -64,6 +64,7 @@ img {
 
 #next-button, #previous-button {
     background-color: transparent;
+    cursor: pointer;
 }
 
 #next-button:hover, #previous-button:hover {
@@ -154,4 +155,5 @@ img {
 #generate-game-button:disabled {
     background-color: #D2386C;
     color: #000;
+    cursor: not-allowed;
 }
