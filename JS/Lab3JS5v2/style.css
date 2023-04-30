@@ -150,3 +150,8 @@ img {
 #generate-game-button:hover::before {
     left: 100%;
 }
+
+#generate-game-button:disabled {
+    background-color: #D2386C;
+    color: #000;
+}
