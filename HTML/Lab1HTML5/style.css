@@ -186,6 +186,7 @@ input[type="number"] {
 }
 
 textarea {
+    width: 98%;
     font-size: 14px;
     padding: 12px;
     border: 2px solid #ccc;
@@ -229,4 +230,20 @@ option {
 
 input[type="checkbox"], .checkbox-container label {
     cursor: pointer;
+}
+
+::-webkit-scrollbar {
+    width: 1.2em;
+}
+
+::-webkit-scrollbar-track {
+    background-color: white;
+    margin-block: 0.25em;
+    border-radius: 0.3em;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #1ed760 -webkit-linear-gradient(to right, #1ed760, black);
+    background: linear-gradient(to right, black, #1ed760);
+    border-radius: 0.3em;
 }
