@@ -35,7 +35,7 @@ function isNumber(str) {
 
 function sortVerticalTable(table, totalRows, totalCols, rowIndex, asc) {
     console.log("\n");
-    console.log((asc) ? ("*SORT ASCENDING*") : ("*SORT DESCENDING*"));
+    console.log((asc) ? ("*SORT ASCENDING VERTICAL TABLE*") : ("*SORT DESCENDING VERTICAL TABLE*"));
 
     for(let col1 = 1; col1 < totalCols; ++col1) {
         for(let col2 = col1 + 1; col2 < totalCols; ++col2) {
@@ -54,7 +54,7 @@ function sortVerticalTable(table, totalRows, totalCols, rowIndex, asc) {
 
 function sortHorizontalTable(table, totalRows, totalCols, colIndex, asc) {
     console.log("\n");
-    console.log((asc) ? ("*SORT ASCENDING*") : ("*SORT DESCENDING*"));
+    console.log((asc) ? ("*SORT ASCENDING HORIZONTAL TABLE*") : ("*SORT DESCENDING HORIZONTAL TABLE*"));
 
     for(let row1 = 1; row1 < totalRows; ++row1) {
         for(let row2 = row1 + 1; row2 < totalRows; ++row2) {
