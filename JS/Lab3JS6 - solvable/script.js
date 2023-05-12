@@ -253,6 +253,10 @@ function startGame(n, hiddenNumber, timer) {
     let numberOfMoves = 0;
 
     document.addEventListener("keydown", (event) => {
+            if(win) {
+                return;
+            }
+
             let validMove = true;
             if((event.key === "ArrowUp" || event.key.toLocaleLowerCase() === "w") && hiddenNumber.row !== 0) {
                 console.log("\n");
