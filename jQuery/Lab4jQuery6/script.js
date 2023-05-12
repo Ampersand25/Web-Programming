@@ -24,13 +24,8 @@ function getRandomNumber(n) {
     return Math.floor(Math.random() * n);
 }
 
-function getRandomColor() {
-    const letters = "0123456789ABCDEF";
-    let randomColor = "#";
-    for(let i = 0; i < 6; ++i) {
-        randomColor += letters[getRandomNumber(16)];
-    }
-    return randomColor;
+function correctPosition(n, row, col, val) {
+    return row * n + col + 1 === val;
 }
 
 function setInitialHiddenNumber(hiddenNumber, n) {
@@ -49,11 +44,7 @@ function computeInitialGameTable(table, n) {
             newCell.css("font-weight", "bold");
             newCell.attr("id", `row${i}col${j}`);
 
-            if(i === n - 1 && j === n - 1) {
-                newCell.css("color", "black");
-            }
-            else {
-                newCell.css("color", getRandomColor());
+            if(i !== n - 1 || j !== n - 1) {
                 newCell.text(i * n + j + 1);
             }
 
@@ -144,12 +135,29 @@ function displayInitialGameStatus(hiddenNumber) {
     console.log(`HIDDEN NUMBER COL: ${hiddenNumber.col}`);
 }
 
+function updateColor(n, row, col) {
+    const cellID = `row${row}col${col}`;
+    const cell = $(`#${cellID}`);
+    const val = cell.text();
+    const color = (correctPosition(n, row, col, Number(val))) ? ("green") : ("red");
+    cell.css("color", `${color}`);
+}
+
+function setCellsColor(table, n) {
+    for(let row = 0; row < n; ++row) {
+        for(let col = 0; col < n; ++col) {
+            updateColor(n, row, col);
+        }
+    }
+}
+
 function computeGameTable(n, hiddenNumber, numberOfShuffles) {
     const table = $("#game-table");
 
     setInitialHiddenNumber(hiddenNumber, n);
     computeInitialGameTable(table, n);
     computeShuffledTable(table, hiddenNumber, n, numberOfShuffles);
+    setCellsColor(table, n);
 
     displayInitialGameStatus(hiddenNumber);
 }
@@ -255,6 +263,8 @@ function startGame(n, hiddenNumber, timer) {
 
     $(document).keydown((event) => {
         if(!win) {
+            const r = hiddenNumber.row;
+            const c = hiddenNumber.col;
             let validMove = true;
             if((event.key === "ArrowUp" || event.key.toLocaleLowerCase() === "w") && hiddenNumber.row !== 0) {
                 console.log("\n");
@@ -283,6 +293,7 @@ function startGame(n, hiddenNumber, timer) {
             if(validMove) {
                 updateNumberOfMovesSpan(numberOfMoves);
                 displayCurrentGameStatus(hiddenNumber);
+                updateColor(n, r, c);
             }
 
             if(gameFinished(n, hiddenNumber)) {

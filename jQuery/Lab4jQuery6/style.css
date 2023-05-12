@@ -14,36 +14,18 @@ fieldset {
     background-color: white;
 }
 
-#game-table {
+table {
+    font-family: Orbitron, sans-serif;
     border-collapse: collapse;
     width: 100%;
-
-    margin: 25px 0;
-    font-size: 0.9em;
-    font-family: sans-serif;
-    min-width: 400px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
 }
-
-#game-table td {
-    border: 1px solid #000;
-    padding: 12px 15px;
-}
-
-#game-table tbody tr {
-    border-bottom: 1px solid #dddddd;
-}
-
-#game-table tbody tr:nth-of-type(odd) {
-    background-color: #ffffff;
-}
-
-#game-table tbody tr:nth-of-type(even) {
-    background-color: #f3f3f3;
-}
-
-#game-table tbody tr:last-of-type {
-    border-bottom: 3px solid #FF6F61;
+td {
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    border: 1px solid black;
 }
 
 #generate-game-button {
