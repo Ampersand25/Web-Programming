@@ -155,48 +155,52 @@ function alertUser(errors) {
 }
 
 function validateNameWrapper(correctImg, wrongImg) {
-    const nameErrors = validateName($("#name-input").val());
+    const nameInput = $("#name-input");
+    const nameErrors = validateName(nameInput.val());
 
     const color = (nameErrors.length !== 0) ? ("red") : ("green");
     const image = (nameErrors.length !== 0) ? (wrongImg) : (correctImg);
 
-    $("#name-input").css("border", `2px solid ${color}`);
+    nameInput.css("border", `2px solid ${color}`);
     $("#name-validation-img").attr("src", image);
 
     return nameErrors;
 }
 
 function validateDOBWrapper(correctImg, wrongImg) {
-    const dobErrors = validateDOB($("#date-of-birth-input").val());
+    const dobInput = $("#date-of-birth-input");
+    const dobErrors = validateDOB(dobInput.val());
 
     const color = (dobErrors.length !== 0) ? ("red") : ("green");
     const image = (dobErrors.length !== 0) ? (wrongImg) : (correctImg);
 
-    $("#date-of-birth-input").css("border", `2px solid ${color}`);
+    dobInput.css("border", `2px solid ${color}`);
     $("#date-of-birth-validation-img").attr("src", image);
 
     return dobErrors;
 }
 
 function validateAgeWrapper(correctImg, wrongImg) {
-    const ageErrors = validateAge($("#age-input").val(), $("#date-of-birth-input").val());
+    const ageInput = $("#age-input");
+    const ageErrors = validateAge(ageInput.val(), $("#date-of-birth-input").val());
 
     const color = (ageErrors.length !== 0) ? ("red") : ("green");
     const image = (ageErrors.length !== 0) ? (wrongImg) : (correctImg);
 
-    $("#age-input").css("border", `2px solid ${color}`);
+    ageInput.css("border", `2px solid ${color}`);
     $("#age-validation-img").attr("src", image);
 
     return ageErrors;
 }
 
 function validateEmailWrapper(correctImg, wrongImg) {
-    const emailErrors = validateEmail($("#email-input").val());
+    const emailInput = $("#email-input");
+    const emailErrors = validateEmail(emailInput.val());
 
     const color = (emailErrors.length !== 0) ? ("red") : ("green");
     const image = (emailErrors.length !== 0) ? (wrongImg) : (correctImg);
 
-    $("#email-input").css("border", `2px solid ${color}`);
+    emailInput.css("border", `2px solid ${color}`);
     $("#email-validation-img").attr("src", image);
 
     return emailErrors;
