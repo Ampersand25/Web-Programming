@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <title>Laborator 3 JS Problema 5</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div class="title-container">
+    <h1><u>Problema 5 JS</u></h1>
+</div>
+
+<br>
+
+<div class="settings-container">
+    <label for="number-of-seconds-input">Number of seconds after which the image to disappear/appear: </label>
+    <input id="number-of-seconds-input" type="number" value="5" min="1" max="10" step="1">
+
+    <br>
+
+    <button id="generate-game-button">Generate Game!</button>
+</div>
+
+<br>
+
+<div class="buttons-container">
+    <button id="previous-button" disabled>
+        <img class="arrow-images" src="./Images/left.png" alt="Left Arrow Image">
+    </button>
+
+    <label id="current-item-label">Current image: m/n</label>
+
+    <button id="next-button" disabled>
+        <img class="arrow-images" src="./Images/right.png" alt="Right Arrow Image">
+    </button>
+</div>
+
+<div class="list-container">
+    <ol id="main-list">
+        <li id="li1">
+            <div class="image-container">
+                <img id="image1" src="./Images/Image1.jpg" alt="First Image From List">
+                <a class="link" href="https://en.wikipedia.org/wiki/Boxer_(dog)" target="_blank">Boxer Dog</a>
+            </div>
+        </li>
+
+        <li id="li2">
+            <div class="image-container">
+                <img id="image2" src="./Images/Image2.jpg" alt="Second Image From List">
+                <a class="link" href="https://en.wikipedia.org/wiki/Bulldog" target="_blank">Bulldog Dog</a>
+            </div>
+        </li>
+
+        <li id="li3">
+            <div class="image-container">
+                <img id="image3" src="./Images/Image3.jpg" alt="Third Image From List">
+                <a class="link" href="https://en.wikipedia.org/wiki/Chihuahua_(dog)" target="_blank">Chihuahua Dog</a>
+            </div>
+        </li>
+
+        <li id="li4">
+            <div class="image-container">
+                <img id="image4" src="./Images/Image4.jpg" alt="Fourth Image From List">
+                <a class="link" href="https://en.wikipedia.org/wiki/Dalmatian_(dog)" target="_blank">Dalmatian Dog</a>
+            </div>
+        </li>
+
+        <li id="li5">
+            <div class="image-container">
+                <img id="image5" src="./Images/Image5.jpg" alt="Fifth Image From List">
+                <a class="link" href="https://en.wikipedia.org/wiki/German_Shepherd" target="_blank">German Shepard Dog</a>
+            </div>
+        </li>
+
+        <li id="li6">
+            <div class="image-container">
+                <img id="image6" src="./Images/Image6.jpg" alt="Sixth Image From List">
+                <a class="link" href="https://en.wikipedia.org/wiki/Indian_Spitz" target="_blank">Indian Spitz Dog</a>
+            </div>
+        </li>
+
+        <li id="li7">
+            <div class="image-container">
+                <img id="image7" src="./Images/Image7.jpg" alt="Seventh Image From List">
+                <a class="link" href="https://en.wikipedia.org/wiki/Labrador_Retriever" target="_blank">Labrador Retriever Dog</a>
+            </div>
+        </li>
+
+        <li id="li8">
+            <div class="image-container">
+                <img id="image8" src="./Images/Image8.jpg" alt="Eight Image From List">
+                <a class="link" href="https://en.wikipedia.org/wiki/Pomeranian_dog" target="_blank">Pomeranian Dog</a>
+            </div>
+        </li>
+
+        <li id="li9">
+            <div class="image-container">
+                <img id="image9" src="./Images/Image9.jpg" alt="Ninth Image From List">
+                <a class="link" href="https://en.wikipedia.org/wiki/St._Bernard_(dog)" target="_blank">St. Bernard Dog</a>
+            </div>
+        </li>
+
+        <li id="li10">
+            <div class="image-container">
+                <img id="image10" src="./Images/Image10.jpg" alt="Tenth Image From List">
+                <a class="link" href="https://en.wikipedia.org/wiki/Tosa_(dog)" target="_blank">Tosa Dog</a>
+            </div>
+        </li>
+    </ol>
+</div>
+</body>
+
+<script src="jQuery/jquery.min.js"></script>
+<script type="text/javascript" src="script.js"></script>
+
+</html>

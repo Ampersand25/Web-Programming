@@ -1,0 +1,163 @@
+body {
+    background-color: #D2386C;
+}
+
+.title-container {
+    text-align: center;
+}
+
+h1 {
+    display: inline-block;
+}
+
+#current-item-label {
+    background-color: white;
+}
+
+.image-container {
+    position: relative;
+    display: inline-block;
+    perspective: 1000px;
+}
+
+img {
+    width: 400px;
+    height: 200px;
+    transition: transform 0.5s ease-in-out;
+}
+
+.flip-animation {
+    opacity: 1;
+    animation: fadeIn 1s ease-in-out 1;
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+.link {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 24px;
+}
+
+#main-list {
+    padding-left: 0;
+    margin-left: 0;
+    list-style-type: none;
+}
+
+#main-list li {
+    position: absolute;
+}
+
+.list-container {
+    display: inline;
+}
+
+#next-button, #previous-button {
+    background-color: transparent;
+    cursor: pointer;
+}
+
+#next-button:hover, #previous-button:hover {
+    transform: translateY(-2px) translateZ(0) rotateX(-1deg);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.arrow-images {
+    height: 20px;
+    width: 20px;
+}
+
+#number-of-seconds-input {
+    font-weight: bold;
+    background-color: #f5f5f5;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    color: #D2386C;
+    font-size: 1.2rem;
+    padding: 10px;
+    text-align: center;
+    transition: box-shadow 0.2s ease-in-out;
+    width: 40px;
+    height: 5px;
+}
+
+#number-of-seconds-input:focus {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    outline: none;
+}
+
+#current-item-label {
+    font-weight: bold;
+    background-color: #f5f5f5;
+    border-radius: 5px;
+    color: #D2386C;
+    font-size: 1.5rem;
+    padding: 5px 10px;
+    transition: background-color 0.2s ease-in-out;
+}
+
+#current-item-label:hover {
+    background-color: #ddd;
+}
+
+#current-item-label:active {
+    background-color: #aaa;
+}
+
+#current-item-label:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px #333;
+}
+
+#generate-game-button {
+    font-weight: bold;
+    background-color: #000;
+    border: none;
+    color: #D2386C;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 25px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+
+#generate-game-button::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, white, transparent);
+    transition: all 0.4s;
+}
+
+#generate-game-button:hover::before {
+    left: 100%;
+}
+
+#generate-game-button:disabled {
+    background-color: #D2386C;
+    color: #000;
+    cursor: not-allowed;
+}
+
+#previous-button:disabled, #next-button:disabled {
+    cursor: not-allowed;
+}
