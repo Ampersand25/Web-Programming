@@ -1,0 +1,25 @@
+body, button {
+    background-color: #D65076;
+}
+
+.title-container {
+    text-align: center;
+}
+
+h1 {
+    display: inline-block;
+    color: #EFC050;
+}
+
+fieldset {
+    background-color: #EFC050;
+}
+
+button {
+    color: #EFC050;
+}
+
+img {
+    width: 10px;
+    height: 10px;
+}
