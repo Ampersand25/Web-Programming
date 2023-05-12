@@ -25,13 +25,11 @@ function hideAllListItemsExceptFirstOne() {
 
 function hideShowListItem(currentItem, numberOfListItems, reverse = false) {
     $(`#li${currentItem}`).css("visibility", "hidden");
-    //$(`#image${currentItem}`).removeClass("flip-animation");
-    $(`#image${currentItem}`).fadeOut();
+    $(`#image${currentItem}`).removeClass("flip-animation");
 
     const newItem = (!reverse) ? (getNextItem(currentItem, numberOfListItems)) : (getPrevItem(currentItem, numberOfListItems));
     $(`#li${newItem}`).css("visibility", "visible");
-    //$(`#image${newItem}`).addClass("flip-animation");
-    $(`#image${newItem}`).fadeIn();
+    $(`#image${newItem}`).addClass("flip-animation");
 
     return newItem;
 }
