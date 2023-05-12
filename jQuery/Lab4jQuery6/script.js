@@ -14,10 +14,51 @@ const jsConfetti = new JSConfetti();
 
 let numberOfPassedSeconds;
 
+const clockEmojis = ["🕛", "🕐", "🕑", "🕒", "🕓", "🕔", "🕕", "🕖", "🕗", "🕘", "🕙", "🕚"];
+
 function updateSecondsCounter() {
     ++numberOfPassedSeconds;
 
-    $("#play-time").html(`<u>Total play time</u>: ${numberOfPassedSeconds}s`);
+    let clockEmoji = clockEmojis[0];
+    const numberOfPassedSecondModulo60 = numberOfPassedSeconds % 60;
+    if(numberOfPassedSecondModulo60 < 5) {
+        clockEmoji = clockEmojis[0];
+    }
+    else if(numberOfPassedSecondModulo60 < 10) {
+        clockEmoji = clockEmojis[1];
+    }
+    else if(numberOfPassedSecondModulo60 < 15) {
+        clockEmoji = clockEmojis[2];
+    }
+    else if(numberOfPassedSecondModulo60 < 20) {
+        clockEmoji = clockEmojis[3];
+    }
+    else if(numberOfPassedSecondModulo60 < 25) {
+        clockEmoji = clockEmojis[4];
+    }
+    else if(numberOfPassedSecondModulo60 < 30) {
+        clockEmoji = clockEmojis[5];
+    }
+    else if(numberOfPassedSecondModulo60 < 35) {
+        clockEmoji = clockEmojis[6];
+    }
+    else if(numberOfPassedSecondModulo60 < 40) {
+        clockEmoji = clockEmojis[7];
+    }
+    else if(numberOfPassedSecondModulo60 < 45) {
+        clockEmoji = clockEmojis[8];
+    }
+    else if(numberOfPassedSecondModulo60 < 50) {
+        clockEmoji = clockEmojis[9];
+    }
+    else if(numberOfPassedSecondModulo60 < 55) {
+        clockEmoji = clockEmojis[10];
+    }
+    else {
+        clockEmoji = clockEmojis[11];
+    }
+
+    $("#play-time").html(`<u>Total play time</u>: ${numberOfPassedSeconds}s ${clockEmoji}`);
 }
 
 function getRandomNumber(n) {
@@ -43,6 +84,7 @@ function computeInitialGameTable(table, n) {
             const newCell = $("<td>");
             newCell.css("font-weight", "bold");
             newCell.attr("id", `row${i}col${j}`);
+            newCell.attr("class", "table-cell");
 
             if(i !== n - 1 || j !== n - 1) {
                 newCell.text(i * n + j + 1);
@@ -270,21 +312,25 @@ function startGame(n, hiddenNumber, timer) {
                 console.log("\n");
                 console.log(`Move #${++numberOfMoves}\nUP arrow key pressed`);
                 arrowUpPressed(hiddenNumber, n);
+                $("#last-move").html("<u>Most recent valid move</u>: 🔼");
             }
             else if((event.key === "ArrowRight" || event.key.toLocaleLowerCase() === "d") && hiddenNumber.col < n - 1) {
                 console.log("\n");
                 console.log(`Move #${++numberOfMoves}\nRIGHT arrow key pressed`);
                 arrowRightPressed(hiddenNumber, n);
+                $("#last-move").html("<u>Most recent valid move</u>: ▶️");
             }
             else if((event.key === "ArrowDown" || event.key.toLocaleLowerCase() === "s") && hiddenNumber.row < n - 1) {
                 console.log("\n");
                 console.log(`Move #${++numberOfMoves}\nDOWN arrow key pressed`);
                 arrowDownPressed(hiddenNumber, n);
+                $("#last-move").html("<u>Most recent valid move</u>: 🔽");
             }
             else if((event.key === "ArrowLeft" || event.key.toLocaleLowerCase() === "a") && hiddenNumber.col !== 0) {
                 console.log("\n");
                 console.log(`Move #${++numberOfMoves}\nLEFT arrow key pressed`);
                 arrowLeftPressed(hiddenNumber, n);
+                $("#last-move").html("<u>Most recent valid move</u>: ◀️");
             }
             else {
                 validMove = false;
@@ -309,7 +355,11 @@ function createGame(n, numberOfShuffles) {
     updateSecondsCounter();
     const timer = setInterval(updateSecondsCounter, 1000);
 
-    let hiddenNumber = {val: undefined, row: undefined, col: undefined};
+    let hiddenNumber = {
+        val: undefined,
+        row: undefined,
+        col: undefined
+    };
     computeGameTable(n, hiddenNumber, numberOfShuffles);
 
     startGame(n, hiddenNumber, timer);
