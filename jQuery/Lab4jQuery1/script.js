@@ -7,29 +7,30 @@ Nu se vor folosi biblioteci de functii, jQuery, pluginuri, etc.
 
 console.log("Welcome to script.js!");
 
+function updateSelectSize(select) {
+    select.attr("size", select.prop("length"));
+}
+
+function selectingItemFromSelect(firstSelect, secondSelect) {
+    firstSelect.on("dblclick", () => {
+        const optionText = firstSelect.find(":selected").text();
+        console.log(`Selected option: ${optionText}`);
+
+        firstSelect.find(`option:contains(${optionText})`).remove();
+        secondSelect.append($('<option>', { text: optionText }));
+
+        updateSelectSize(firstSelect);
+        updateSelectSize(secondSelect);
+    });
+}
+
 $("document").ready(() => {
-    $("#first-select").attr("size", $("#first-select").prop("length"));
-    $("#second-select").attr("size", $("#second-select").prop("length"));
+    const firstSelect = $("#first-select");
+    const secondSelect = $("#second-select");
 
-    $("#first-select").on("dblclick", () => {
-        const optionText = $("#first-select").find(":selected").text();
-        console.log(`Selected option from first select: ${optionText}`);
+    updateSelectSize(firstSelect);
+    updateSelectSize(secondSelect);
 
-        $("#first-select").find(`option:contains(${optionText})`).remove();
-        $("#second-select").append($('<option>', { text: optionText }));
-
-        $("#first-select").attr("size", $("#first-select").prop("length"));
-        $("#second-select").attr("size", $("#second-select").prop("length"));
-    });
-
-    $("#second-select").on("dblclick", () => {
-        const optionText = $("#second-select").find(":selected").text();
-        console.log(`Selected option from second select: ${optionText}`);
-
-        $("#second-select").find(`option:contains(${optionText})`).remove();
-        $("#first-select").append($('<option>', { text: optionText }));
-
-        $("#first-select").attr("size", $("#first-select").prop("length"));
-        $("#second-select").attr("size", $("#second-select").prop("length"));
-    });
+    selectingItemFromSelect(firstSelect, secondSelect);
+    selectingItemFromSelect(secondSelect, firstSelect);
 });
