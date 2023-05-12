@@ -20,15 +20,15 @@ function getNextItem(currentItem, numberOfListItems) {
 }
 
 function hideAllListItemsExceptFirstOne() {
-    $(`#main-list li:not(:first-child)`).css("visibility", "hidden");
+    $(`#main-list li:not(:first-child)`).hide();
 }
 
 function hideShowListItem(currentItem, numberOfListItems, reverse = false) {
-    $(`#li${currentItem}`).css("visibility", "hidden");
+    $(`#li${currentItem}`).hide();
     $(`#image${currentItem}`).removeClass("flip-animation");
 
     const newItem = (!reverse) ? (getNextItem(currentItem, numberOfListItems)) : (getPrevItem(currentItem, numberOfListItems));
-    $(`#li${newItem}`).css("visibility", "visible");
+    $(`#li${newItem}`).show();
     $(`#image${newItem}`).addClass("flip-animation");
 
     return newItem;
@@ -73,7 +73,12 @@ function addEventListenerToNextButton(gameInfo) {
 function startGame(n, numberOfListItems) {
     hideAllListItemsExceptFirstOne();
 
-    let gameInfo = {n: n, numberOfListItems: numberOfListItems, currentItem: 1, currentSecond: 0};
+    let gameInfo = {
+        n: n,
+        numberOfListItems: numberOfListItems,
+        currentItem: 1,
+        currentSecond: 0
+    };
 
     setIntervalFunction(gameInfo);
     addEventListenerToPrevButton(gameInfo);
@@ -82,7 +87,7 @@ function startGame(n, numberOfListItems) {
 
 $("document").ready(() => {
     $("#generate-game-button").click(() => {
-        const n = Number($("#number-of-seconds-input").val());
+        const n = parseInt($("#number-of-seconds-input").val());
         const numberOfListItems = $("#main-list > li").length;
         updateCurrentItemLabel(1, numberOfListItems);
         startGame(n, numberOfListItems);
