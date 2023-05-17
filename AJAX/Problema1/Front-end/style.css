@@ -1,0 +1,54 @@
+body {
+    background-color: #79C753;
+}
+
+h1 {
+    color: #DD4132;
+}
+
+fieldset {
+    background-color: #DD4132;
+}
+
+.title-container {
+    text-align: center;
+}
+
+legend, span {
+    font-size: 20px;
+}
+
+#lista-plecari {
+    list-style-type: none;
+}
+
+.tipuri-curse-container, .sosiri-trenuri-container, .plecari-trenuri-container {
+    font-family: Orbitron, sans-serif;
+}
+
+.tipuri-curse-container input[type="radio"], .plecari-trenuri-container input[type="radio"] {
+    display: none;
+}
+
+.tipuri-curse-container label, .plecari-trenuri-container label {
+    display: inline-block;
+    padding: 0.5em 1em;
+    margin: 0.5em;
+    font-size: 1em;
+    font-weight: bold;
+    border: 2px solid #79C753;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    background-color: #DD4132;
+    color: #79C753;
+}
+
+.tipuri-curse-container input[type="radio"]:checked + label, .plecari-trenuri-container input[type="radio"]:checked + label {
+    background-color: #79C753;
+    color: #DD4132;
+}
+
+#lista-sosiri {
+    list-style-type: square;
+}
