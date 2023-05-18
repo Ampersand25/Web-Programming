@@ -6,7 +6,6 @@
 
 console.log("Problema 4 AJAX - Laborator 5 Programare Web");
 
-let canMove = false;
 let turn;
 let player;
 let computer;
@@ -48,12 +47,7 @@ function gameIsOver() {
                 end = true;
 
                 const draws = localStorage.getItem("remize");
-                if (draws === null) {
-                    localStorage.setItem("remize", 0);
-                }
-                else {
-                    localStorage.setItem("remize", parseInt(draws) + 1);
-                }
+                localStorage.setItem("remize", (draws === null) ? (0) : (parseInt(draws) + 1));
                 updateStats();
             }
             else if (xhr.responseText === "player") {
@@ -61,12 +55,7 @@ function gameIsOver() {
                 end = true;
 
                 const victories = localStorage.getItem("victorii-jucator");
-                if (victories === null) {
-                    localStorage.setItem("victorii-jucator", 0);
-                }
-                else {
-                    localStorage.setItem("victorii-jucator", parseInt(victories) + 1);
-                }
+                localStorage.setItem("victorii-jucator", (victories === null) ? (0) : (parseInt(victories) + 1));
                 updateStats();
             }
             else if (xhr.responseText === "computer") {
@@ -74,12 +63,7 @@ function gameIsOver() {
                 end = true;
 
                 const loses = localStorage.getItem("victorii-calculator");
-                if (loses === null) {
-                    localStorage.setItem("victorii-calculator", 0);
-                }
-                else {
-                    localStorage.setItem("victorii-calculator", parseInt(loses) + 1);
-                }
+                localStorage.setItem("victorii-calculator", (loses === null) ? (0) : (parseInt(loses) + 1));
                 updateStats();
             }
         }
@@ -100,7 +84,7 @@ function validMove(row, col) {
 function computePlayerMove() {
     const table = document.querySelector("#tic-tac-toe");
     table.addEventListener("click", (event) => {
-        if (event.target.tagName === "TD" && canMove === true) {
+        if (event.target.tagName === "TD") {
             if (event.target.textContent === "-" && end === false) {
                 turn = 1;
                 event.target.textContent = player;
@@ -119,13 +103,9 @@ function checkGameStatus() {
     }
     else {
         if (turn === 0) {
-            canMove = true;
-
             computePlayerMove();
         }
         else {
-            canMove = false;
-
             let row = randomMove();
             let col = randomMove();
 
@@ -139,7 +119,7 @@ function checkGameStatus() {
             turn = 0;
         }
 
-        timeout = setTimeout(checkGameStatus, 1000);
+        timeout = setTimeout(checkGameStatus, 1);
     }
 }
 
@@ -167,14 +147,12 @@ function showGameTable() {
 }
 
 function playerFirst() {
-    canMove = true;
     turn = 0;
     player = "X";
     computer = "0";
 }
 
 function computerFirst() {
-    canMove = false;
     turn = 1;
     player = "0";
     computer = "X";
