@@ -50,6 +50,11 @@ table tr:nth-of-type(even) {
     color: black;
 }
 
+table tr:nth-of-type(odd) {
+    background-color: #e7e3e3;
+    color: black;
+}
+
 table tr:last-of-type {
     border-bottom: 5px solid #F7CAC9;
 }
