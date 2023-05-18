@@ -49,10 +49,9 @@ function displayRecordsGET(n) {
             clearTable();
 
             const response = this.responseText.split("<br>");
-            if (response[response.length - 1] === '') {
+            if (response[response.length - 1] === "") {
                 response.pop();
             }
-
             for (let i = 0; i < response.length; ++i) {
                 const client = response[i];
                 addClientToTable(client);
@@ -83,10 +82,9 @@ function displayInitialRecordsPOST(n) {
             clearTable();
 
             const response = this.responseText.split("<br>");
-            if (response[response.length - 1] === '') {
+            if (response[response.length - 1] === "") {
                 response.pop();
             }
-
             for (let i = 0; i < response.length; ++i) {
                 const client = response[i];
                 addClientToTable(client);
