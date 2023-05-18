@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <title>Laborator 5 AJAX Problema 4</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body onload>
+    <div class="title-container">
+        <h1><u>Problema 4 AJAX</u></h1>
+    </div>
+
+    <br>
+
+    <div class="main-div">
+        <fieldset>
+            <legend>Alegere cine sa inceapa</legend>
+
+            <div class="choose-start-container">
+                <div class="radio-buttons-container">
+                    <input class="radio-buttons" type="radio" id="radio-button-1" name="radio-group" value="option1">
+                    <label for="radio-button-1">Jucator</label>
+
+                    <input class="radio-buttons" type="radio" id="radio-button-2" name="radio-group" value="option2">
+                    <label for="radio-button-2">Calculator</label>
+
+                    <input class="radio-buttons" type="radio" id="radio-button-3" name="radio-group" value="option3" checked>
+                    <label for="radio-button-3">Random</label>
+                </div>
+
+                <br>
+
+                <div class="start-game-button-container">
+                    <button onclick="startGame()">START GAME</button>
+                </div>
+            </div>
+        </fieldset>
+
+        <fieldset>
+            <legend>Tabla de joc X si 0</legend>
+
+            <div class="table-container">
+                <table id="tic-tac-toe">
+                    <tbody>
+                        <tr>
+                            <td id="cell11">-</td>
+                            <td id="cell12">-</td>
+                            <td id="cell13">-</td>
+                        </tr>
+
+                        <tr>
+                            <td id="cell21">-</td>
+                            <td id="cell22">-</td>
+                            <td id="cell23">-</td>
+                        </tr>
+
+                        <tr>
+                            <td id="cell31">-</td>
+                            <td id="cell32">-</td>
+                            <td id="cell33">-</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </fieldset>
+
+        <fieldset>
+            <legend>Statistici meciuri jucate</legend>
+
+            <span id="victorii-jucator">Numar total de victorii jucator: ?</span>
+
+            <br>
+
+            <span id="victorii-calculator">Numar total de victorii calculator: ?</span>
+
+            <br>
+
+            <span id="remize">Numar total de remize: ?</span>
+        </fieldset>
+    </div>
+</body>
+
+<script type="text/javascript" src="script.js"></script>
+
+</html>
