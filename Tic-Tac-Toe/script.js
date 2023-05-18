@@ -170,7 +170,7 @@ function checkGameStatus() {
             turn = 0;
         }
 
-        timeout = setTimeout(checkGameStatus, 500);
+        timeout = setTimeout(checkGameStatus, 100);
     }
 }
 
