@@ -29,7 +29,7 @@ table {
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
 }
 
-table thead tr {
+table th {
     background-color: #F7CAC9;
     color: white;
     text-align: center;
@@ -41,21 +41,21 @@ table td {
     padding: 12px 15px;
 }
 
-table tbody tr {
+table tr {
     border-bottom: 1px solid #F7CAC9;
 }
 
-table tbody tr:nth-of-type(even) {
+table tr:nth-of-type(even) {
     background-color: white;
     color: black;
 }
 
-table tbody tr:last-of-type {
+table tr:last-of-type {
     border-bottom: 5px solid #F7CAC9;
 }
 
 th, td {
-    border: 1px solid #F7CAC9;
+    border: 5px solid #F7CAC9;
 }
 
 button {
@@ -65,7 +65,7 @@ button {
     font-size: 30px;
     font-weight: bold;
     text-transform: uppercase;
-    color: black;
+    color: white;
     background-color: #F7CAC9;
     border: none;
     border-radius: 5px;
