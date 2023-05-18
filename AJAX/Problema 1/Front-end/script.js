@@ -91,11 +91,11 @@ function addCityToList(city, nr) {
             console.log(`Orasul de plecare ales: ${labelText}`);
             const curseDirecteRadioBtn = document.querySelector("#curse-directe");
             if (curseDirecteRadioBtn.checked) {
-                console.log("Se vor afisa cursele directe!");
+                console.log("Se vor afisa cursele directe (de la sursa/plecare la destinatie/sosire)!");
                 showRoutes(labelText);
             }
             else {
-                console.log("Se vor afisa cursele cu legatura!");
+                console.log("Se vor afisa cursele inverse (de la destinatie/sosire la sursa/plecare)!");
                 showReverseRoutes(labelText);
             }
             console.log("\n");
