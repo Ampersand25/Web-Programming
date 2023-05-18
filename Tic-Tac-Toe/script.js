@@ -1,6 +1,5 @@
 console.log("Joc de X si 0");
 
-let canMove = false;
 let turn;
 let player;
 let computer;
@@ -154,12 +153,9 @@ function checkGameStatus() {
         console.log(`FREE CELLS: ${freeCells}`);
 
         if (turn === 0) {
-            canMove = true;
             computePlayerMove();
         }
         else {
-            canMove = false;
-
             let row = randomMove();
             let col = randomMove();
 
@@ -199,14 +195,12 @@ function showGameTable() {
 }
 
 function playerFirst() {
-    canMove = true;
     turn = 0;
     player = "X";
     computer = "0";
 }
 
 function computerFirst() {
-    canMove = false;
     turn = 1;
     player = "0";
     computer = "X";
