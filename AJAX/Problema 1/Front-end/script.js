@@ -18,6 +18,7 @@ function isUndefined(val) {
 function addSosireToList(content) {
     const sosireNoua = document.createElement("li");
     sosireNoua.textContent = content;
+
     const sosiriList = document.querySelector("#lista-sosiri");
     sosiriList.appendChild(sosireNoua);
 }
@@ -36,10 +37,9 @@ function showRoutes(plecare) {
             clearSosiriList();
 
             const sosiri = this.responseText.split("<br>");
-            if (sosiri[sosiri.length - 1] === '') {
+            if (sosiri[sosiri.length - 1] === "") {
                 sosiri.pop();
             }
-
             for (let i = 0; i < sosiri.length; ++i) {
                 addSosireToList(sosiri[i]);
             }
@@ -60,7 +60,6 @@ function showReverseRoutes(plecare) {
             if (sosiri[sosiri.length - 1] === "") {
                 sosiri.pop();
             }
-
             for (let i = 0; i < sosiri.length; ++i) {
                 addSosireToList(sosiri[i]);
             }
@@ -78,7 +77,7 @@ function showReverseRoutes(plecare) {
 function addCityToList(city, nr) {
     const plecareNoua = document.createElement("li");
     plecareNoua.innerHTML = `<input id="statie-plecare${nr}" type="radio" name="oras-plecare" value="${city}" class="radio-option">
-                          <label for="statie-plecare${nr}" class="radio-button-label">${city}</label>`;
+                             <label for="statie-plecare${nr}" class="radio-button-label">${city}</label>`;
     const plecariList = document.querySelector("#lista-plecari");
     plecariList.appendChild(plecareNoua);
 
@@ -89,6 +88,7 @@ function addCityToList(city, nr) {
 
         if (isUndefined(lastRadioBtnClickedLabelText) || lastRadioBtnClickedLabelText !== labelText) {
             console.log(`Orasul de plecare ales: ${labelText}`);
+
             const curseDirecteRadioBtn = document.querySelector("#curse-directe");
             if (curseDirecteRadioBtn.checked) {
                 console.log("Se vor afisa cursele directe (de la sursa/plecare la destinatie/sosire)!");
@@ -98,6 +98,7 @@ function addCityToList(city, nr) {
                 console.log("Se vor afisa cursele inverse (de la destinatie/sosire la sursa/plecare)!");
                 showReverseRoutes(labelText);
             }
+
             console.log("\n");
         }
 
@@ -110,10 +111,9 @@ function showCitiesGET() {
     xhttp.onreadystatechange = function() {
         if (this.readyState === 4 && this.status === 200) {
             const cities = this.responseText.split("<br>");
-            if (cities[cities.length - 1] === '') {
+            if (cities[cities.length - 1] === "") {
                 cities.pop();
             }
-
             for (let i = 0; i < cities.length; ++i) {
                 addCityToList(cities[i], i + 1);
             }
@@ -132,7 +132,6 @@ function showCitiesPOST() {
             if (cities[cities.length - 1] === "") {
                 cities.pop();
             }
-
             for (let i = 0; i < cities.length; ++i) {
                 addCityToList(cities[i], i + 1);
             }
@@ -145,12 +144,7 @@ function showCitiesPOST() {
 }
 
 function showCities(requestType = "GET") {
-    if (requestType === "GET") {
-        showCitiesGET();
-    }
-    else {
-        showCitiesPOST();
-    }
+    (requestType === "GET") ? (showCitiesGET()) : (showCitiesPOST());
 }
 
 function main() {
