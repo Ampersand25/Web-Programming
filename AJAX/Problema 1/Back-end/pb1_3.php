@@ -1,15 +1,16 @@
 <?php
 $servername = "localhost";
-$username = "root";
-$password = "BacktrackingGOD314#";
-$dbname = "sql_pw_ajax";
+$username   = "root";
+$password   = "BacktrackingGOD314#";
+$dbname     = "sql_pw_ajax";
 
 header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Methods: POST");
 header("Access-Control-Allow-Headers: Content-Type");
 
 $conn = new mysqli($servername, $username, $password, $dbname);
 if ($conn->connect_error) {
-    exit("[X] Connection failed to MySQL: ".$conn->connect_error);
+    exit("[X] Connection failed to MySQL: ".$conn->connect_error."!");
 }
 
 $data = json_decode(file_get_contents('php://input'), true);
@@ -31,7 +32,7 @@ if (isset($plecare)) {
     }
 }
 else {
-    exit("[X] Missing 'plecare' parameter.");
+    exit("[X] Missing 'plecare' parameter!");
 }
 
 $conn->close();
