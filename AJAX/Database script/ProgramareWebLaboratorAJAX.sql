@@ -1,3 +1,4 @@
+-- CREARE BAZA DE DATE
 DROP DATABASE IF EXISTS `sql_pw_ajax`;
 CREATE DATABASE `sql_pw_ajax`;
 USE `sql_pw_ajax`;
@@ -5,6 +6,7 @@ USE `sql_pw_ajax`;
 SET NAMES utf8;
 SET character_set_client = utf8mb4;
 
+-- CREARE TABEL `trenuri` PENTRU PRIMA PROBLEMA
 CREATE TABLE `trenuri` (
 	`plecare` VARCHAR(100) NOT NULL,
 	`sosire` VARCHAR(100) NOT NULL,
@@ -12,6 +14,7 @@ CREATE TABLE `trenuri` (
     CONSTRAINT CHECK (`plecare` <> `sosire`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+-- INSERARE DATE/INREGISTRARI IN TABELUL/TABELA `trenuri`
 INSERT INTO `trenuri` VALUES
 ('Cluj-Napoca', 'Bucuresti'),
 ('Iasi', 'Suceava'),
@@ -34,14 +37,17 @@ INSERT INTO `trenuri` VALUES
 ('Buzau', 'Suceava'),
 ('Bucuresti', 'Ploiesti');
 
+-- SELECTAM TOATE LINIILE (TRENURILE) DIN TABELUL/TABELA `trenuri`
 SELECT * FROM `trenuri`;
 
+-- SELECTAM TOATE ORASELE DIN TABELUL/TABELA `trenuri`
 SELECT `plecare` AS `oras`
 FROM `trenuri`
 UNION
 SELECT `sosire`
 FROM `trenuri`;
 
+-- CREARE TABEL `clienti` PENTRU A DOUA PROBLEMA
 CREATE TABLE `clienti` (
 	`id` INT PRIMARY KEY AUTO_INCREMENT,
 	`nume` NVARCHAR(40) NOT NULL,
@@ -50,6 +56,7 @@ CREATE TABLE `clienti` (
     `email` VARCHAR(30) NOT NULL UNIQUE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+-- INSERARE DATE/INREGISTRARI IN TABELUL/TABELA `clienti`
 INSERT INTO `clienti` (`nume`, `prenume`, `email`, `telefon`) VALUES
 ('Bast', 'Alcmene', 'balcmene13@gmail.com', '(206) 342-8631'),
 ('Níam', 'Simon', 'nsimon25@yahoo.com', '(717) 550-1675'),
@@ -63,6 +70,8 @@ INSERT INTO `clienti` (`nume`, `prenume`, `email`, `telefon`) VALUES
 ('Rigantona', 'Erato', 'rigantona_erato@gmail.com', '(201) 874-8593'),
 ('Yngvi', 'Diomedes', 'ydiomedes@gmail.com', '(815) 922-6178');
 
+-- SELECTAM TOATE INREGISTRARILE/LINIILE DIN TABELUL/TABELA `clienti`
 SELECT * FROM `clienti`;
 
+-- SELECTAM NUMARUL DE CLIENTI DIN TABELUL `clienti`
 SELECT COUNT(*) AS `numar clienti` FROM `clienti`;
