@@ -9,7 +9,6 @@ Nu se vor folosi biblioteci de functii, jQuery, pluginuri, etc.
 
 console.log("Welcome to script.js!");
 
-const canvas = document.getElementById("confetti");
 const jsConfetti = new JSConfetti();
 
 let numberOfPassedSeconds;
