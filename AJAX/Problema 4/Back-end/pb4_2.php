@@ -28,7 +28,7 @@ else {
 		$randomRow = random_int(1, 3);
 		$randomCol = random_int(1, 3);
 		
-		while ($matrix[$randomRow - 1][$randomCol - 1] === "-") {
+		while ($matrix[$randomRow - 1][$randomCol - 1] !== "-") {
 			$randomRow = random_int(1, 3);
 			$randomCol = random_int(1, 3);
 		}
