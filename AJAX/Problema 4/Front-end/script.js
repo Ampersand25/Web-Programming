@@ -77,13 +77,41 @@ function gameIsOver() {
     xhr.send(jsonData);
 }
 
-function validMove(row, col) {
-    const cell = document.querySelector(`#cell${row}${col}`);
-    if (cell.textContent === "-") {
-        cell.textContent = computer;
-        return true;
-    }
-    return false;
+function computeComputerMove() {
+    const cell11 = document.querySelector("#cell11").textContent;
+    const cell12 = document.querySelector("#cell12").textContent;
+    const cell13 = document.querySelector("#cell13").textContent;
+
+    const cell21 = document.querySelector("#cell21").textContent;
+    const cell22 = document.querySelector("#cell22").textContent;
+    const cell23 = document.querySelector("#cell23").textContent;
+
+    const cell31 = document.querySelector("#cell31").textContent;
+    const cell32 = document.querySelector("#cell32").textContent;
+    const cell33 = document.querySelector("#cell33").textContent;
+
+    const data = [cell11, cell12, cell13, cell21, cell22, cell23, cell31, cell32, cell33];
+    const jsonData = JSON.stringify(data);
+
+    const xhr = new XMLHttpRequest();
+    xhr.open("POST", "http://localhost/Lab5AJAX/Problema4/pb4_2.php", false);
+    xhr.setRequestHeader("Content-Type", "application/json");
+
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            const response = xhr.responseText;
+            const row = response[0];
+            const col = response[1];
+
+            console.log(`TEST: ${row} ${col}`);
+
+            document.querySelector(`#cell${row}${col}`).textContent = computer;
+
+            turn = 0;
+        }
+    };
+
+    xhr.send(jsonData);
 }
 
 function computePlayerMove() {
@@ -111,17 +139,7 @@ function checkGameStatus() {
             computePlayerMove();
         }
         else {
-            let row = randomMove();
-            let col = randomMove();
-
-            while (!validMove(row, col)) {
-                row = randomMove();
-                col = randomMove();
-            }
-
-            console.log(`COMPUTER MOVE: ${row} ${col}`);
-
-            turn = 0;
+            computeComputerMove();
         }
 
         timeout = setTimeout(checkGameStatus, 1);
