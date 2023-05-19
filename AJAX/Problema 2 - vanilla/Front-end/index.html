@@ -16,6 +16,17 @@
         <fieldset>
             <legend>Informatii clienti</legend>
 
+            <div class="number-of-items-per-page-container">
+                <label for="number-of-items-input">Select the number of items/page:</label>
+                <input id="number-of-items-input" type="number" min="1" max="100" value="3">
+            </div>
+
+            <div class="button-container">
+                <button id="compute-table-button" onclick="computeTable()">Compute Table</button>
+            </div>
+
+            <br>
+
             <div class="clients-container">
                 <table id="clients-table">
                     <tr>
