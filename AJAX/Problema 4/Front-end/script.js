@@ -6,6 +6,8 @@
 
 console.log("Problema 4 AJAX - Laborator 5 Programare Web");
 
+const jsConfetti = new JSConfetti();
+
 let turn;
 let player;
 let computer;
@@ -51,7 +53,10 @@ function gameIsOver() {
                 updateStats();
             }
             else if (xhr.responseText === "player") {
-                alert("PLAYER WON!");
+                jsConfetti.addConfetti({
+                    emojis: ['🦄', '🌈', '⚡️', '💥', '✨', '💫', '🌸'],
+                }).then(() => { alert("PLAYER WON!"); });
+
                 end = true;
 
                 const victories = localStorage.getItem("victorii-jucator");
