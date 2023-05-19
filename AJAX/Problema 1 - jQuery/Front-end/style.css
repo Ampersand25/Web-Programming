@@ -52,3 +52,10 @@ legend, span {
 #lista-sosiri {
     list-style-type: square;
 }
+
+span {
+    font-weight: bold;
+    font-size: 20px;
+    font-family: Orbitron, sans-serif;
+    color: #79C753;
+}
