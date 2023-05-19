@@ -6,33 +6,44 @@
     <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
-    <div class="title-container">
-        <h1><u>Problema 2 AJAX</u></h1>
-    </div>
+<div class="title-container">
+    <h1><u>Problema 2 AJAX</u></h1>
+</div>
 
-    <br>
+<br>
 
-    <div class="main-div">
-        <fieldset>
-            <legend>Informatii clienti</legend>
+<div class="main-div">
+    <fieldset>
+        <legend>Informatii clienti</legend>
 
-            <div class="clients-container">
-                <table id="clients-table">
-                    <tr>
-                        <th>Nume</th>
-                        <th>Prenume</th>
-                        <th>Telefon</th>
-                        <th>Email</th>
-                    </tr>
-                </table>
-            </div>
+        <div class="number-of-items-per-page-container">
+            <label for="number-of-items-input">Select the number of items/page:</label>
+            <input id="number-of-items-input" type="number" min="1" max="100" value="3">
+        </div>
 
-            <div class="buttons-container">
-                <button id="prev-button" disabled>Prev</button>
-                <button id="next-button">Next</button>
-            </div>
-        </fieldset>
-    </div>
+        <div class="button-container">
+            <button id="compute-table-button" onclick="computeTable()">Compute Table</button>
+        </div>
+
+        <br>
+
+        <div class="clients-container">
+            <table id="clients-table">
+                <tr>
+                    <th>Nume</th>
+                    <th>Prenume</th>
+                    <th>Telefon</th>
+                    <th>Email</th>
+                </tr>
+            </table>
+        </div>
+
+        <div class="buttons-container">
+            <button id="prev-button" disabled>Prev</button>
+            <button id="next-button">Next</button>
+        </div>
+    </fieldset>
+</div>
 </body>
 
 <script src="jQuery/jquery.min.js" type="text/javascript"></script>

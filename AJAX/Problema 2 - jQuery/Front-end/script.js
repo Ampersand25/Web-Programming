@@ -159,12 +159,21 @@ function getNumberOfRecords(method = "GET", n) {
     (method === "GET") ? (getNumberOfRecordsGET(n)) : (getNumberOfRecordsPOST(n));
 }
 
-function main(n = 3) {
+function displayTable(n = 3) {
     getNumberOfRecords("GET", n);
     //getNumberOfRecords("POST", n);
 }
 
-main();
-//main(2);
-//main(3);
-//main(4);
+function computeTable() {
+    const computeGameBtn = document.querySelector("#compute-table-button");
+    computeGameBtn.disabled = true;
+
+    const input = document.querySelector("input");
+    input.disabled = true;
+
+    const table = document.querySelector("#clients-table");
+    table.style.display = "block";
+
+    const numberOfItemsPerPage = parseInt(document.querySelector("#number-of-items-input").value);
+    displayTable(numberOfItemsPerPage);
+}
