@@ -13,6 +13,7 @@ let player;
 let computer;
 let timeout;
 let end = false;
+let difficulty;
 
 function randomMove() {
     return Math.floor(Math.random() * 3) + 1;
@@ -77,7 +78,19 @@ function gameIsOver() {
     xhr.send(jsonData);
 }
 
-function computeComputerMove() {
+function executeMove(response) {
+    const row = response[0];
+    const col = response[1];
+
+    console.log("\n");
+    console.log(`COMPUTER'S MOVE: ${row} ${col}`);
+
+    document.querySelector(`#cell${row}${col}`).textContent = computer;
+
+    turn = 0;
+}
+
+function computeComputerMoveEASY() {
     const cell11 = document.querySelector("#cell11").textContent;
     const cell12 = document.querySelector("#cell12").textContent;
     const cell13 = document.querySelector("#cell13").textContent;
@@ -99,15 +112,36 @@ function computeComputerMove() {
 
     xhr.onreadystatechange = function() {
         if (xhr.readyState === 4 && xhr.status === 200) {
-            const response = xhr.responseText;
-            const row = response[0];
-            const col = response[1];
+            executeMove(xhr.responseText);
+        }
+    };
 
-            console.log(`TEST: ${row} ${col}`);
+    xhr.send(jsonData);
+}
 
-            document.querySelector(`#cell${row}${col}`).textContent = computer;
+function computeComputerMoveHARD() {
+    const cell11 = document.querySelector("#cell11").textContent;
+    const cell12 = document.querySelector("#cell12").textContent;
+    const cell13 = document.querySelector("#cell13").textContent;
 
-            turn = 0;
+    const cell21 = document.querySelector("#cell21").textContent;
+    const cell22 = document.querySelector("#cell22").textContent;
+    const cell23 = document.querySelector("#cell23").textContent;
+
+    const cell31 = document.querySelector("#cell31").textContent;
+    const cell32 = document.querySelector("#cell32").textContent;
+    const cell33 = document.querySelector("#cell33").textContent;
+
+    const data = [cell11, cell12, cell13, cell21, cell22, cell23, cell31, cell32, cell33, player, computer];
+    const jsonData = JSON.stringify(data);
+
+    const xhr = new XMLHttpRequest();
+    xhr.open("POST", "http://localhost/Lab5AJAX/Problema4/pb4_3.php", false);
+    xhr.setRequestHeader("Content-Type", "application/json");
+
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            executeMove(xhr.responseText);
         }
     };
 
@@ -135,12 +169,7 @@ function checkGameStatus() {
         clearTimeout(timeout);
     }
     else {
-        if (turn === 0) {
-            computePlayerMove();
-        }
-        else {
-            computeComputerMove();
-        }
+        (turn === 0) ? (computePlayerMove()) : ((difficulty === "easy") ? (computeComputerMoveEASY()) : (computeComputerMoveHARD()));
 
         timeout = setTimeout(checkGameStatus, 1);
     }
@@ -206,15 +235,38 @@ function updateStats() {
     const statsDraws = document.querySelector("#remize");
     const draws = (localStorage.getItem("remize") === null) ? (0) : (parseInt(localStorage.getItem("remize")));
     statsDraws.textContent = `Numar total de remize: ${draws}`;
+
+    return [victories, loses, draws];
+}
+
+function resetStats() {
+    localStorage.setItem("remize", "0");
+    localStorage.setItem("victorii-jucator", "0");
+    localStorage.setItem("victorii-calculator", "0");
+
+    updateStats();
+}
+
+function enableDisableResetStatsBtn(victories, loses, draws) {
+    const resetStatsBtn = document.querySelector("#reset-stats-button");
+    resetStatsBtn.disabled = (victories + loses + draws === 0);
+    resetStatsBtn.addEventListener("click", () => {
+        resetStats();
+        resetStatsBtn.disabled = true;
+    });
 }
 
 function startGame() {
-    updateStats();
+    const stats = updateStats();
+    enableDisableResetStatsBtn(stats[0], stats[1], stats[2]);
 
     setPlayerAndComputer();
 
+    difficulty = (document.querySelector("#radio-button-4").checked === true) ? ("easy") : ("hard");
+
     console.log(`PLAYER: ${player}`);
     console.log(`COMPUTER: ${computer}`);
+    console.log(`DIFFICULTY: ${difficulty}`);
 
     disableButtons();
     showGameTable();

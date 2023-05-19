@@ -14,18 +14,30 @@
 
     <div class="main-div">
         <fieldset>
-            <legend>Alegere cine sa inceapa</legend>
+            <legend>Setari joc</legend>
 
-            <div class="choose-start-container">
-                <div class="radio-buttons-container">
-                    <input class="radio-buttons" type="radio" id="radio-button-1" name="radio-group" value="option1">
+            <div class="settings-container">
+                <span id="select-first-player-span">Alegeti cine sa inceapa meciul:</span>
+                <div class="radio-buttons-container start-container">
+                    <input class="radio-buttons" type="radio" id="radio-button-1" name="radio-group-1" value="option1">
                     <label for="radio-button-1">Jucator</label>
 
-                    <input class="radio-buttons" type="radio" id="radio-button-2" name="radio-group" value="option2">
+                    <input class="radio-buttons" type="radio" id="radio-button-2" name="radio-group-1" value="option2">
                     <label for="radio-button-2">Calculator</label>
 
-                    <input class="radio-buttons" type="radio" id="radio-button-3" name="radio-group" value="option3" checked>
+                    <input class="radio-buttons" type="radio" id="radio-button-3" name="radio-group-1" value="option3" checked>
                     <label for="radio-button-3">Random</label>
+                </div>
+
+                <br>
+
+                <span id="difficulty-span">Alegeti dificultatea jocului:</span>
+                <div class="radio-buttons-container difficulty-container">
+                    <input class="radio-buttons" type="radio" id="radio-button-4" name="radio-group-2" value="option1" checked>
+                    <label for="radio-button-4">Usor</label>
+
+                    <input class="radio-buttons" type="radio" id="radio-button-5" name="radio-group-2" value="option2">
+                    <label for="radio-button-5">Greu</label>
                 </div>
 
                 <br>
@@ -67,15 +79,23 @@
         <fieldset>
             <legend>Statistici meciuri jucate</legend>
 
-            <span id="victorii-jucator">Numar total de victorii jucator: ?</span>
+            <div class="span-container">
+                <span id="victorii-jucator">Numar total de victorii jucator: ?</span>
+
+                <br>
+
+                <span id="victorii-calculator">Numar total de victorii calculator: ?</span>
+
+                <br>
+
+                <span id="remize">Numar total de remize: ?</span>
+            </div>
 
             <br>
 
-            <span id="victorii-calculator">Numar total de victorii calculator: ?</span>
-
-            <br>
-
-            <span id="remize">Numar total de remize: ?</span>
+            <div class="reset-stats-button-container">
+                <button id="reset-stats-button" disabled>Reset stats</button>
+            </div>
         </fieldset>
     </div>
 </body>
