@@ -7,6 +7,17 @@ let timeout;
 let freeCells = 9;
 let end = false;
 
+const jsConfetti = new JSConfetti();
+
+function startConfetti() {
+    jsConfetti.addConfetti();
+}
+
+function winHandler() {
+    setInterval(startConfetti, 500);
+    alert("PLAYER WON!");
+}
+
 function randomMove() {
     return Math.floor(Math.random() * 3) + 1;
 }
@@ -27,7 +38,7 @@ function gameIsOver() {
     // SAME ROW/LINE CHECK
     if (cell11 === cell12 && cell12 === cell13) {
         if (cell11 === player) {
-            alert("PLAYER WON!");
+            winHandler();
             return true;
         }
         else if (cell11 === computer) {
@@ -38,7 +49,7 @@ function gameIsOver() {
 
     if (cell21 === cell22 && cell22 === cell23) {
         if (cell21 === player) {
-            alert("PLAYER WON!");
+            winHandler();
             return true;
         }
         else if (cell21 === computer) {
@@ -49,7 +60,7 @@ function gameIsOver() {
 
     if (cell31 === cell32 && cell32 === cell33) {
         if (cell31 === player) {
-            alert("PLAYER WON!");
+            winHandler();
             return true;
         }
         else if (cell31 === computer) {
@@ -61,7 +72,7 @@ function gameIsOver() {
     // DIAGONAL CHECK
     if (cell11 === cell22 && cell22 === cell33) {
         if (cell11 === player) {
-            alert("PLAYER WON!");
+            winHandler();
             return true;
         }
         else if (cell11 === computer) {
@@ -72,7 +83,7 @@ function gameIsOver() {
 
     if (cell13 === cell22 && cell22 === cell31) {
         if (cell13 === player) {
-            alert("PLAYER WON!");
+            winHandler();
             return true;
         }
         else if (cell13 === computer) {
@@ -84,7 +95,7 @@ function gameIsOver() {
     // SAME COLUMN CHECK
     if (cell11 === cell21 && cell21 === cell31) {
         if (cell11 === player) {
-            alert("PLAYER WON!");
+            winHandler();
             return true;
         }
         else if (cell11 === computer) {
@@ -95,7 +106,7 @@ function gameIsOver() {
 
     if (cell12 === cell22 && cell22 === cell32) {
         if (cell12 === player) {
-            alert("PLAYER WON!");
+            winHandler();
             return true;
         }
         else if (cell12 === computer) {
@@ -106,7 +117,7 @@ function gameIsOver() {
 
     if (cell13 === cell23 && cell23 === cell33) {
         if (cell13 === player) {
-            alert("PLAYER WON!");
+            winHandler();
             return true;
         }
         else if (cell13 === computer) {
@@ -149,7 +160,7 @@ function checkGameStatus() {
         end = true;
         clearTimeout(timeout);
     }
-    else if (end === false) {
+    else if (!end) {
         console.log(`FREE CELLS: ${freeCells}`);
 
         if (turn === 0) {
@@ -207,10 +218,10 @@ function computerFirst() {
 }
 
 function setPlayerAndComputer() {
-    if (document.querySelector("#radio-button-1").checked === true) {
+    if (document.querySelector("#radio-button-1").checked) {
         playerFirst();
     }
-    else if (document.querySelector("#radio-button-2").checked === true) {
+    else if (document.querySelector("#radio-button-2").checked) {
         computerFirst();
     }
     else {
