@@ -43,7 +43,10 @@ INSERT INTO `trenuri` (`nr_tren`, `tip_tren`, `localitate_plecare`, `localitate_
 INSERT INTO `trenuri` (`nr_tren`, `tip_tren`, `localitate_plecare`, `localitate_sosire`, `ora_plecare`, `ora_sosire`) VALUES
 (5893, 'Regio', 'Iasi', 'Constanta', '09:35', '14:20'),
 (7261, 'InterRegio', 'Iasi', 'Constanta', '17:55', '10:50'),
-(4037, 'Accelerat', 'Brasov', 'Vaslui', '21:10', '08:00');
+(4037, 'Accelerat', 'Brasov', 'Vaslui', '21:10', '08:00'),
+(8462, 'InterCity', 'Ploiesti', 'Mioveni', '15:35', '18:25'),
+(8462, 'InterRegio', 'Ploiesti', 'Suceava', '09:40', '12:05'),
+(8462, 'InterRegio', 'Suceava', 'Mioveni', '14:50', '17:55');
 
 SELECT `localitate_plecare` AS `oras`
 FROM `trenuri`
