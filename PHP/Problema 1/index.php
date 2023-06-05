@@ -6,6 +6,7 @@
     Iasi -> Brasov
     Bucuresti Nord -> Cluj-Napoca
     Ploiesti -> Mioveni
+    Iasi -> Timisoara Nord
 -->
 
 <!DOCTYPE html>
@@ -13,7 +14,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Laborator 6 PHP Problema 1</title>
-    <link rel="stylesheet" type="text/css" href="./style.css">
+    <link rel="stylesheet" type="text/css" href="style.css?v=1.2">
 </head>
 <body>
     <div class="title-container">
