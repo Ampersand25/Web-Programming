@@ -5,6 +5,7 @@
     Targu Mures -> Bucuresti Nord
     Iasi -> Brasov
     Bucuresti Nord -> Cluj-Napoca
+    Ploiesti -> Mioveni
 -->
 
 <!DOCTYPE html>
@@ -135,7 +136,7 @@
                             echo "<span>Trenul \"$localitate_intermediara\" - \"$destinatie\":<ul><li><u>numar tren</u>: <em>$nr_tren2</em></li><li><u>tip tren</u>: <em>$tip_tren2</em></li><li><u>ora plecare</u>: <em>$ora_plecare2</em></li><li><u>ora sosire</u>: <em>$ora_sosire2</em></li></ul></span>";
                         }
                     }
-                    else {
+                    else if ($localitate_intermediara != $destinatie) {
                         echo "<span>Nu exista curse <u>cu legatura</u> de la \"$sursa\" la \"$destinatie\" prin \"$localitate_intermediara\"!</span><br><br>";
                     }
 
