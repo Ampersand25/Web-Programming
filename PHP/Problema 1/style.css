@@ -1,13 +1,13 @@
 body {
-    background-color: #79C753;
+    background-color: #0047AB;
 }
 
 h1 {
-    color: #DD4132;
+    color: #98FF98;
 }
 
 fieldset {
-    background-color: #DD4132;
+    background-color: #98FF98;
 }
 
 .title-container {
@@ -22,20 +22,20 @@ span, label {
     font-weight: bold;
     font-size: 20px;
     font-family: Orbitron, sans-serif;
-    color: #79C753;
+    color: #0047AB;
 }
 
 input {
     font-weight: bold;
     font-size: 20px;
     font-family: Orbitron, sans-serif;
-    color: #79C753;
+    color: #0047AB;
 }
 
 input[type="text"] {
     width: 325px;
-    background-color: #79C753;
-    color: #DD4132;
+    background-color: #0047AB;
+    color: #98FF98;
 }
 
 input[type="submit"] {
@@ -45,17 +45,17 @@ input[type="submit"] {
     font-size: 20px;
     font-weight: bold;
     text-transform: uppercase;
-    color: #DD4132;
-    background-color: #79C753;
+    color: #98FF98;
+    background-color: #0047AB;
     border: none;
     border-radius: 5px;
-    box-shadow: 0 3px 0 #79C753;
+    box-shadow: 0 3px 0 #0047AB;
     transition: all 0.1s ease-in-out;
 }
 
 input[type="submit"]:hover {
-    background-color: #79C753;
-    box-shadow: 0 3px 0 #79C753;
+    background-color: #0047AB;
+    box-shadow: 0 3px 0 #0047AB;
     transform: translateY(2px);
     cursor: pointer;
 }
@@ -79,11 +79,11 @@ input[type="submit"]:hover {
     left: 0;
     height: 18px;
     width: 18px;
-    background-color: #79C753;
+    background-color: #0047AB;
 }
 
 .checkbox input:checked ~ .checkmark {
-    background-color: #79C753;
+    background-color: #0047AB;
 }
 
 .checkmark:after {
@@ -101,7 +101,7 @@ input[type="submit"]:hover {
     top: 2px;
     width: 4px;
     height: 9px;
-    border: solid #DD4132;
+    border: solid #98FF98;
     border-width: 0 2px 2px 0;
     transform: rotate(45deg);
 }
