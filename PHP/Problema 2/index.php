@@ -7,7 +7,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Laborator 6 PHP Problema 2</title>
-    <link rel="stylesheet" type="text/css" href="style.css?v=1.1">
+    <link rel="stylesheet" type="text/css" href="style.css?v=1.4">
 </head>
 <body>
     <div class="title-container">
@@ -24,7 +24,7 @@
                 <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="GET">
                     <div class="combo-box-container">
                         <label for="numar-produse-pagina">Numar de produse per pagina: </label>
-                        <select id="numar-produse-pagina" name="numar-produse-pagina">
+                        <select name="numar-produse-pagina">
                             <option>2</option>
                             <option>3</option>
                             <option>4</option>
@@ -40,14 +40,14 @@
                     <br><br>
 
                     <div class="submit-button-container">
-                        <input type="submit" value="Vizualizare">
+                        <input type="submit" value="Vizualizare produse">
                     </div>
                 </form>
             </div>
 
             <br>
 
-            <div class="navigation-container">
+            <div class="navigation-controls-container">
                 <a id="first-link" class="links" href="<?php echo $_SERVER['PHP_SELF']; ?>?action=1">Prev</a>
                 <a id="second-link" class="links" href="<?php echo $_SERVER['PHP_SELF']; ?>?action=2">Next</a>
             </div>
