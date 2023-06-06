@@ -99,8 +99,8 @@
             echo "<span>Curse <u>directe</u> de la \"$sursa\" la \"$destinatie\":</span><br><br>";
             $i = 1;
             while ($row1 = $result1->fetch_assoc()) {
-                $nr_tren = $row1['nr_tren'];
-                $tip_tren = $row1['tip_tren'];
+                $nr_tren = $row1["nr_tren"];
+                $tip_tren = $row1["tip_tren"];
                 $ora_plecare = $row1["ora_plecare"];
                 $ora_sosire = $row1["ora_sosire"];
                 
@@ -131,9 +131,9 @@
 
             if ($result2->num_rows > 0) {
                 while ($row2 = $result2->fetch_assoc()) {
-                    $localitate_intermediara = $row2['localitate_sosire'];
-                    $nr_tren_sursa_intermediar = $row2['nr_tren'];
-                    $tip_tren_sursa_intermediar = $row2['tip_tren'];
+                    $localitate_intermediara = $row2["localitate_sosire"];
+                    $nr_tren_sursa_intermediar = $row2["nr_tren"];
+                    $tip_tren_sursa_intermediar = $row2["tip_tren"];
                     $ora_plecare_sursa_intermediar = $row2["ora_plecare"];
                     $ora_sosire_sursa_intermediar = $row2["ora_sosire"];
                     
@@ -148,8 +148,8 @@
                         while ($row3 = $result3->fetch_assoc()) {
                             $curse_cu_legatura = true;
 
-                            $nr_tren_intermediar_destinatie = $row3['nr_tren'];
-                            $tip_tren_intermediar_destinatie = $row3['tip_tren'];
+                            $nr_tren_intermediar_destinatie = $row3["nr_tren"];
+                            $tip_tren_intermediar_destinatie = $row3["tip_tren"];
                             $ora_plecare_intermediar_destinatie = $row3["ora_plecare"];
                             $ora_sosire_intermediar_destinatie = $row3["ora_sosire"];
                             
