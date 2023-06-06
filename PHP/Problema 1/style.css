@@ -10,6 +10,10 @@ fieldset {
     background-color: #98FF98;
 }
 
+legend {
+    color: black;
+}
+
 .title-container {
     text-align: center;
 }
