@@ -69,9 +69,8 @@
         die("[X]Connection failed to MySQL: " . $conn->connect_error . "!");
     }
 
-    $sql = "SELECT COUNT(*) AS `total` FROM `produse`;";
+    $sql = "SELECT COUNT(*) AS `total` FROM `produse`";
     $result = $conn->query($sql);
-
     if ($result->num_rows > 0) {
         if ($row = $result->fetch_assoc()) {
             $total = $row["total"];
@@ -85,46 +84,31 @@
 
     if (isset($_GET['action'])) {
         $action = htmlspecialchars(trim($_GET["action"]));
+
         $n = $_SESSION["number_of_items_per_page"];
         $page = $_SESSION["current_page"];
+        
         if ($action == 1) {
             if ($page) {
+                // GET PREVIOUS ITEMS/PRODUCTS
                 $page -= $n;
             }
-        }
-        else if ($action == 2) {
+        } else if ($action == 2) {
             $total = $_SESSION["total_number_of_records"];
             if ($page + $n < $total) {
+                // GET NEXT ITEMS/PRODUCTS
                 $page += $n;
             }
         }
 
-        $sql = "SELECT `nume`, `tip`, `material`, `culoare`, `pret` from `produse` LIMIT $n OFFSET $page;";
-        $result = $conn->query($sql);
+        $sql = "SELECT `nume`, `tip`, `material`, `culoare`, `pret` FROM `produse` LIMIT ? OFFSET ?";
+        $stmt = $conn->prepare($sql);
 
-        if ($result->num_rows > 0) {
-            while ($row = $result->fetch_assoc()) {
-                $nume = $row["nume"];
-                $tip = $row["tip"];
-                $material = $row["material"];
-                $culoare = $row["culoare"];
-                $pret = $row["pret"];
-                
-                echo "<tr><td>$nume</td><td>$tip</td><td>$material</td><td>$culoare</td><td>$pret</td></tr>";
-            }
-        }
+        if ($stmt) {
+            $stmt->bind_param("ii", $n, $page);
+            $stmt->execute();
 
-        $_SESSION["current_page"] = $page;
-    }
-    else {
-        if (isset($_GET["numar-produse-pagina"])) {
-            $n = $_GET["numar-produse-pagina"];
-            $_SESSION["number_of_items_per_page"] = $n;
-            $_SESSION["current_page"] = 0;
-
-            $sql = "SELECT `nume`, `tip`, `material`, `culoare`, `pret` from `produse` LIMIT $n;";
-            $result = $conn->query($sql);
-
+            $result = $stmt->get_result();
             if ($result->num_rows > 0) {
                 while ($row = $result->fetch_assoc()) {
                     $nume = $row["nume"];
@@ -132,9 +116,50 @@
                     $material = $row["material"];
                     $culoare = $row["culoare"];
                     $pret = $row["pret"];
-                    
+
                     echo "<tr><td>$nume</td><td>$tip</td><td>$material</td><td>$culoare</td><td>$pret</td></tr>";
                 }
+            }
+
+            $stmt->close();
+        }
+        else {
+            die("[X]Failed to prepare the statement: " . $conn->error . "!");
+        }
+
+        $_SESSION["current_page"] = $page;
+    }
+    else {
+        if (isset($_GET["numar-produse-pagina"])) {
+            $n =  htmlspecialchars(trim($_GET["numar-produse-pagina"]));
+
+            $_SESSION["number_of_items_per_page"] = $n;
+            $_SESSION["current_page"] = 0;
+
+            $sql = "SELECT `nume`, `tip`, `material`, `culoare`, `pret` FROM `produse` LIMIT ?";
+            $stmt = $conn->prepare($sql);
+
+            if ($stmt) {
+                $stmt->bind_param("i", $n);
+                $stmt->execute();
+
+                $result = $stmt->get_result();
+                if ($result->num_rows > 0) {
+                    while ($row = $result->fetch_assoc()) {
+                        $nume = $row["nume"];
+                        $tip = $row["tip"];
+                        $material = $row["material"];
+                        $culoare = $row["culoare"];
+                        $pret = $row["pret"];
+
+                        echo "<tr><td>$nume</td><td>$tip</td><td>$material</td><td>$culoare</td><td>$pret</td></tr>";
+                    }
+                }
+
+                $stmt->close();
+            }
+            else {
+                die("[X]Failed to prepare the statement: " . $conn->error . "!");
             }
         }
     }
