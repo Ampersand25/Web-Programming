@@ -1,10 +1,9 @@
 <!--
-    http://localhost:80/Lab6PHP/
+    http://localhost:80/Lab6PHP/Lab6PHP1
 
     EXEMPLE:
     Targu Mures -> Bucuresti Nord
     Iasi -> Brasov
-    Bucuresti Nord -> Cluj-Napoca
     Ploiesti -> Mioveni
     Iasi -> Timisoara Nord
 -->
@@ -14,7 +13,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Laborator 6 PHP Problema 1</title>
-    <link rel="stylesheet" type="text/css" href="style.css?v=1.8">
+    <link rel="stylesheet" type="text/css" href="style.css?v=1.9">
 </head>
 <body>
     <div class="title-container">
@@ -25,7 +24,7 @@
 
     <div class="main-div">
         <fieldset>
-            <legend>Optiuni cautare</legend>
+            <legend><b>Optiuni cautare</b></legend>
 
             <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="GET">
                 <div class="selectare-sosire-div">
@@ -33,10 +32,14 @@
                     <input type="text" name="localitate_plecare" placeholder="Introduceti statia sursa...">
                 </div>
                 
+                <br>
+
                 <div class="selectare-destinatie-div">
                     <label for="localitate_sosire">Localitatea de sosire: </label>
                     <input type="text" name="localitate_sosire" placeholder="Introduceti statia destinatie...">
                 </div>
+
+                <br>
 
                 <div class="alegere-tip-cursa-div">
                     <label class="checkbox">
@@ -45,6 +48,8 @@
                         Curse directe
                     </label>
                 </div>
+
+                <br>
 
                 <input type="submit" value="Cautare curse" name="submit">
             </form>
@@ -57,10 +62,20 @@
     $sursa = htmlspecialchars(trim($_GET["localitate_plecare"]));
     $destinatie = htmlspecialchars(trim($_GET["localitate_sosire"]));
 
-    echo "<fieldset><legend>Rezultate cautare</legend>";
+    echo "<fieldset><legend><b>Rezultate cautare</b></legend>";
 
     if (isset($sursa) && isset($destinatie)) {
         if ($sursa == "" || $destinatie == "") {
+            if ($sursa == "" && $destinatie == "") {
+                echo "<span>Nu au fost introduse cele doua orase (sursa si destinatie)!</span><br>";
+            }
+            else if ($sursa == "") {
+                echo "<span>Nu a fost introdus orasul de plecare (sursa)!</span><br>";
+            }
+            else {
+                echo "<span>Nu a fost introdus orasul de sosire (destinatie)!</span><br>";
+            }
+
             return;
         }
 
@@ -111,13 +126,16 @@
             $stmt2->execute();
             $result2 = $stmt2->get_result();
 
+            $curse_cu_legatura = false;
+            $oras_inexistent = false;
+
             if ($result2->num_rows > 0) {
                 while ($row2 = $result2->fetch_assoc()) {
                     $localitate_intermediara = $row2['localitate_sosire'];
-                    $nr_tren1 = $row2['nr_tren'];
-                    $tip_tren1 = $row2['tip_tren'];
-                    $ora_plecare1 = $row2["ora_plecare"];
-                    $ora_sosire1 = $row2["ora_sosire"];
+                    $nr_tren_sursa_intermediar = $row2['nr_tren'];
+                    $tip_tren_sursa_intermediar = $row2['tip_tren'];
+                    $ora_plecare_sursa_intermediar = $row2["ora_plecare"];
+                    $ora_sosire_sursa_intermediar = $row2["ora_sosire"];
                     
                     $sql3 = "SELECT `nr_tren`, `tip_tren`, `ora_plecare`, `ora_sosire` from `trenuri` WHERE `localitate_plecare` = ? AND `localitate_sosire` = ?;";
                     $stmt3 = $conn->prepare($sql3);
@@ -128,24 +146,28 @@
                     if ($result3->num_rows > 0) {
                         echo "<span>Curse <u>cu legatura</u> de la \"$sursa\" la \"$destinatie\" prin \"$localitate_intermediara\":</span><br><br>";
                         while ($row3 = $result3->fetch_assoc()) {
-                            $nr_tren2 = $row3['nr_tren'];
-                            $tip_tren2 = $row3['tip_tren'];
-                            $ora_plecare2 = $row3["ora_plecare"];
-                            $ora_sosire2 = $row3["ora_sosire"];
+                            $curse_cu_legatura = true;
+
+                            $nr_tren_intermediar_destinatie = $row3['nr_tren'];
+                            $tip_tren_intermediar_destinatie = $row3['tip_tren'];
+                            $ora_plecare_intermediar_destinatie = $row3["ora_plecare"];
+                            $ora_sosire_intermediar_destinatie = $row3["ora_sosire"];
                             
-                            echo "<span>Trenul \"$sursa\" - \"$localitate_intermediara\":<ul><li><u>numar tren</u>: <em>$nr_tren1</em></li><li><u>tip tren</u>: <em>$tip_tren1</em></li><li><u>ora plecare</u>: <em>$ora_plecare1</em></li><li><u>ora sosire</u>: <em>$ora_sosire1</em></li></ul></span>";
-                            echo "<span>Trenul \"$localitate_intermediara\" - \"$destinatie\":<ul><li><u>numar tren</u>: <em>$nr_tren2</em></li><li><u>tip tren</u>: <em>$tip_tren2</em></li><li><u>ora plecare</u>: <em>$ora_plecare2</em></li><li><u>ora sosire</u>: <em>$ora_sosire2</em></li></ul></span>";
+                            echo "<span>Trenul \"$sursa\" - \"$localitate_intermediara\":<ul><li><u>numar tren</u>: <em>$nr_tren_sursa_intermediar</em></li><li><u>tip tren</u>: <em>$tip_tren_sursa_intermediar</em></li><li><u>ora plecare</u>: <em>$ora_plecare_sursa_intermediar</em></li><li><u>ora sosire</u>: <em>$ora_sosire_sursa_intermediar</em></li></ul></span>";
+                            echo "<span>Trenul \"$localitate_intermediara\" - \"$destinatie\":<ul><li><u>numar tren</u>: <em>$nr_tren_intermediar_destinatie</em></li><li><u>tip tren</u>: <em>$tip_tren_intermediar_destinatie</em></li><li><u>ora plecare</u>: <em>$ora_plecare_intermediar_destinatie</em></li><li><u>ora sosire</u>: <em>$ora_sosire_intermediar_destinatie</em></li></ul></span>";
                         }
-                    }
-                    else if ($localitate_intermediara != $destinatie) {
-                        echo "<span>Nu exista curse <u>cu legatura</u> de la \"$sursa\" la \"$destinatie\" prin \"$localitate_intermediara\"!</span><br><br>";
                     }
 
                     $stmt3->close();
                 }
             }
             else {
-                echo "<span>Nu exista curse <u>cu legatura</u> de la \"$sursa\" la \"$destinatie\"!</span><br>";
+                echo "<span>Nu exista curse cu plecare de la \"$sursa\" (orasul \"$sursa\" nu exista in baza de date)!</span><br>";
+                $oras_inexistent = true;
+            }
+
+            if (!$curse_cu_legatura && !$oras_inexistent) {
+                echo "<span>Nu exista curse <u>cu legatura</u> de la \"$sursa\" la \"$destinatie\"!</span><br><br>";
             }
 
             $stmt2->close();
