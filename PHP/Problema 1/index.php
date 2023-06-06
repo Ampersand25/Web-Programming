@@ -1,11 +1,11 @@
 <!--
-    http://localhost:80/Lab6PHP/Lab6PHP1
+    SERVER: http://localhost:80/Lab6PHP/Lab6PHP1
 
     EXEMPLE:
-    Targu Mures -> Bucuresti Nord
-    Iasi -> Brasov
-    Ploiesti -> Mioveni
-    Iasi -> Timisoara Nord
+    Iasi     -> Timisoara Nord (nu exista nici curse directe si nici cu legatura)
+    Iasi     -> Brasov         (nu exista curse directe dar exista cu legatura)
+    Ploiesti -> Suceava        (exista curse directe dar nu exista cu legatura)
+    Ploiesti -> Mioveni        (atat curse directe cat si cu legatura)
 -->
 
 <!DOCTYPE html>
@@ -65,11 +65,11 @@
     echo "<fieldset><legend><b>Rezultate cautare</b></legend>";
 
     if (isset($sursa) && isset($destinatie)) {
-        if ($sursa == "" || $destinatie == "") {
-            if ($sursa == "" && $destinatie == "") {
+        if (empty($sursa) || empty($destinatie)) {
+            if (strlen($sursa) === 0 && strlen($destinatie) === 0) {
                 echo "<span>Nu au fost introduse cele doua orase (sursa si destinatie)!</span><br>";
             }
-            else if ($sursa == "") {
+            else if (strlen($sursa) === 0) {
                 echo "<span>Nu a fost introdus orasul de plecare (sursa)!</span><br>";
             }
             else {
@@ -89,6 +89,8 @@
             exit("[X]Connection failed to MySQL: " . $conn->connect_error . "!");
         }
 
+        // CURSE DIRECTE
+
         $sql1 = "SELECT `nr_tren`, `tip_tren`, `ora_plecare`, `ora_sosire` from `trenuri` WHERE `localitate_plecare` = ? AND `localitate_sosire` = ?;";
         $stmt1 = $conn->prepare($sql1);
         $stmt1->bind_param("ss", $sursa, $destinatie);
@@ -106,7 +108,7 @@
                 
                 echo "<span>Trenul $i:<ul><li><u>numar tren</u>: <em>$nr_tren</em></li><li><u>tip tren</u>: <em>$tip_tren</em></li><li><u>ora plecare</u>: <em>$ora_plecare</em></li><li><u>ora sosire</u>: <em>$ora_sosire</em></li></ul></span>";
 
-                $i++;
+                ++$i;
             }
         }
         else {
