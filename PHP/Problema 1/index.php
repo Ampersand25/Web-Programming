@@ -28,15 +28,15 @@
 
             <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
                 <div class="selectare-sosire-div">
-                    <label for="localitate_plecare">Localitatea de plecare: </label>
-                    <input type="text" name="localitate_plecare" placeholder="Introduceti statia sursa...">
+                    <label for="localitate-plecare">Localitatea de plecare: </label>
+                    <input type="text" name="localitate-plecare" placeholder="Introduceti statia sursa...">
                 </div>
                 
                 <br>
 
                 <div class="selectare-destinatie-div">
-                    <label for="localitate_sosire">Localitatea de sosire: </label>
-                    <input type="text" name="localitate_sosire" placeholder="Introduceti statia destinatie...">
+                    <label for="localitate-sosire">Localitatea de sosire: </label>
+                    <input type="text" name="localitate-sosire" placeholder="Introduceti statia destinatie...">
                 </div>
 
                 <br>
@@ -62,8 +62,8 @@
     if ($_SERVER["REQUEST_METHOD"] != "POST")
         return;
 
-    $sursa = htmlspecialchars(trim($_POST["localitate_plecare"]));
-    $destinatie = htmlspecialchars(trim($_POST["localitate_sosire"]));
+    $sursa = htmlspecialchars(trim($_POST["localitate-plecare"]));
+    $destinatie = htmlspecialchars(trim($_POST["localitate-sosire"]));
 
     echo "<fieldset><legend><b>Rezultate cautare</b></legend>";
 
@@ -83,7 +83,7 @@
         }
 
         $pattern = '/^[a-zA-Z]+$/';
-        if (!preg_match($pattern, $sursa) && !preg_match($pattern, $sursa)) {
+        if (!preg_match($pattern, $sursa) && !preg_match($pattern, $destinatie)) {
             echo "<span>Cele doua orase nu sunt valide (nu contin doar litere)!</span><br>";
             return;
         }
