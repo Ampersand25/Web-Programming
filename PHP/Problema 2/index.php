@@ -1,5 +1,5 @@
 <!--
-    http://localhost:80/Lab6PHP/Lab6PHP2
+    SERVER: http://localhost:80/Lab6PHP/Lab6PHP2
 -->
 
 <!DOCTYPE html>
@@ -57,6 +57,9 @@
 </html>
 
 <?php
+    if ($_SERVER["REQUEST_METHOD"] != "GET")
+        return;
+
     session_start();
 
     $servername = "localhost";
