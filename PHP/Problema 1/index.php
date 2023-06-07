@@ -26,7 +26,7 @@
         <fieldset>
             <legend><b>Optiuni cautare</b></legend>
 
-            <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="GET">
+            <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
                 <div class="selectare-sosire-div">
                     <label for="localitate_plecare">Localitatea de plecare: </label>
                     <input type="text" name="localitate_plecare" placeholder="Introduceti statia sursa...">
@@ -59,8 +59,11 @@
 </html>
 
 <?php
-    $sursa = htmlspecialchars(trim($_GET["localitate_plecare"]));
-    $destinatie = htmlspecialchars(trim($_GET["localitate_sosire"]));
+    if ($_SERVER["REQUEST_METHOD"] != "POST")
+        return;
+
+    $sursa = htmlspecialchars(trim($_POST["localitate_plecare"]));
+    $destinatie = htmlspecialchars(trim($_POST["localitate_sosire"]));
 
     echo "<fieldset><legend><b>Rezultate cautare</b></legend>";
 
@@ -76,6 +79,20 @@
                 echo "<span>Nu a fost introdus orasul de sosire (destinatie)!</span><br>";
             }
 
+            return;
+        }
+
+        $pattern = '/^[a-zA-Z]+$/';
+        if (!preg_match($pattern, $sursa) && !preg_match($pattern, $sursa)) {
+            echo "<span>Cele doua orase nu sunt valide (nu contin doar litere)!</span><br>";
+            return;
+        }
+        else if (!preg_match($pattern, $sursa)) {
+            echo "<span>Orasul de plecare (sursa) nu este valid (nu contine doar litere)!</span><br>";
+            return;
+        }
+        else if (!preg_match($pattern, $destinatie)) {
+            echo "<span>Orasul de sosire (destinatie) nu este valid (nu contine doar litere)!</span><br>";
             return;
         }
 
@@ -117,7 +134,7 @@
 
         $stmt1->close();
 
-        if (!isset($_GET["tip_curse"])) {
+        if (!isset($_POST["tip_curse"])) {
             // CURSE CU LEGATURA
             
             echo "<br>";
