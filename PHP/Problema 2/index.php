@@ -23,8 +23,8 @@
             <div class="form-container">
                 <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="GET">
                     <div class="combo-box-container">
-                        <label for="numar-produse-pagina">Numar de produse per pagina: </label>
-                        <select name="numar-produse-pagina">
+                        <label for="items-per-page">Numar de produse per pagina: </label>
+                        <select name="items-per-page">
                             <option>2</option>
                             <option>3</option>
                             <option>4</option>
@@ -81,10 +81,6 @@
         }
     }
 
-    echo "<fieldset><legend><b>Vizualizare produse (sub forma de tabel)</b></legend>";
-    echo "<div class=\"products-table-container\">";
-    echo "<table><thead><tr><th>Nume</th><th>Tip</th><th>Material</th><th>Culoare</th><th>Pret</th></tr></thead><tbody>";
-
     if (isset($_GET['action'])) {
         $action = htmlspecialchars(trim($_GET["action"]));
 
@@ -113,6 +109,10 @@
 
             $result = $stmt->get_result();
             if ($result->num_rows > 0) {
+                echo "<fieldset><legend><b>Vizualizare produse (sub forma de tabel)</b></legend>";
+                echo "<div class=\"products-table-container\">";
+                echo "<table><thead><tr><th>Nume</th><th>Tip</th><th>Material</th><th>Culoare</th><th>Pret</th></tr></thead><tbody>";
+
                 while ($row = $result->fetch_assoc()) {
                     $nume = $row["nume"];
                     $tip = $row["tip"];
@@ -122,6 +122,10 @@
 
                     echo "<tr><td>$nume</td><td>$tip</td><td>$material</td><td>$culoare</td><td>$pret</td></tr>";
                 }
+
+                echo "</tbody></table>";
+                echo "</div>";
+                echo "</fieldset>";
             }
 
             $stmt->close();
@@ -133,8 +137,8 @@
         $_SESSION["current_page"] = $page;
     }
     else {
-        if (isset($_GET["numar-produse-pagina"])) {
-            $n =  htmlspecialchars(trim($_GET["numar-produse-pagina"]));
+        if (isset($_GET["items-per-page"])) {
+            $n =  htmlspecialchars(trim($_GET["items-per-page"]));
 
             $_SESSION["number_of_items_per_page"] = $n;
             $_SESSION["current_page"] = 0;
@@ -148,6 +152,10 @@
 
                 $result = $stmt->get_result();
                 if ($result->num_rows > 0) {
+                    echo "<fieldset><legend><b>Vizualizare produse (sub forma de tabel)</b></legend>";
+                    echo "<div class=\"products-table-container\">";
+                    echo "<table><thead><tr><th>Nume</th><th>Tip</th><th>Material</th><th>Culoare</th><th>Pret</th></tr></thead><tbody>";
+
                     while ($row = $result->fetch_assoc()) {
                         $nume = $row["nume"];
                         $tip = $row["tip"];
@@ -157,6 +165,10 @@
 
                         echo "<tr><td>$nume</td><td>$tip</td><td>$material</td><td>$culoare</td><td>$pret</td></tr>";
                     }
+
+                    echo "</tbody></table>";
+                    echo "</div>";
+                    echo "</fieldset>";
                 }
 
                 $stmt->close();
@@ -168,8 +180,4 @@
     }
 
     $conn->close();
-
-    echo "</tbody></table>";
-    echo "</div>";
-    echo "</fieldset>";
 ?>
