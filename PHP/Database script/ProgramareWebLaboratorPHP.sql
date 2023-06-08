@@ -57,6 +57,12 @@ ORDER BY `oras` ASC;
 
 SELECT * FROM `trenuri` ORDER BY `localitate_plecare`;
 
+-- CURSE DIRECTE DE LA Iasi LA Brasov
+SELECT * FROM `trenuri` WHERE `localitate_plecare` = 'Iasi' AND `localitate_sosire` = 'Brasov';
+
+-- CURSE CU LEGATURA DE LA Iasi LA Brasov
+SELECT * FROM `trenuri` `T1` INNER JOIN `trenuri` `T2` ON `T1`.`localitate_sosire` = `T2`.`localitate_plecare` WHERE `T1`.`localitate_plecare` = 'Iasi' AND `T2`.`localitate_sosire` = 'Brasov';
+
 -- PROBLEMA 2 (PRODUSE)
 -- O tabela din cadrul unei baze de date mentinuta server side contine produse descrise prin mai multe atribute.
 -- Un script php va afisa aceste produse impreuna cu atributele lor paginat (n pe pagina) afisandu-se in acelasi timp link-uri spre urmatoarele respectiv anterioarele n produse.
