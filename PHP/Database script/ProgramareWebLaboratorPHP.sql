@@ -18,6 +18,7 @@ CREATE TABLE `trenuri` (
     `ora_sosire` TIME NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+-- INSERAM INREGISTRARI (RECORDS/LINES/ROWS) IN TABELUL/TABELA `trenuri`
 INSERT INTO `trenuri` (`nr_tren`, `tip_tren`, `localitate_plecare`, `localitate_sosire`, `ora_plecare`, `ora_sosire`) VALUES
 (1234, 'InterCity', 'Bucuresti Nord', 'Cluj-Napoca', '08:00', '15:30'),
 (5678, 'Regio', 'Timisoara Nord', 'Suceava', '14:30', '21:10'),
@@ -40,6 +41,7 @@ INSERT INTO `trenuri` (`nr_tren`, `tip_tren`, `localitate_plecare`, `localitate_
 (6789, 'InterRegio', 'Timisoara Nord', 'Suceava', '17:00', '17:50'),
 (9012, 'Accelerat', 'Iasi', 'Bucuresti Nord', '10:45', '17:30');
 
+-- MAI INSERAM INCA 6 INREGISTRARI IN TABELUL/TABELA `trenuri`
 INSERT INTO `trenuri` (`nr_tren`, `tip_tren`, `localitate_plecare`, `localitate_sosire`, `ora_plecare`, `ora_sosire`) VALUES
 (5893, 'Regio', 'Iasi', 'Constanta', '09:35', '14:20'),
 (7261, 'InterRegio', 'Iasi', 'Constanta', '17:55', '10:50'),
@@ -48,6 +50,8 @@ INSERT INTO `trenuri` (`nr_tren`, `tip_tren`, `localitate_plecare`, `localitate_
 (8462, 'InterRegio', 'Ploiesti', 'Suceava', '09:40', '12:05'),
 (8462, 'InterRegio', 'Suceava', 'Mioveni', '14:50', '17:55');
 
+-- AFISAM TOATE ORASELE DIN TABELUL/TABELA `trenuri` (TOATE ORASELE CARE SUNT FIE STATII DE PLECARE FIE DE SOSIRE)
+-- SORTAM CRESCATOR (ALFABETIC/LEXICOGRAFIC) RESULT SET-UL (TABELUL OBTINUT IN URMA EXECUTIEI INTEROGARII)
 SELECT `localitate_plecare` AS `oras`
 FROM `trenuri`
 UNION
@@ -55,12 +59,13 @@ SELECT `localitate_sosire`
 FROM `trenuri`
 ORDER BY `oras` ASC;
 
+-- PRINTAM TOATE TRENURILE (TOATE INREGISTRARILE DIN TABELUL/TABELA `trenuri`)
 SELECT * FROM `trenuri` ORDER BY `localitate_plecare`;
 
--- CURSE DIRECTE DE LA Iasi LA Brasov
+-- CURSE DIRECTE DE LA Iasi (ORAS DE PLECARE (SURSA)) LA Brasov (ORAS DE SOSIRE (DESTINATIE))
 SELECT * FROM `trenuri` WHERE `localitate_plecare` = 'Iasi' AND `localitate_sosire` = 'Brasov';
 
--- CURSE CU LEGATURA DE LA Iasi LA Brasov
+-- CURSE CU LEGATURA DE LA Iasi (ORAS DE PLECARE (SURSA)) LA Brasov (ORAS DE SOSIRE (DESTINATIE))
 SELECT * FROM `trenuri` `T1` INNER JOIN `trenuri` `T2` ON `T1`.`localitate_sosire` = `T2`.`localitate_plecare` WHERE `T1`.`localitate_plecare` = 'Iasi' AND `T2`.`localitate_sosire` = 'Brasov';
 
 -- PROBLEMA 2 (PRODUSE)
@@ -76,6 +81,7 @@ CREATE TABLE `produse` (
     `pret` FLOAT NOT NULL CHECK (`pret` > 0.0)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+-- INSERAM MAI MULTE PRODUSE (LINII) IN TABELUL/TABELA `produse` 
 INSERT INTO `produse` (`nume`, `tip`, `material`, `culoare`, `pret`) VALUES
 ('Smartphone', 'Electronics', 'Glass/Metal', 'Black', 899.99),
 ('Running Shoes', 'Footwear', 'Mesh/Synthetic', 'Gray/Blue', 79.99),
@@ -98,4 +104,5 @@ INSERT INTO `produse` (`nume`, `tip`, `material`, `culoare`, `pret`) VALUES
 ('Gaming Mouse', 'Electronics', 'Plastic', 'Black', 49.99),
 ('Aluminum Water Bottle', 'Accessories', 'Aluminum', 'Silver', 19.99);
 
+-- AFISAM TOATE PRODUSELE DIN TABELUL/TABELA `produse`
 SELECT * FROM `produse`;
