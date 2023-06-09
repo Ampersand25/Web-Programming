@@ -81,7 +81,7 @@ CREATE TABLE `produse` (
     `pret` FLOAT NOT NULL CHECK (`pret` > 0.0)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- INSERAM MAI MULTE PRODUSE (LINII) IN TABELUL/TABELA `produse` 
+-- INSERAM PRODUSE (LINII) IN TABELUL/TABELA `produse`
 INSERT INTO `produse` (`nume`, `tip`, `material`, `culoare`, `pret`) VALUES
 ('Smartphone', 'Electronics', 'Glass/Metal', 'Black', 899.99),
 ('Running Shoes', 'Footwear', 'Mesh/Synthetic', 'Gray/Blue', 79.99),
@@ -103,6 +103,39 @@ INSERT INTO `produse` (`nume`, `tip`, `material`, `culoare`, `pret`) VALUES
 ('Hiking Boots', 'Footwear', 'Leather/Synthetic', 'Brown', 129.99),
 ('Gaming Mouse', 'Electronics', 'Plastic', 'Black', 49.99),
 ('Aluminum Water Bottle', 'Accessories', 'Aluminum', 'Silver', 19.99);
+
+-- INSERAM MAI MULTE PRODUSE (LINII) IN TABELUL/TABELA `produse`
+INSERT INTO produse (nume, tip, material, culoare, pret) VALUES
+('Leather Jacket', 'Apparel', 'Leather', 'Black', 199.99),
+('Wireless Headphones', 'Electronics', 'Plastic/Metal', 'White', 129.99),
+('Cotton Socks', 'Apparel', 'Cotton', 'Black', 9.99),
+('Stainless Steel Water Bottle', 'Accessories', 'Stainless Steel', 'Blue', 24.99),
+('Office Chair', 'Furniture', 'Leather/Metal', 'Black', 199.99),
+('Laptop', 'Electronics', 'Plastic/Metal', 'Silver', 1299.99),
+('Casual Sneakers', 'Footwear', 'Canvas/Synthetic', 'White', 89.99),
+('Designer Handbag', 'Bags', 'Leather', 'Brown', 299.99),
+('Smart TV', 'Electronics', 'Plastic/Metal', 'Black', 999.99),
+('Cotton Pillowcase Set', 'Home Decor', 'Cotton', 'White', 19.99),
+('Gold Necklace', 'Jewelry', 'Gold', 'Gold', 199.99),
+('Acrylic Paint Set', 'Art Supplies', 'Acrylic', 'Assorted', 29.99),
+('Leather Boots', 'Footwear', 'Leather', 'Brown', 149.99),
+('Wireless Mouse', 'Electronics', 'Plastic', 'Black', 19.99),
+('Wooden Cutting Board', 'Kitchenware', 'Wood', 'Natural', 24.99),
+('Classic Novels Set', 'Books', 'Paper', 'Assorted', 49.99),
+('Wool Sweater', 'Apparel', 'Wool', 'Gray', 79.99),
+('Ceramic Flower Vase', 'Home Decor', 'Ceramic', 'White', 14.99),
+('Diamond Ring', 'Jewelry', 'Diamond/Gold', 'Silver', 999.99),
+('Outdoor Tent', 'Camping', 'Nylon/Fiberglass', 'Green', 149.99),
+('Laptop Bag', 'Bags', 'Nylon', 'Black', 39.99),
+('Portable Charger', 'Electronics', 'Plastic', 'Black', 39.99),
+('Cotton Bath Towel Set', 'Home Decor', 'Cotton', 'White', 29.99),
+('Running Shorts', 'Apparel', 'Polyester', 'Black', 24.99),
+('Stainless Steel Cutlery Set', 'Kitchenware', 'Stainless Steel', 'Silver', 39.99),
+('Bluetooth Earbuds', 'Electronics', 'Plastic/Metal', 'Black', 79.99),
+('Leather Wallet', 'Accessories', 'Genuine Leather', 'Black', 49.99),
+('Watercolor Paint Set', 'Art Supplies', 'Watercolor', 'Assorted', 19.99),
+('Silk Scarf', 'Accessories', 'Silk', 'Purple', 34.99),
+('Gym Bag', 'Bags', 'Polyester', 'Black', 29.99);
 
 -- AFISAM TOATE PRODUSELE DIN TABELUL/TABELA `produse`
 SELECT * FROM `produse`;
